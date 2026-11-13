@@ -1,0 +1,1982 @@
+{
+ "command": "lua tests/lua/run.lua --report <path> --syntax-verdicts <path>",
+ "failures": {},
+ "run_at_utc": "2026-11-13T16:00:08Z",
+ "runtime": "Lua 5.4",
+ "stage": "implementation_lua_runtime_tests",
+ "suites": [
+  {
+   "assertions": 17,
+   "cases": [
+    {
+     "assertions": 8,
+     "ms": 0,
+     "name": "decode scalars, arrays, objects, escapes",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "decode preserves leading zeros in strings and rejects trailing garbage",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "encode is deterministic and round-trips",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 1,
+     "name": "decode_file loads a rules file",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 1,
+   "name": "json",
+   "passed": 4
+  },
+  {
+   "assertions": 159,
+   "cases": [
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "cn_resident_id_mod11_2 fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "cn_uscc_mod31 fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "th_mod11 fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "jp_mynumber fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "jp_corporate_number fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "kz_iin fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 13,
+     "ms": 0,
+     "name": "luhn fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 39,
+     "ms": 0,
+     "name": "iban_mod97 fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "icao9303_check_digit fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "verhoeff fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "tr_tckn fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "tr_vkn fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 11,
+     "ms": 0,
+     "name": "sg_nric_fin_reconstructed fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "tw_citizen_new_ui fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "hkid_mod11 fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "ir_national_mod11 fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "kr_rrn_legacy fixture cases (positive + check mutation)",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "fixture file covers every registered algorithm",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 2,
+   "name": "checksum_fixtures",
+   "passed": 18
+  },
+  {
+   "assertions": 81217,
+   "cases": [
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "cn_resident_id_mod11_2: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "cn_resident_id_mod11_2: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 2000,
+     "ms": 5,
+     "name": "cn_resident_id_mod11_2: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "cn_uscc_mod31: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "cn_uscc_mod31: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 6000,
+     "ms": 8,
+     "name": "cn_uscc_mod31: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "hkid_mod11: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "hkid_mod11: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 2000,
+     "ms": 4,
+     "name": "hkid_mod11: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "iban_mod97: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "iban_mod97: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 19800,
+     "ms": 108,
+     "name": "iban_mod97: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "icao9303_check_digit: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "icao9303_check_digit: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 2,
+     "name": "icao9303_check_digit: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "ir_national_mod11: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "ir_national_mod11: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 4,
+     "name": "ir_national_mod11: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "jp_corporate_number: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "jp_corporate_number: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 5,
+     "name": "jp_corporate_number: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "jp_mynumber: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "jp_mynumber: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 5,
+     "name": "jp_mynumber: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "kr_rrn_legacy: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "kr_rrn_legacy: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 5,
+     "name": "kr_rrn_legacy: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 196,
+     "ms": 1,
+     "name": "kz_iin: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "kz_iin: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1804,
+     "ms": 5,
+     "name": "kz_iin: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "luhn: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "luhn: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 3,
+     "name": "luhn: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "sg_nric_fin_reconstructed: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "sg_nric_fin_reconstructed: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 5000,
+     "ms": 7,
+     "name": "sg_nric_fin_reconstructed: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "th_mod11: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "th_mod11: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 5,
+     "name": "th_mod11: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "tr_tckn: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "tr_tckn: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 19800,
+     "ms": 28,
+     "name": "tr_tckn: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "tr_vkn: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "tr_vkn: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 5,
+     "name": "tr_vkn: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "tw_citizen_new_ui: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "tw_citizen_new_ui: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 4,
+     "name": "tw_citizen_new_ui: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 0,
+     "name": "verhoeff: verify accepts all 200 Python-generated vectors",
+     "status": "pass"
+    },
+    {
+     "assertions": 200,
+     "ms": 1,
+     "name": "verhoeff: Lua generator reproduces Python check characters",
+     "status": "pass"
+    },
+    {
+     "assertions": 1800,
+     "ms": 4,
+     "name": "verhoeff: every other value at the check position is rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "reference vector file covers every registered algorithm",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 239,
+   "name": "reference_vectors",
+   "passed": 52
+  },
+  {
+   "assertions": 1822,
+   "cases": [
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "cn_resident_id_mod11_2: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "cn_resident_id_mod11_2: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "cn_resident_id_mod11_2: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "cn_resident_id_mod11_2: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "cn_resident_id_mod11_2: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "cn_uscc_mod31: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "cn_uscc_mod31: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "cn_uscc_mod31: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "cn_uscc_mod31: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "cn_uscc_mod31: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "hkid_mod11: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "hkid_mod11: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "hkid_mod11: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "hkid_mod11: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "hkid_mod11: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "iban_mod97: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "iban_mod97: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "iban_mod97: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "iban_mod97: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "iban_mod97: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "icao9303_check_digit: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "icao9303_check_digit: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "icao9303_check_digit: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "icao9303_check_digit: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "icao9303_check_digit: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "ir_national_mod11: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "ir_national_mod11: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "ir_national_mod11: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "ir_national_mod11: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "ir_national_mod11: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "jp_corporate_number: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "jp_corporate_number: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "jp_corporate_number: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "jp_corporate_number: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "jp_corporate_number: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "jp_mynumber: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "jp_mynumber: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "jp_mynumber: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "jp_mynumber: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "jp_mynumber: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "kr_rrn_legacy: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "kr_rrn_legacy: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "kr_rrn_legacy: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "kr_rrn_legacy: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "kr_rrn_legacy: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "kz_iin: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "kz_iin: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "kz_iin: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "kz_iin: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "kz_iin: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "luhn: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "luhn: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "luhn: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "luhn: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "luhn: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "sg_nric_fin_reconstructed: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "sg_nric_fin_reconstructed: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "sg_nric_fin_reconstructed: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "sg_nric_fin_reconstructed: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "sg_nric_fin_reconstructed: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "th_mod11: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "th_mod11: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "th_mod11: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "th_mod11: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "th_mod11: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "tr_tckn: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "tr_tckn: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "tr_tckn: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "tr_tckn: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "tr_tckn: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "tr_vkn: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "tr_vkn: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "tr_vkn: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "tr_vkn: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "tr_vkn: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "tw_citizen_new_ui: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "tw_citizen_new_ui: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "tw_citizen_new_ui: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "tw_citizen_new_ui: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "tw_citizen_new_ui: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "verhoeff: determinism and accepted sample",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "verhoeff: nil, non-string and empty inputs are rejected with a reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "verhoeff: wrong lengths are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 16,
+     "ms": 0,
+     "name": "verhoeff: illegal ASCII characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "verhoeff: Unicode digits and format characters are rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 12,
+     "ms": 0,
+     "name": "leading zeros are preserved by generators (no numeric conversion)",
+     "status": "pass"
+    },
+    {
+     "assertions": 1163,
+     "ms": 3,
+     "name": "ISO 7064 / Luhn / Verhoeff schemes detect every single-character substitution",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "JP corporate number (mod 9) cannot distinguish 0 from 9: documented blind spot",
+     "status": "pass"
+    },
+    {
+     "assertions": 13,
+     "ms": 0,
+     "name": "Verhoeff detects every adjacent transposition; Luhn misses only 09<->90",
+     "status": "pass"
+    },
+    {
+     "assertions": 23,
+     "ms": 0,
+     "name": "KZ two-stage: bodies with no valid digit are rejected for all ten digits",
+     "status": "pass"
+    },
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "IBAN: registry subset, structure classes and check-digit range",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "SG: series detection and experimental flag are separate from arithmetic",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "TR: TCKN leading zero and YKN separation",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 1,
+     "name": "ICAO: composite check digit over TD3 sample slices",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "HKID: single-letter prefix uses 36, two-letter prefix does not",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 5,
+   "name": "checksum_properties",
+   "passed": 95
+  },
+  {
+   "assertions": 1831,
+   "cases": [
+    {
+     "assertions": 180,
+     "ms": 2,
+     "name": "all rule patterns compile in the restricted subset",
+     "status": "pass"
+    },
+    {
+     "assertions": 12,
+     "ms": 0,
+     "name": "unsupported constructs raise instead of silently matching",
+     "status": "pass"
+    },
+    {
+     "assertions": 1623,
+     "ms": 3,
+     "name": "rule examples and negative examples match the expected verdicts",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "length bounds are derived correctly",
+     "status": "pass"
+    },
+    {
+     "assertions": 9,
+     "ms": 0,
+     "name": "byte semantics: newline, NUL, non-ASCII never match; non-string is false",
+     "status": "pass"
+    },
+    {
+     "assertions": 1,
+     "ms": 37,
+     "name": "differential corpus verdicts recorded for PCRE2 comparison",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 57,
+   "name": "syntax_subset",
+   "passed": 6
+  },
+  {
+   "assertions": 32,
+   "cases": [
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "MY NRIC: only the exact 6-2-4 hyphen layout is stripped",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "HKID: only a single trailing (x) pair is removed",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "IBAN: print-format spaces only in 4-groups; no generic whitespace removal",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "SG foreign company: three spaces -> 000 only in the exact legacy layout",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "ASCII upper-casing happens only with the explicit option; never NFKC",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "rules without normalization entries return the value verbatim",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "validate() never normalizes implicitly",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 19,
+   "name": "normalize",
+   "passed": 7
+  },
+  {
+   "assertions": 53,
+   "cases": [
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "leap year rules: 1900 no, 2000 yes, 2024 yes, 2100 no",
+     "status": "pass"
+    },
+    {
+     "assertions": 8,
+     "ms": 0,
+     "name": "valid_date boundaries",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "parse_iso_date",
+     "status": "pass"
+    },
+    {
+     "assertions": 8,
+     "ms": 0,
+     "name": "CN: date validity, future check with reference date, region unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 9,
+     "ms": 0,
+     "name": "ID NIK: female +40, invalid days, ambiguous century",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "MY NRIC: YYMMDD plausibility, century and birthplace unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "KR RRN: century digit mapping and date validity",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "IN PAN serial 0000 and IR repeated digits",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "rules without semantic checks report not_applicable; semantic=false skips",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 17,
+   "name": "semantic",
+   "passed": 9
+  },
+  {
+   "assertions": 199,
+   "cases": [
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "defaults are conservative",
+     "status": "pass"
+    },
+    {
+     "assertions": 8,
+     "ms": 0,
+     "name": "enabled (official) algorithms run by default and can be disabled per id",
+     "status": "pass"
+    },
+    {
+     "assertions": 23,
+     "ms": 0,
+     "name": "opt_in_secondary algorithms skip by default with an evidence reason",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "IL Luhn is rule-scoped: PAN runs by default, IL.id_tin does not",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "SG: S/T/F/G opt-in; M requires the experimental flag",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "KR: regime gating",
+     "status": "pass"
+    },
+    {
+     "assertions": 129,
+     "ms": 0,
+     "name": "every rule with an algorithm has a policy from the known vocabulary",
+     "status": "pass"
+    },
+    {
+     "assertions": 17,
+     "ms": 0,
+     "name": "official evidence <=> enabled policy; secondary evidence never enabled by default",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 17,
+   "name": "policies",
+   "passed": 8
+  },
+  {
+   "assertions": 286,
+   "cases": [
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "cn_feb30_checksum_correct_date_invalid",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "cn_leap_2000_02_29",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "cn_nonleap_1900_02_29",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "cn_1880_example_year_not_rejected_by_regex",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "cn_future_date_with_reference",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "cn_future_date_without_reference_is_not_checked",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "jp_mynumber_remainder_0",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "jp_mynumber_remainder_1",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "jp_mynumber_remainder_10",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "jp_mynumber_algorithm_must_not_accept_corporate_number",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "jp_corporate_official_example",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "th_remainder_0",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "th_remainder_1",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "th_remainder_10",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "th_default_policy_is_unknown_not_fail",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "th_enabled_policy_detects_mismatch",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "kz_two_stage_second_round_valid",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "kz_two_stage_second_round_10_no_valid_digit_0",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "kz_two_stage_second_round_10_no_valid_digit_1",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "sg_m_official_example_default",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "sg_m_official_example_secondary_only_still_unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "sg_m_official_example_experimental_reconstruction_disagrees",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "sg_s_series_default_unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "sg_s_series_secondary_enabled",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "kr_rrn_unknown_regime_legacy_mismatch_not_fail",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "kr_rrn_current_regime_not_applicable",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "kr_rrn_legacy_regime_runs_formula_pass",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "kr_rrn_legacy_regime_runs_formula_fail",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "kr_rrn_century_digit_3_2000s_date",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "kr_rrn_century_digit_1_1900_feb29_invalid",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "tr_ykn_is_not_validated_with_tckn_formula",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "tr_ykn_non_99_prefix_not_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "tr_tckn_default_unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "tr_tckn_enabled_pass",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "tr_tckn_leading_zero_regex_rejects",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "tr_vkn_leading_zero_preserved",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "iban_check_digits_00_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "iban_check_digits_01_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "iban_check_digits_99_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "iban_print_format_requires_normalize",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "iban_print_format_normalized",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "iban_lowercase_requires_explicit_uppercase",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "iban_lowercase_with_explicit_uppercase",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "pan_luhn_is_not_bank_account",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "pan_too_short_for_current_profile",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "pan_legacy_profile_accepts_8_digits_syntax",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "il_id_luhn_default_unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "il_id_luhn_opt_in",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "il_entity_tin_never_runs_luhn",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "ir_repeated_digits_rejected_by_policy_not_arithmetic",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "ir_repeated_digits_policy_disabled",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "ir_leading_zeros_preserved",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "ir_short_input_not_left_padded",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "hkid_parentheses_require_normalize",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "hkid_parentheses_normalized",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "hkid_official_dpo_example_is_not_checksum_positive",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "my_nric_hyphens_require_normalize",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "my_nric_hyphens_normalized",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "my_nric_wrong_hyphen_positions_not_stripped",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "sg_foreign_company_legacy_spaces_normalized",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "sg_foreign_company_legacy_spaces_not_globally_stripped",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "id_nik_female_day_plus_40",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "id_nik_day_32_invalid",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "id_nik_day_72_invalid_even_as_female",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "id_nik_feb29_yy00_ambiguous_century_pass",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "in_pan_serial_0000_semantic_fail",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "in_pan_holder_type_k_not_in_profile",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "mo_tin_no_check_digit_per_source",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "phone_envelope_is_not_a_phone_validator",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "phone_envelope_16_digits_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "phone_envelope_without_plus_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "phone_profile_national_format_not_accepted",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "historical_rule_warns_without_import_mode",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "historical_rule_silent_in_import_mode",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "candidate_profile_warns",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "cn_passport_second_letter_I_excluded",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "cn_passport_checksum_not_established",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "uscc_lowercase_rejected_without_uppercase_option",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "uscc_lowercase_accepted_with_explicit_uppercase",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "cn_resident_lowercase_x_explicit_option",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "cn_resident_lowercase_x_without_option",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "input_too_long_guard",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "nul_byte_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "zero_width_space_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "rtl_override_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "fullwidth_digit_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "arabic_indic_digit_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "thai_digit_rejected",
+     "status": "pass"
+    },
+    {
+     "assertions": 3,
+     "ms": 0,
+     "name": "icao_mrz_field_rule_has_no_rule_level_checksum",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "icao_mrz_lowercase_rejected",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 18,
+   "name": "edge_cases",
+   "passed": 90
+  },
+  {
+   "assertions": 5405,
+   "cases": [
+    {
+     "assertions": 10,
+     "ms": 0,
+     "name": "registry statistics match the documented inventory",
+     "status": "pass"
+    },
+    {
+     "assertions": 28,
+     "ms": 0,
+     "name": "result shape and vocabulary",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "unknown rule id raises; options table is not mutated",
+     "status": "pass"
+    },
+    {
+     "assertions": 2945,
+     "ms": 9,
+     "name": "every rule: positive examples pass syntax; negative examples fail",
+     "status": "pass"
+    },
+    {
+     "assertions": 50,
+     "ms": 1,
+     "name": "every rule: expected_checksum_arithmetic holds when all algorithms are enabled",
+     "status": "pass"
+    },
+    {
+     "assertions": 20,
+     "ms": 0,
+     "name": "default mode never reports checksum=fail for opt-in or regime-gated algorithms",
+     "status": "pass"
+    },
+    {
+     "assertions": 180,
+     "ms": 1,
+     "name": "checksum_status vocabulary is respected per rule",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "status warnings: candidate / envelope / dated / historical",
+     "status": "pass"
+    },
+    {
+     "assertions": 2160,
+     "ms": 6,
+     "name": "non-string and oversize inputs for every rule",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "rules_for() and jurisdiction headers",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 34,
+   "name": "api",
+   "passed": 10
+  },
+  {
+   "assertions": 187,
+   "cases": [
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "TH SCB accepts 10 and 13; rejects 11",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "SG UOB VAN lengths vs ordinary 10",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "HK HSBC 10/12 reject 11; BOCHK 14",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "MO BOC generations and no global zero trim",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "TR IBAN alphanumeric BBAN, reserved 0, MOD97; ownership unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "CN foreign ID checksum pass but impossible date fails semantic",
+     "status": "pass"
+    },
+    {
+     "assertions": 8,
+     "ms": 0,
+     "name": "HK/MO mainland residence and travel permit field split",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "MO BIR format only; checksum unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "Worldpay MC19 opt-in processor profile",
+     "status": "pass"
+    },
+    {
+     "assertions": 8,
+     "ms": 0,
+     "name": "phone allocation: assigned/reserved/hole/VAS; unlisted unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 125,
+     "ms": 1,
+     "name": "banking algorithm fixtures via Lua checksums",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "NUL newline unicode types still fail syntax on bank rules",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 19,
+   "name": "banking",
+   "passed": 12
+  }
+ ],
+ "summary": {
+  "assertions": 91208,
+  "cases": 311,
+  "cpu_seconds": 0.432,
+  "failed": 0,
+  "passed": 311,
+  "suites": 11
+ }
+}

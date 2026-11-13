@@ -1,0 +1,11 @@
+{
+  "imported_profiles": 51,
+  "skipped": [
+    "TR.iban.2021"
+  ],
+  "format_fixtures": 458,
+  "algorithm_fixtures": 62,
+  "uob_full_table_committed": false,
+  "ofca_full_table_committed": false,
+  "note_zh": "完整 UOB/OFCA 表未提交；仅合成目录夹具。"
+}

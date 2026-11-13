@@ -1,0 +1,611 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13.banking",
+  "jurisdiction": "TH",
+  "name_zh": "泰国",
+  "scope_group": "core",
+  "calling_code": "66",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "TH.citizen_id",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[1-8][0-9]{12})\\z",
+      "python_fullmatch_body": "[1-8][0-9]{12}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "th_mod11",
+        "evidence": "official_structure_secondary_formula",
+        "policy": "opt_in_secondary"
+      },
+      "notes_zh": "DOPA 13 位公民身份号码，首位类别 1-8，末位检查位。0 类无国籍登记号属另一记录类型，不在本规则。校验公式来自二级技术资料，官方 OECD 材料仅确认存在检查位且 RD 税号用同一方法。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.structure",
+        "th.checksum"
+      ],
+      "source_urls": [
+        "https://datastandard.m-society.go.th/datatable/index/1",
+        "https://charin-nawaritloha.github.io/excel-vba-notes/20180111_check_sum_id.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "1234567890121",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!1234567890121",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "1234567890121\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n1234567890121",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "1234567890121!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "123456789012",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "12345678901210",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "123456789０121",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "TH.tin_envelope",
+      "pii_type": "tax_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{13})\\z",
+      "python_fullmatch_body": "[0-9]{13}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "th_mod11",
+        "evidence": "official_structure_secondary_formula",
+        "policy": "opt_in_secondary"
+      },
+      "notes_zh": "泰国税号 13 位外壳：可来自 DOPA（前缀 100-999，排除 601）、DBD（010-096）、RD（099，第 4 位类别 1-4，类别 2 第 5 位须为 8）。税号可 0 开头，不能复用首位 1-8 的身份证正则。发证机构前缀语义未在正则内。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "oecd.TH",
+        "th.checksum"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/thailand-tin.pdf",
+        "https://charin-nawaritloha.github.io/excel-vba-notes/20180111_check_sum_id.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0991123456781",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        },
+        {
+          "input": "0101234567899",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!0991123456781",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "0991123456781\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n0991123456781",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "0991123456781!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "099112345678",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "09911234567810",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "０991123456781",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "TH.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+66[0-9]{1,13})\\z",
+      "python_fullmatch_body": "\\+66[0-9]{1,13}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+661",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+661111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+661",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+661\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+661",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+661!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+66",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+66１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "TH.phone_mobile_profile",
+      "pii_type": "phone",
+      "status": "dated_numbering_profile",
+      "regex_pcre2": "\\A(?:\\+66[689][0-9]{8})\\z",
+      "python_fullmatch_body": "\\+66[689][0-9]{8}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "NBTC（经 ITU）编号通知：移动号码 NSN 9 位，首位 6/8/9（国内写法含 0 共 10 位）。不代表每个子号段均已分配。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.numbering"
+      ],
+      "source_urls": [
+        "https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000CD0004PDFE.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+66800000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+66800000000",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+66800000000\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+66800000000",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+66800000000!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+6680000000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+668000000000",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "+668０0000000",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "TH.bbl.personal_deposit",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{10})\\z",
+      "python_fullmatch_body": "[0-9]{10}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Bangkok Bank personal savings/current in SMS Account Alert；unknown account check digit; do not apply Luhn；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.bbl"
+      ],
+      "source_urls": [
+        "https://www.bangkokbank.com/en/fragments/accordions/personal/digital-banking/sms-services/sms-account-alert-1"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9876543210",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0123456789\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0123456789",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0123456789\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0123456789x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６٧８٩",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "00000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Bangkok Bank personal savings/current in SMS Account Alert",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "th.bbl": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "TH.bbl.atm_be1st",
+      "pii_type": "payment_card",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{16})\\z",
+      "python_fullmatch_body": "[0-9]{16}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Bangkok Bank ATM or Be1st card in SMS Account Alert；only length documented for this service; no BIN or Luhn obligation established；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.bbl"
+      ],
+      "source_urls": [
+        "https://www.bangkokbank.com/en/fragments/accordions/personal/digital-banking/sms-services/sms-account-alert-1"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0000123456789012",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9876543210987654",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0000123456789012\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0000123456789012",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0000123456789012\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0000123456789012x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００００١２٣４٥６٧８٩０١２",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Bangkok Bank ATM or Be1st card in SMS Account Alert",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "th.bbl": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "TH.kbank.cdm_account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{10})\\z",
+      "python_fullmatch_body": "[0-9]{10}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=KBank K-CDM deposit account-number field；scoped CDM input; not virtual account or every deposit product；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.kbank"
+      ],
+      "source_urls": [
+        "https://www.kasikornbank.com/en/personal/services/payment/pages/transfer-k-cdm.aspx"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9876543210",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0012345678\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0012345678",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0012345678\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0012345678x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "KBank K-CDM deposit account-number field",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "th.kbank": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "TH.scb.company_add_account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:(?:[0-9]{10}|[0-9]{13}))\\z",
+      "python_fullmatch_body": "(?:[0-9]{10}|[0-9]{13})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=SCB company-admin Add Bank Account manual；10/13 product mapping not published in source; do not claim personal-only or all-Thai length；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.scb"
+      ],
+      "source_urls": [
+        "https://www.scb.co.th/getmedia/3d158e54-9ecf-469e-ba7b-a7ce99149b67/add-new-account.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "0012345678901",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0012345678\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0012345678",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0012345678\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0012345678x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "SCB company-admin Add Bank Account manual",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "th.scb": null
+      },
+      "rule_role": "full_identifier"
+    }
+  ]
+}

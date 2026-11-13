@@ -1,0 +1,999 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13.banking",
+  "jurisdiction": "MO",
+  "name_zh": "澳门",
+  "scope_group": "additional_asia",
+  "calling_code": "853",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "MO.individual_commercial_tin",
+      "pii_type": "tax_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:0[0-9]{7})\\z",
+      "python_fullmatch_body": "0[0-9]{7}",
+      "checksum": {
+        "status": "none_per_source"
+      },
+      "notes_zh": "澳门商业个人纳税人编号 0 + 7 位数字。OECD 明确该税号没有检查位。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "oecd.MO"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/macau-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "01234567",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!01234567",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "01234567\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n01234567",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "01234567!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "0123456",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "012345670",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "０1234567",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "MO.entity_tin",
+      "pii_type": "tax_id_entity",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:8[0-9]{7})\\z",
+      "python_fullmatch_body": "8[0-9]{7}",
+      "checksum": {
+        "status": "none_per_source"
+      },
+      "notes_zh": "澳门实体纳税人编号 8 + 7 位数字。OECD 明确该税号没有检查位。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "oecd.MO"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/macau-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "81234567",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!81234567",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "81234567\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n81234567",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "81234567!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "8123456",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "812345670",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "8１234567",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "MO.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+853[0-9]{1,12})\\z",
+      "python_fullmatch_body": "\\+853[0-9]{1,12}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+8531",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+853111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+8531",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+8531\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+8531",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+8531!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+853",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+853１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "MO.bnu.eapplication_savings",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{10})\\z",
+      "python_fullmatch_body": "[0-9]{10}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=BNU e-Application MOP/HKD/RMB savings inward remittance；scoped to these savings accounts; no public checksum found；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "mo.bnu"
+      ],
+      "source_urls": [
+        "https://www.bnu.com.mo/en/digital-solutions/pages/eapplication"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9876543210",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0012345678\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0012345678",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0012345678\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0012345678x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "BNU e-Application MOP/HKD/RMB savings inward remittance",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.bnu": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "MO.icbc.ebanking_main",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{19})\\z",
+      "python_fullmatch_body": "[0-9]{19}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=ICBC Macau online-banking main account；undated legacy-looking service page; no claim all transfer products; no Luhn；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax_date_unknown",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "mo.icbc"
+      ],
+      "source_urls": [
+        "https://www.icbc.com.mo/tc/page/721852397734625293.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0000123456789012345",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9876543210987654321",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0000123456789012345\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0000123456789012345",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0000123456789012345\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0000123456789012345x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００００١２٣４٥６٧８٩０١２٣４٥",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "ICBC Macau online-banking main account",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.icbc": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "MO.boc.standard17",
+      "pii_type": "domestic_bank_account",
+      "status": "dated_bank_generation_profile",
+      "regex_pcre2": "\\A(?:[0-9]{17})\\z",
+      "python_fullmatch_body": "[0-9]{17}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=BOC Macau standard accounts after2018 upgrade except FI/NHG；do not reject FI/NHG using this profile; source says17 except these, general savings passage says up to17；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_bank_generation_profile；effective_from=2018-03-25",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "mo.boc"
+      ],
+      "source_urls": [
+        "https://pic.bankofchina.com/bocappd/macau/201803/P020180305764307361626.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "00123456789012345",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "00987654321098765",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "00123456789012345\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 00123456789012345",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "00123456789012345\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "00123456789012345x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８٩０١２٣４٥",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "BOC Macau standard accounts after2018 upgrade except FI/NHG",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.boc": "2018-03"
+      },
+      "effective_from": "2018-03-25",
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "MO.boc.selfservice15",
+      "pii_type": "account_channel_input",
+      "status": "dated_channel_profile",
+      "regex_pcre2": "\\A(?:[0-9]{15})\\z",
+      "python_fullmatch_body": "[0-9]{15}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=BOC Macau ATM/CDM/BOC Express2018 input for00-prefixed17；only this channel maps input ->00+15. Do not globally trim zeros or infer arbitrary17->15；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_channel_profile；仅渠道归一化：canonical17 必须以00开头时去掉恰好两位00；禁止全局去零。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "mo_boc_selfservice_00_prefix_channel",
+          "layout": "canonical_17_starting_00_to_15",
+          "requires_option": "normalize"
+        }
+      ],
+      "source_ids": [
+        "mo.boc"
+      ],
+      "source_urls": [
+        "https://pic.bankofchina.com/bocappd/macau/201803/P020180305764307361626.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "123456789012345",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "098765432109876",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "123456789012345\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 123456789012345",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "123456789012345\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "123456789012345x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "١２٣４٥６٧８٩０١２٣４٥",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "BOC Macau ATM/CDM/BOC Express2018 input for00-prefixed17",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.boc": "2018-03"
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "MO.boc.old12",
+      "pii_type": "domestic_bank_account",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{12})\\z",
+      "python_fullmatch_body": "[0-9]{12}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=BOC Macau pre-upgrade account numbers；2018document allowed continued old use;2026acceptance unconfirmed；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=historical_compatibility",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "mo.boc"
+      ],
+      "source_urls": [
+        "https://pic.bankofchina.com/bocappd/macau/201803/P020180305764307361626.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "001234567890",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "987654321098",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "001234567890\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 001234567890",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "001234567890\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "001234567890x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８٩０",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "BOC Macau pre-upgrade account numbers",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.boc": "2018-03"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "MO.boc.loan15",
+      "pii_type": "loan_account",
+      "status": "dated_bank_generation_profile",
+      "regex_pcre2": "\\A(?:[0-9]{15})\\z",
+      "python_fullmatch_body": "[0-9]{15}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=BOC Macau post2018 loan account；separate loan profile; same15length does not mean selfservice normalization；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_bank_generation_profile",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "mo.boc"
+      ],
+      "source_urls": [
+        "https://pic.bankofchina.com/bocappd/macau/201803/P020180305764307361626.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "001234567890123",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "987654321098765",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "001234567890123\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 001234567890123",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "001234567890123\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "001234567890123x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８٩０١２٣",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "BOC Macau post2018 loan account",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.boc": "2018-03"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "MO.mainland_travel_permit",
+      "pii_type": "mainland_travel_permit",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:M[0-9]{8})\\z",
+      "python_fullmatch_body": "M[0-9]{8}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Chinese-national MO resident return-home permit；first application territory controlsH/M; appended2renewalcount separate; nonChinese2024series notcovered；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "cn.travel"
+      ],
+      "source_urls": [
+        "https://www.nia.gov.cn/n741440/n741547/c1197066/content.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "M00012345",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "M98765432",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "M00012345\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " M00012345",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "M00012345\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "M00012345x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "M０００١２٣４٥",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "M0001234501",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Chinese-national MO resident return-home permit",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.travel": "2019-12-26"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "MO.resident_id",
+      "pii_type": "resident_id",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{8})\\z",
+      "python_fullmatch_body": "[0-9]{8}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Macao Resident Identity Card；7number+1check; first1/5/7 not inferred nationality/permanent-status; no published formula here；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "mo.bir"
+      ],
+      "source_urls": [
+        "https://www.al.gov.mo/file/colect/col_lei-01/cn/07/3-2.htm"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "10000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "50000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "70000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "10000000\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 10000000",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "10000000\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "10000000x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "١０００００００",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Macao Resident Identity Card",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.bir": "2002-10-24 (制定)"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "MO.phone.mobile_series",
+      "pii_type": "phone",
+      "status": "dated_numbering_profile",
+      "regex_pcre2": "\\A(?:\\+8536[23568][0-9]{6})\\z",
+      "python_fullmatch_body": "\\+8536[23568][0-9]{6}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=CTT2026mobile series62,63,65,66,68；allocation lookup file mandatory for assigned-range result;65one-card-two-number;660VASnotnormalconsumer；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_numbering_series_profile",
+      "semantic_checks": [
+        "mo_mobile_allocation_directory_lookup"
+      ],
+      "normalization": [],
+      "source_ids": [
+        "mo.phone",
+        "mo.phone.62",
+        "mo.phone.63",
+        "mo.phone.65",
+        "mo.phone.66",
+        "mo.phone.68"
+      ],
+      "source_urls": [
+        "https://telecommunications.ctt.gov.mo/zh/PublicInfo/NumberInformation",
+        "https://telecommunications.ctt.gov.mo/zh/PublicInfo/AllocatedNum/62",
+        "https://telecommunications.ctt.gov.mo/zh/PublicInfo/AllocatedNum/63",
+        "https://telecommunications.ctt.gov.mo/zh/PublicInfo/AllocatedNum/65",
+        "https://telecommunications.ctt.gov.mo/zh/PublicInfo/AllocatedNum/66",
+        "https://telecommunications.ctt.gov.mo/zh/PublicInfo/AllocatedNum/68"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+85362123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "+85365123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "+85368123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "+85362123456\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " +85362123456",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "+85362123456\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "+85362123456x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "+８٥٣６２١２٣４٥６",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "+85364123456",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "+85367123456",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "+85369123456",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "CTT2026mobile series62,63,65,66,68",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.phone": null,
+        "mo.phone.62": "2026-04-23",
+        "mo.phone.63": "2026-04-23",
+        "mo.phone.65": "2026-04-23",
+        "mo.phone.66": "2026-04-23",
+        "mo.phone.68": "2026-04-23"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "MO.phone.fixed28",
+      "pii_type": "phone",
+      "status": "dated_numbering_profile",
+      "regex_pcre2": "\\A(?:\\+85328[0-9]{6})\\z",
+      "python_fullmatch_body": "\\+85328[0-9]{6}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=CTTfixed28series；series syntax not user allocation;8xDIDseparate；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_numbering_series_profile",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "mo.phone"
+      ],
+      "source_urls": [
+        "https://telecommunications.ctt.gov.mo/zh/PublicInfo/NumberInformation"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+85328123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "+85328987654",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "+85328123456\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " +85328123456",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "+85328123456\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "+85328123456x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "+８٥٣２８١２٣４٥６",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "CTTfixed28series",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "mo.phone": null
+      },
+      "rule_role": "full_identifier"
+    }
+  ]
+}

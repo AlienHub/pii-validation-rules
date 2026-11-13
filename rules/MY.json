@@ -1,0 +1,467 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13.banking",
+  "jurisdiction": "MY",
+  "name_zh": "马来西亚",
+  "scope_group": "core",
+  "calling_code": "60",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "MY.nric",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{12})\\z",
+      "python_fullmatch_body": "[0-9]{12}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "MyKad NRIC 12 位（展示格式 YYMMDD-PB-####）。出生日期/世纪、出生地码需要独立语义与历史码表；未证实统一校验码；末位奇偶是性别属性不是校验位。",
+      "semantic_checks": [
+        "yymmdd_birth_date_pos1_6",
+        "century_ambiguous",
+        "birthplace_code_not_verified"
+      ],
+      "normalization": [
+        {
+          "transform": "strip_fixed_separators",
+          "layout": "NNNNNN-NN-NNNN",
+          "separator": "-"
+        }
+      ],
+      "source_ids": [
+        "oecd.MY"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/malaysia-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "900101010001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!900101010001",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "900101010001\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n900101010001",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "900101010001!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "90010101000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "9001010100010",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "9０0101010001",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "MY.tin_individual",
+      "pii_type": "tax_id",
+      "status": "candidate_profile",
+      "regex_pcre2": "\\A(?:IG[0-9]{9,11})\\z",
+      "python_fullmatch_body": "IG[0-9]{9,11}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "LHDN 2023 年 TIN 说明给出 IG+9/10/11 位数字的示例。9 位下限是示例推断的候选剖面，不是官方对所有遗留短号的否定。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "oecd.MY",
+        "my.tin"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/malaysia-tin.pdf",
+        "https://www.hasil.gov.my/wp-content/uploads/malaysia-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "IG123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "IG1234567890",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "IG12345678901",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!IG123456789",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "IG123456789\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nIG123456789",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "IG123456789!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "IG12345678",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "IG１23456789",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "MY.tin_individual_legacy",
+      "pii_type": "tax_id",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:(?:SG|OG)[0-9]{9,11})\\z",
+      "python_fullmatch_body": "(?:SG|OG)[0-9]{9,11}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "SG/OG 前缀自 2023-01-02 起转换为 IG，数字保留。仅历史导入用途。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "oecd.MY"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/malaysia-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "SG123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "OG12345678901",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!SG123456789",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "SG123456789\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nSG123456789",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "SG123456789!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "SG12345678",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "SG１23456789",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "MY.tin_entity",
+      "pii_type": "tax_id_entity",
+      "status": "candidate_profile",
+      "regex_pcre2": "\\A(?:(?:C|CS|D|E|F|FA|PT|TA|TC|TN|TR|TP|J|LE)[0-9]{8,10}0)\\z",
+      "python_fullmatch_body": "(?:C|CS|D|E|F|FA|PT|TA|TC|TN|TR|TP|J|LE)[0-9]{8,10}0",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "非个人前缀 C/CS/D/E/F/FA/PT/TA/TC/TN/TR/TP/J/LE，历史号码末尾补 0。该 0 是迁移字符，不是已证明的数学校验位。各类别最小长度无统一官方定义，候选剖面不作为严格国家验证器。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "oecd.MY"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/malaysia-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "C1234567890",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "CS12345678900",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!C1234567890",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "C1234567890\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nC1234567890",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "C1234567890!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "C123456789",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "C123456789０",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "MY.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+60[0-9]{1,13})\\z",
+      "python_fullmatch_body": "\\+60[0-9]{1,13}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+601",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+601111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+601",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+601\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+601",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+601!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+60",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+6０1",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "MY.phone_011_profile",
+      "pii_type": "phone",
+      "status": "dated_numbering_profile",
+      "regex_pcre2": "\\A(?:\\+6011[0-9]{8})\\z",
+      "python_fullmatch_body": "\\+6011[0-9]{8}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "MCMC 2010 年通知：011 + 8 位用户号码。仅该系列，不是全部马来西亚手机号。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "my.numbering"
+      ],
+      "source_urls": [
+        "https://www.mcmc.gov.my/en/media/announcements/01-october-2010-notification"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+601100000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+601100000000",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+601100000000\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+601100000000",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+601100000000!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+60110000000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+6011000000000",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "+6０1100000000",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

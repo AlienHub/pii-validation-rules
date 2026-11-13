@@ -1,0 +1,1047 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13.banking",
+  "jurisdiction": "CN",
+  "name_zh": "中国大陆",
+  "scope_group": "core",
+  "calling_code": "86",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "CN.resident_id",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{17}[0-9X])\\z",
+      "python_fullmatch_body": "[0-9]{17}[0-9X]",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "cn_resident_id_mod11_2",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "GB 11643-1999 公民身份号码：6 位地址码 + 8 位出生日期 + 3 位顺序码 + 1 位校验码（ISO 7064 MOD 11-2，X 表示 10）。第二个正例为标准附录示例，不保证未发放。出生日期合法性、历史行政区划码、发证状态属于语义层/发证核验层，正则与校验码都不能证明。不要把出生年硬编码为 19/20 开头（标准附录含 1880 年示例）。15 位旧号、外国人永久居留身份证、港澳台居住证不在本规则内。",
+      "semantic_checks": [
+        "gregorian_birth_date_yyyymmdd_pos7_14",
+        "not_after_reference_date",
+        "region_code_not_verified"
+      ],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase_last_char",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.id.standard",
+        "cn.id.catalogue"
+      ],
+      "source_urls": [
+        "https://zjw.beijing.gov.cn/Portals/0/zhuanti/fazhan/%E8%BA%AB%E4%BB%BD%E8%AF%81GB11643-1999.pdf",
+        "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=080D6FBF2BB468F9007657F26D60013E"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "110105199001010010",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        },
+        {
+          "input": "11010519491231002X",
+          "expected_syntax": true,
+          "provenance": "official_GB11643_illustrative_example_not_reserved",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!110105199001010010",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "110105199001010010\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n110105199001010010",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "110105199001010010!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "11010519900101001",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "1101051990010100100",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "11０105199001010010",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "CN.uscc",
+      "pii_type": "tax_id_entity",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9ABCDEFGHJKLMNPQRTUWXY]{18})\\z",
+      "python_fullmatch_body": "[0-9ABCDEFGHJKLMNPQRTUWXY]{18}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "cn_uscc_mod31",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "GB 32100-2015 统一社会信用代码：18 位，字符集排除 I/O/Z/S/V；第 1 位登记管理部门、第 2 位机构类别、第 3-8 位行政区划、第 9-17 位主体标识码（组织机构代码）、第 18 位校验码（MOD 31）。部门/类别组合、行政区划分配表与内嵌组织机构代码的 GB 11714 校验位未在本规则内。并非所有 18 位税号都是 USCC。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.uscc",
+        "oecd.CN"
+      ],
+      "source_urls": [
+        "https://www.cods.org.cn/cods/2020-10/29/12575hi/2026052817531155415.pdf",
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/china-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "91110101ABCDEFGH1E",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!91110101ABCDEFGH1E",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "91110101ABCDEFGH1E\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n91110101ABCDEFGH1E",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "91110101ABCDEFGH1E!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "91110101ABCDEFGH1",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "91110101ABCDEFGH1E0",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "9111０101ABCDEFGH1E",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "CN.ordinary_passport",
+      "pii_type": "passport",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:(?:[GE][0-9]{8}|E[A-HJ-NP-Z][0-9]{7}))\\z",
+      "python_fullmatch_body": "(?:[GE][0-9]{8}|E[A-HJ-NP-Z][0-9]{7})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "仅普通护照：G+8 位数字、E+8 位数字、E+第二字母（排除 I/O）+7 位数字。外交/公务护照、更早历史系列不涵盖。未发现对印刷护照号公开的校验码；MRZ 检查位是另一字段。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.passport"
+      ],
+      "source_urls": [
+        "https://gaj.gz.gov.cn/zwfw/ywtd/crjimmigration/crjzx/content/post_9496059.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "G00000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "E00000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "EA0000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!G00000001",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "G00000001\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nG00000001",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "G00000001!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "G0000000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "G000000010",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "G０0000001",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "CN.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+86[0-9]{1,13})\\z",
+      "python_fullmatch_body": "\\+86[0-9]{1,13}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+861",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+861111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+861",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+861\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+861",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+861!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+86",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+86１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "CN.pan.jrt0008_2000",
+      "pii_type": "payment_card",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:9[0-9]{12,18})\\z",
+      "python_fullmatch_body": "9[0-9]{12,18}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "luhn",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "issuer_scope=JR/T0008-2000 historical RMB card series；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=historical_standard_only",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "cn.pan.legacy"
+      ],
+      "source_urls": [
+        "https://www.pbc.gov.cn/eportal/fileDir/image_public/rhwg/001801f1.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "9000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9000000000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "9000000000000\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 9000000000000",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "9000000000000\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "9000000000000x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "٩００００００００００００",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "6200000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "JR/T0008-2000 historical RMB card series",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.pan.legacy": "2000-11-10"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "CN.boc.passbook12",
+      "pii_type": "domestic_bank_account",
+      "status": "dated_bank_generation_profile",
+      "regex_pcre2": "\\A(?:[0-9]{12})\\z",
+      "python_fullmatch_body": "[0-9]{12}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=BOC mainland intra-bank passbook new account in2012announcement；not all BOC accounts or cardPAN; no public checksum；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_bank_generation_profile",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "cn.boc"
+      ],
+      "source_urls": [
+        "https://wap.boc.cn/bif/bi2/201204/t20120410_1775238.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "001234567890",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "987654321098",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "001234567890\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 001234567890",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "001234567890\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "001234567890x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８٩０",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "BOC mainland intra-bank passbook new account in2012announcement",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.boc": "2012-04-10"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "CN.cnaps.routing",
+      "pii_type": "routing_code",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{12})\\z",
+      "python_fullmatch_body": "[0-9]{12}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=PBOC payment system participant code；12digit routing ID, not customer account; directory membership required; checksum formula not obtained；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "cn.cnaps"
+      ],
+      "source_urls": [
+        "https://taiyuan.pbc.gov.cn/taiyuan/134011/2164710/2552644/index.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "000123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "987654321098",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "000123456789\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 000123456789",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "000123456789\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "000123456789x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０００١２٣４٥６٧８٩",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "PBOC payment system participant code",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.cnaps": "2013-05-31"
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "CN.cmb.professional_legacy_card",
+      "pii_type": "payment_card",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:(?:[0-9]{8}|[0-9]{16}))\\z",
+      "python_fullmatch_body": "(?:[0-9]{8}|[0-9]{16})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=CMB Professional3.0+ historical batch payer card field；historical8-digit card not current ISO8IIN PAN; source does not specify Luhn；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=historical_interface_profile",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "cn.cmb.legacy"
+      ],
+      "source_urls": [
+        "https://www.cmbchina.com/cmbpb/v50/gb/pb/BatchTransferPayFileGuide.htm"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "00123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "0012345678901234",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "00123456\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 00123456",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "00123456\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "00123456x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "CMB Professional3.0+ historical batch payer card field",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.cmb.legacy": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "CN.foreign_permanent_resident2023",
+      "pii_type": "foreign_resident_id",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:9[0-9]{5}[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X])\\z",
+      "python_fullmatch_body": "9[0-9]{5}[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X]",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "cn_resident_id_mod11_2",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "issuer_scope=NIA foreign permanent resident ID issued from1Dec2023；positions2-3 reception province;4-6numeric country/region;7-14GregorianDOB;15-17sequence;18check; maintain code dictionaries separately；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax；effective_from=2023-12-01",
+      "semantic_checks": [
+        "gregorian_birth_date_yyyymmdd_pos7_14",
+        "not_after_reference_date",
+        "region_or_country_code_not_verified"
+      ],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase_last_char",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.foreign"
+      ],
+      "source_urls": [
+        "https://www.nia.gov.cn/20231013/2.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "932682198501010017",
+          "expected_syntax": true,
+          "provenance": "official_NIA_illustrative_example_not_reserved",
+          "expected_checksum_arithmetic": true
+        },
+        {
+          "input": "911156200002290013",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "932682198501010017\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 932682198501010017",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "932682198501010017\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "932682198501010017x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "٩٣２６８２١٩８٥０١０١００١٧",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "NIA foreign permanent resident ID issued from1Dec2023",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.foreign": "2023-10 (URL; 启用2023-12-01)"
+      },
+      "effective_from": "2023-12-01",
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "CN.foreign_permanent_resident_legacy",
+      "pii_type": "foreign_resident_id",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:[A-Z]{3}[0-9]{12})\\z",
+      "python_fullmatch_body": "[A-Z]{3}[0-9]{12}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=NIA2017/prior foreign permanent resident card；3lettercountry+4address+YYMMDD+sequence+check; century/code/oldcheck unknown; retained only explicit legacy；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=historical_compatibility",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "cn.foreign"
+      ],
+      "source_urls": [
+        "https://www.nia.gov.cn/20231013/2.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "ZZZ110090123105",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "AAA000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "ZZZ110090123105\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " ZZZ110090123105",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "ZZZ110090123105\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "ZZZ110090123105x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "ZZZ١١００٩０١２٣١０٥",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "NIA2017/prior foreign permanent resident card",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.foreign": "2023-10 (URL; 启用2023-12-01)"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "CN.hk_mainland_residence",
+      "pii_type": "mainland_residence_permit",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:810000[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X])\\z",
+      "python_fullmatch_body": "810000[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X]",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "cn_resident_id_mod11_2",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "issuer_scope=HK resident mainland residence permit under2018rules；DOB Gregorian + nonfuture policy separate; citizen-number standard checksum; not HKID/BIR or H/M permit；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax；effective_from=2018-09-01",
+      "semantic_checks": [
+        "gregorian_birth_date_yyyymmdd_pos7_14",
+        "not_after_reference_date",
+        "region_or_country_code_not_verified"
+      ],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase_last_char",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.hmtres",
+        "cn.foreign"
+      ],
+      "source_urls": [
+        "https://www.gov.cn/zhengce/content/2018-08/19/content_5314865.htm",
+        "https://www.nia.gov.cn/20231013/2.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "810000198501010010",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "81000019850101001X\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 81000019850101001X",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "81000019850101001X\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "81000019850101001Xx",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "８١００００١٩８٥０١０١００١X",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "HK resident mainland residence permit under2018rules",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.hmtres": "2018-08-06",
+        "cn.foreign": "2023-10 (URL; 启用2023-12-01)"
+      },
+      "effective_from": "2018-09-01",
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "CN.mo_mainland_residence",
+      "pii_type": "mainland_residence_permit",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:820000[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X])\\z",
+      "python_fullmatch_body": "820000[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X]",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "cn_resident_id_mod11_2",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "issuer_scope=MO resident mainland residence permit under2018rules；DOB Gregorian + nonfuture policy separate; citizen-number standard checksum; not HKID/BIR or H/M permit；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax；effective_from=2018-09-01",
+      "semantic_checks": [
+        "gregorian_birth_date_yyyymmdd_pos7_14",
+        "not_after_reference_date",
+        "region_or_country_code_not_verified"
+      ],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase_last_char",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.hmtres",
+        "cn.foreign"
+      ],
+      "source_urls": [
+        "https://www.gov.cn/zhengce/content/2018-08/19/content_5314865.htm",
+        "https://www.nia.gov.cn/20231013/2.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "820000198501010012",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "82000019850101001X\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 82000019850101001X",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "82000019850101001X\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "82000019850101001Xx",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "８２００００١٩８٥０١０١００١X",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "MO resident mainland residence permit under2018rules",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.hmtres": "2018-08-06",
+        "cn.foreign": "2023-10 (URL; 启用2023-12-01)"
+      },
+      "effective_from": "2018-09-01",
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "CN.travel_hkmo_electronic",
+      "pii_type": "exit_entry_permit",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:C(?:[0-9]{8}|[A-HJ-NP-Z][0-9]{7}))\\z",
+      "python_fullmatch_body": "C(?:[0-9]{8}|[A-HJ-NP-Z][0-9]{7})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Mainland resident electronic exit-entry permit for HK/MO；Cdigits series before3Dec2018; Cletterseries after, noI/O; old expiry not proven merely from syntax；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "cn.travel"
+      ],
+      "source_urls": [
+        "https://www.nia.gov.cn/n741440/n741547/c1197066/content.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "C00012345",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "CA0123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "C00012345\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " C00012345",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "C00012345\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "C00012345x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "C０００١２٣４٥",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "CI0123456",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "CO0123456",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Mainland resident electronic exit-entry permit for HK/MO",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.travel": "2019-12-26"
+      },
+      "rule_role": "full_identifier"
+    }
+  ]
+}

@@ -1,0 +1,928 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13.banking",
+  "jurisdiction": "HK",
+  "name_zh": "香港",
+  "scope_group": "additional_asia",
+  "calling_code": "852",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "HK.hkid",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[A-Z]{1,2}[0-9]{6}[0-9A])\\z",
+      "python_fullmatch_body": "[A-Z]{1,2}[0-9]{6}[0-9A]",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "hkid_mod11",
+        "evidence": "official_structure_secondary_algorithm",
+        "policy": "opt_in_secondary"
+      },
+      "notes_zh": "HKID：1-2 字母 + 6 位数字 + 检查字符 0-9/A（政府 DPO 公共架构与 OECD）。单字母补值 36 的 MOD 11 公式来自二级资料，默认可选。DPO 示例 A123456(A) 仅示意，不是校验正例。括号仅展示用。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "strip_trailing_parenthesised_check",
+          "layout": "BODY(C)"
+        },
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "hk.format",
+        "oecd.HK",
+        "hk.checksum"
+      ],
+      "source_urls": [
+        "https://www.digitalpolicy.gov.hk/en/our_work/data_governance/policies_standards/interoperability_framework/common_schemas/hkid_number/index.html",
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/hong-kong-tin.pdf",
+        "https://fongbin.com/hkid-checker/"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "A1234563",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        },
+        {
+          "input": "AB1234569",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!A1234563",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "A1234563\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nA1234563",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "A1234563!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "A123456",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "A12345630",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "A１234563",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "HK.business_registration",
+      "pii_type": "tax_id_entity",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{8})\\z",
+      "python_fullmatch_body": "[0-9]{8}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "商业登记号 8 位根号；完整登记证号另有后缀。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "oecd.HK"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/hong-kong-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "12345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!12345678",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "12345678\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n12345678",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "12345678!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "1234567",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "123456780",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "１2345678",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "HK.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+852[0-9]{1,12})\\z",
+      "python_fullmatch_body": "\\+852[0-9]{1,12}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+8521",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+852111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+8521",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+8521\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+8521",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+8521!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+852",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+852１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "HK.hsbc.full_account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:(?:[0-9]{10}|[0-9]{12}))\\z",
+      "python_fullmatch_body": "(?:[0-9]{10}|[0-9]{12})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=HSBC Hong Kong inward payments account；first3 branch; account7or9. Do not include bank004 in account field. Integrated remittance suffix selection is purpose/currency-dependent, not universal regex；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "hk.hsbc"
+      ],
+      "source_urls": [
+        "https://www.hsbc.com.hk/content/dam/hsbc/hk/docs/transfer-payments/customer-information-sheet-for-inward-payments-to-hong-kong.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "001234567890",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0012345678\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0012345678",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0012345678\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0012345678x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "00000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "000123456833HKD",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "HSBC Hong Kong inward payments account",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "hk.hsbc": "2026-01 (filename/search title; PDF body undated)"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "HK.bochk.payroll_account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{14})\\z",
+      "python_fullmatch_body": "[0-9]{14}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=BOCHK payroll HKD savings/current autopay account；payroll-specific scope; 14digits disprove HK universal9-12 assertion; do not require all HongKong accounts14；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "hk.bochk"
+      ],
+      "source_urls": [
+        "https://www.bochk.com/whk/form/payrollRegister/input.action?lang=en"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "00123456789012",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "98765432109876",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "00123456789012\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 00123456789012",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "00123456789012\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "00123456789012x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８٩０١２",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "BOCHK payroll HKD savings/current autopay account",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "hk.bochk": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "HK.clearing.bank_code",
+      "pii_type": "routing_code",
+      "status": "candidate_profile",
+      "regex_pcre2": "\\A(?:[0-9]{3})\\z",
+      "python_fullmatch_body": "[0-9]{3}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=HKICL clearing directory syntax；bank-branch membership requires live maintained table; not PII alone; 3-digit candidate grammar pending direct directory evidence; directory landing alone not authoritative for length; no default hard reject；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=candidate_routing_syntax_directory_unverified",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "hk.clearing"
+      ],
+      "source_urls": [
+        "https://www.hkicl.com.hk/eng/information%5Fcentre/clearing%5Fcode%5Fand%5Fbranch%5Fcode%5Flist.php"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "004",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "012",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "004\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 004",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "004\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "004x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００４",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "HKICL clearing directory syntax",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "hk.clearing": "2026-11-16 (future-dated landing; not effective snapshot)"
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "HK.clearing.branch_code",
+      "pii_type": "routing_code",
+      "status": "candidate_profile",
+      "regex_pcre2": "\\A(?:[0-9]{3})\\z",
+      "python_fullmatch_body": "[0-9]{3}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=HKICL branch directory syntax；branch is within bank namespace, cannot route on branch alone; 3-digit candidate grammar pending direct directory evidence; directory landing alone not authoritative for length; no default hard reject；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=candidate_routing_syntax_directory_unverified",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "hk.clearing"
+      ],
+      "source_urls": [
+        "https://www.hkicl.com.hk/eng/information%5Fcentre/clearing%5Fcode%5Fand%5Fbranch%5Fcode%5Flist.php"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "001",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "123",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "001\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 001",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "001\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "001x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "HKICL branch directory syntax",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "hk.clearing": "2026-11-16 (future-dated landing; not effective snapshot)"
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "HK.fps.id",
+      "pii_type": "payment_alias",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:(?:[0-9]{7}|[0-9]{9}))\\z",
+      "python_fullmatch_body": "(?:[0-9]{7}|[0-9]{9})",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=HK FPS-generated ID；registration/unique mapping unknown offline; not bank account and not Macau FPS；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "hk.fps"
+      ],
+      "source_urls": [
+        "https://fps.hkicl.com.hk/chi/fps/consumers/frequently_asked_questions.php"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0123456\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0123456",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0123456\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0123456x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "12345678",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "HK FPS-generated ID",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "hk.fps": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "HK.mainland_travel_permit",
+      "pii_type": "mainland_travel_permit",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:H[0-9]{8})\\z",
+      "python_fullmatch_body": "H[0-9]{8}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Chinese-national HK resident return-home permit；first application territory controlsH/M; appended2renewalcount separate; nonChinese2024series notcovered；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "cn.travel"
+      ],
+      "source_urls": [
+        "https://www.nia.gov.cn/n741440/n741547/c1197066/content.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "H00012345",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "H98765432",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "H00012345\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " H00012345",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "H00012345\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "H00012345x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "H０００١２٣４٥",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "H0001234501",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Chinese-national HK resident return-home permit",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "cn.travel": "2019-12-26"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "HK.hkid.identifier_field",
+      "pii_type": "identity_component",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[A-Z]{1,2}[0-9]{6})\\z",
+      "python_fullmatch_body": "[A-Z]{1,2}[0-9]{6}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=Government Common Schema HKID Identifier field；no check intentionally: government schema separates optionalcheck field; fullHKID baseline remains separately checked；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "hk.hkid"
+      ],
+      "source_urls": [
+        "https://www.digitalpolicy.gov.hk/en/our_work/data_governance/policies_standards/interoperability_framework/common_schemas/hkid_number/index.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "A000123",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "AB000123",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "A000123\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " A000123",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "A000123\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "A000123x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "A０００١２٣",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Government Common Schema HKID Identifier field",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "hk.hkid": "2005-02-01"
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "HK.hkid.check_field",
+      "pii_type": "identity_component",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9A])\\z",
+      "python_fullmatch_body": "[0-9A]",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=Government Common Schema separate HKID check digit field；a separate field, not completeID and not checksum validation；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "hk.hkid"
+      ],
+      "source_urls": [
+        "https://www.digitalpolicy.gov.hk/en/our_work/data_governance/policies_standards/interoperability_framework/common_schemas/hkid_number/index.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "A",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Government Common Schema separate HKID check digit field",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "hk.hkid": "2005-02-01"
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "HK.phone.mobile_candidate",
+      "pii_type": "phone",
+      "status": "syntax_plus_required_allocation_lookup",
+      "regex_pcre2": "\\A(?:\\+852[4-9][0-9]{7})\\z",
+      "python_fullmatch_body": "\\+852[4-9][0-9]{7}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=OFCA8-digit mobile range lookup input；only candidate grammar; EXACT mobile service/range/status lookup REQUIRED using hk-mobile-ranges.json;7x/8xcanbeotherusage；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=syntax_plus_required_allocation_lookup",
+      "semantic_checks": [
+        "hk_mobile_allocation_directory_lookup"
+      ],
+      "normalization": [],
+      "source_ids": [
+        "hk.phone"
+      ],
+      "source_urls": [
+        "https://www.ofca.gov.hk/filemanager/ofca/tc/content_311/no_plan.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+85240601234",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "+85291234567",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "+85240601234\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " +85240601234",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "+85240601234\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "+85240601234x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "+８٥２４０６０١２٣４",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "+85221234567",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "OFCA8-digit mobile range lookup input",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "hk.phone": "2026-10-31 (issued 2026-11-02)"
+      },
+      "rule_role": "full_identifier"
+    }
+  ]
+}

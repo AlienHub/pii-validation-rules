@@ -1,0 +1,33 @@
+{
+  "schema_version": "directory-1",
+  "directory": "mo_mobile_allocation",
+  "notice_zh": "合成澳门移动首阶样例，保留空洞与660 VAS；完整监管表由调用方注入。",
+  "source_id": "mo.phone.mobile",
+  "source_date": "2026-04-23",
+  "ranges": [
+    {
+      "start": "62000000",
+      "end": "62999999",
+      "status": "allocated",
+      "service": "mobile"
+    },
+    {
+      "start": "66050000",
+      "end": "66050008",
+      "status": "allocated",
+      "service": "VAS"
+    },
+    {
+      "start": "68000000",
+      "end": "68007999",
+      "status": "allocated",
+      "service": "mobile"
+    },
+    {
+      "start": "68008001",
+      "end": "68999999",
+      "status": "allocated",
+      "service": "mobile"
+    }
+  ]
+}

@@ -1,0 +1,326 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13.banking",
+  "jurisdiction": "TW",
+  "name_zh": "台湾",
+  "scope_group": "additional_asia",
+  "calling_code": "886",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "TW.citizen_id",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[A-Z][12][0-9]{8})\\z",
+      "python_fullmatch_body": "[A-Z][12][0-9]{8}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "tw_citizen_new_ui",
+        "evidence": "official_structure_secondary_algorithm",
+        "policy": "opt_in_secondary"
+      },
+      "notes_zh": "国民身分证统一编号：1 字母 + [12] + 8 位数字。字母换算与 MOD 10 算术来自协会/技术资料，默认可选。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "tw.format",
+        "tw.checksum",
+        "tw.id.checksum"
+      ],
+      "source_urls": [
+        "https://www.immigration.gov.tw/5385/12162/238449/382804/",
+        "https://www.tsitc.org.tw/uploads/acad_domestic_file/1644939910_ef920698c0ed51b9def8.pdf",
+        "https://blog.gtwang.org/python/python-verify-taiwanese-id-card-number-tutorial-examples/"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "A100000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!A100000001",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "A100000001\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nA100000001",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "A100000001!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "A10000000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "A1000000010",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "A1０0000001",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "TW.new_ui",
+      "pii_type": "resident_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[A-Z][89][0-9]{8})\\z",
+      "python_fullmatch_body": "[A-Z][89][0-9]{8}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "tw_citizen_new_ui",
+        "evidence": "official_structure_secondary_algorithm",
+        "policy": "opt_in_secondary"
+      },
+      "notes_zh": "新式外来人口统一证号（2021-01-02 起）：1 字母 + [89] + 8 位数字，与国民身分证共用算术（二级来源）。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "tw.format",
+        "tw.checksum",
+        "tw.id.checksum"
+      ],
+      "source_urls": [
+        "https://www.immigration.gov.tw/5385/12162/238449/382804/",
+        "https://www.tsitc.org.tw/uploads/acad_domestic_file/1644939910_ef920698c0ed51b9def8.pdf",
+        "https://blog.gtwang.org/python/python-verify-taiwanese-id-card-number-tutorial-examples/"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "A800000005",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!A800000005",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "A800000005\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nA800000005",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "A800000005!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "A80000000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "A8000000050",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "A8０0000005",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "TW.old_ui",
+      "pii_type": "resident_id",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:[A-Z]{2}[0-9]{8})\\z",
+      "python_fullmatch_body": "[A-Z]{2}[0-9]{8}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "旧式统一证号：2 字母 + 8 位数字（2021-01-02 前）。旧式第二字母分配与旧算法未实现，不得套用新式算法；仅历史语法。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "tw.format"
+      ],
+      "source_urls": [
+        "https://www.immigration.gov.tw/5385/12162/238449/382804/"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "AA00000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!AA00000001",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "AA00000001\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nAA00000001",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "AA00000001!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "AA0000000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "AA000000010",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "AA０0000001",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "TW.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+886[0-9]{1,12})\\z",
+      "python_fullmatch_body": "\\+886[0-9]{1,12}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+8861",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+886111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+8861",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+8861\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+8861",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+8861!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+886",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+886１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

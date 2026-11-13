@@ -1,0 +1,6 @@
+{
+  "catalog_json": "catalog.json",
+  "github_rules": "https://github.com/AlienHub/pii-validation-rules/tree/cursor/pii-validation-rules-impl-9e79/rules",
+  "github_lua": "https://github.com/AlienHub/pii-validation-rules/tree/cursor/pii-validation-rules-impl-9e79/lua/pii",
+  "branch": "cursor/pii-validation-rules-impl-9e79"
+}

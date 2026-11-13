@@ -1,0 +1,501 @@
+{
+  "notice": "Offline fixtures only. Published vectors independently documented in sources; synthetic positives can fail semantic constraints and do not indicate issued identity/account.",
+  "fixtures": [
+    {
+      "algorithm": "luhn",
+      "input": "4005550000081019",
+      "expected_checksum": true,
+      "label": "independent_published_example",
+      "provenance": "official_illustrative_or_processor_teaching",
+      "evidence": "pan.luhn"
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4005550000081010",
+      "expected_checksum": false,
+      "label": "mutated_check_character",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4005550000081019\n",
+      "expected_checksum": false,
+      "label": "trailing_newline",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": " 4005550000081019",
+      "expected_checksum": false,
+      "label": "leading_space",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "400555000008101",
+      "expected_checksum": true,
+      "label": "length_changed_math_only_not_brand_profile",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "40055500000810190",
+      "expected_checksum": false,
+      "label": "length_changed_math_only_not_brand_profile",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "400555000008١0١9",
+      "expected_checksum": false,
+      "label": "Unicode_digit",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "11010519491231002X",
+      "expected_checksum": true,
+      "label": "independent_published_example",
+      "provenance": "official_illustrative_or_processor_teaching",
+      "evidence": "cn.foreign"
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "110105194912310020",
+      "expected_checksum": false,
+      "label": "mutated_check_character",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "11010519491231002X\n",
+      "expected_checksum": false,
+      "label": "trailing_newline",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": " 11010519491231002X",
+      "expected_checksum": false,
+      "label": "leading_space",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "11010519491231002",
+      "expected_checksum": false,
+      "label": "too_short",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "11010519491231002X0",
+      "expected_checksum": false,
+      "label": "too_long",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "١١0١05١949١23١002X",
+      "expected_checksum": false,
+      "label": "Unicode_digit",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "932682198501010017",
+      "expected_checksum": true,
+      "label": "independent_published_example",
+      "provenance": "official_illustrative_or_processor_teaching",
+      "evidence": "cn.foreign"
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "932682198501010010",
+      "expected_checksum": false,
+      "label": "mutated_check_character",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "932682198501010017\n",
+      "expected_checksum": false,
+      "label": "trailing_newline",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": " 932682198501010017",
+      "expected_checksum": false,
+      "label": "leading_space",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "93268219850101001",
+      "expected_checksum": false,
+      "label": "too_short",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "9326821985010100170",
+      "expected_checksum": false,
+      "label": "too_long",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "932682١9850١0١00١7",
+      "expected_checksum": false,
+      "label": "Unicode_digit",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR470000100100000350930001",
+      "expected_checksum": true,
+      "label": "independent_published_example",
+      "provenance": "official_illustrative_or_processor_teaching",
+      "evidence": "tr.iban"
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR470000100100000350930000",
+      "expected_checksum": false,
+      "label": "mutated_check_character",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR470000100100000350930001\n",
+      "expected_checksum": false,
+      "label": "trailing_newline",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": " TR470000100100000350930001",
+      "expected_checksum": false,
+      "label": "leading_space",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR47000010010000035093000",
+      "expected_checksum": false,
+      "label": "too_short",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR4700001001000003509300010",
+      "expected_checksum": false,
+      "label": "too_long",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR470000١00١0000035093000١",
+      "expected_checksum": false,
+      "label": "Unicode_digit",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "0000000000000000",
+      "expected_checksum": true,
+      "label": "allzero_passes_math_not_issuance",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4111111111111111",
+      "expected_checksum": true,
+      "label": "synthetic_math_vector",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "1234567812345670",
+      "expected_checksum": true,
+      "label": "synthetic_math_vector",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "000000000000000001",
+      "expected_checksum": true,
+      "label": "allzero_payload_check1_math_only",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "911156200002290013",
+      "expected_checksum": true,
+      "label": "synthetic_new_scope_math",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "810000198501010010",
+      "expected_checksum": true,
+      "label": "synthetic_new_scope_math",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "820000198501010012",
+      "expected_checksum": true,
+      "label": "synthetic_new_scope_math",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "cn_mod11_2",
+      "input": "932682198502300016",
+      "expected_checksum": true,
+      "label": "synthetic_invalid_calendar",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR90000010000000000000000A",
+      "expected_checksum": true,
+      "label": "synthetic_alphanumeric_bban",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR400006200000000000000001",
+      "expected_checksum": true,
+      "label": "synthetic_iban",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR880000100000000000000000",
+      "expected_checksum": true,
+      "label": "synthetic_iban",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR470000110100000350930001",
+      "expected_checksum": false,
+      "label": "reserved_field_nonzero",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "tr470000100100000350930001",
+      "expected_checksum": false,
+      "label": "lowercase_requires_explicit_normalization",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "iban_mod97",
+      "input": "TR47 0000 1001 0000 0350 9300 01",
+      "expected_checksum": false,
+      "label": "printed_format_requires_explicit_normalization",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "40012346",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_8",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "40012347",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_8",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "400123451",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_9",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "400123452",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_9",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4001234568",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_10",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4001234569",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_10",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4001234567893",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_13",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4001234567894",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_13",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "40012345678905",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_14",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "40012345678906",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_14",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "400123456789011",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_15",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "400123456789012",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_15",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4001234567890120",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_16",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4001234567890121",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_16",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "40012345678901233",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_17",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "40012345678901234",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_17",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "400123456789012349",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_18",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "400123456789012340",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_18",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4001234567890123458",
+      "expected_checksum": true,
+      "label": "synthetic_variable_length_19",
+      "provenance": "synthetic",
+      "evidence": null
+    },
+    {
+      "algorithm": "luhn",
+      "input": "4001234567890123459",
+      "expected_checksum": false,
+      "label": "mutated_variable_length_19",
+      "provenance": "synthetic",
+      "evidence": null
+    }
+  ]
+}

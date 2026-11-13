@@ -1,0 +1,45 @@
+name: pages
+
+# Deploy PII Atlas to GitHub Pages.
+# - main: after merge
+# - cursor/pii-validation-rules-impl-9e79: sanctioned pre-merge publish (PR #1 not merged)
+# - workflow_dispatch: manual redeploy once this file exists on the selected ref
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - cursor/pii-validation-rules-impl-9e79
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build PII Atlas static site
+        run: |
+          python3 tools/build_website.py
+          python3 tools/check_website.py
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: website-dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

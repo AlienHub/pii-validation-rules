@@ -1,0 +1,160 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13.banking",
+  "jurisdiction": "LA",
+  "name_zh": "老挝",
+  "scope_group": "additional_asia",
+  "calling_code": "856",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "LA.tin_2007",
+      "pii_type": "tax_id",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{9}[09][0-9]{2})\\z",
+      "python_fullmatch_body": "[0-9]{9}[09][0-9]{2}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "老挝 2007 年第 354/PM 号法令税号：8 位顺序 + 1 位监控位 + VAT 标志 0/9 + 2 位分支。监控位算法未公开，现行适用性未确认，仅历史语法。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "la.tin"
+      ],
+      "source_urls": [
+        "https://www.laotradeportal.gov.la/en-gb/site/display/1735"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "123456789000",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "123456789900",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!123456789000",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "123456789000\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n123456789000",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "123456789000!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "12345678900",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "1234567890000",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "123456789０00",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "LA.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+856[0-9]{1,12})\\z",
+      "python_fullmatch_body": "\\+856[0-9]{1,12}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+8561",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+856111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+8561",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+8561\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+8561",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+8561!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+856",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+856１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

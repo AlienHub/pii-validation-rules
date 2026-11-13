@@ -1,0 +1,19 @@
+PII Atlas — site notices
+========================
+
+1. This static website is part of AlienHub/pii-validation-rules.
+2. It displays research rules for identifier *format* and *checksum consistency*.
+   It does NOT perform issuer verification, account existence checks, ownership
+   matching, payment authorization, or live number submission.
+3. Example strings shown in the UI are synthetic research fixtures or official
+   published illustrative samples. Do not submit them (or real identifiers) to
+   online payment or identity APIs.
+4. Component / routing rules are labeled separately and are not marketed as
+   full PII types.
+5. Visual style is intentionally aligned with the same owner's Agent Atlas
+   project (repository AlienHub/agent-catalog; live site https://agent-atlas.pindo.page/).
+   That project's LICENSE is UNLICENSED/proprietary; style reuse here is by the
+   same owner. This site is not affiliated with any third-party brand named
+   "Atlas" outside that project.
+6. Source of truth remains rules/*.json and lua/pii/ in the Git repository.
+7. No analytics that capture typed identifier values are included in this build.

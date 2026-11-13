@@ -1,0 +1,12 @@
+{
+  "schema_version": "directory-1",
+  "directory": "sg_uob_prefix_branch",
+  "notice_zh": "合成/公开关系样例，供接口与回归测试。完整 UOB Appendix A（2026-10-08）因再分发权利未核清，不提交；调用方可通过 pii.directories.set_provider 注入自备表。",
+  "source_id": "sg.uob",
+  "source_date": "2026-10-08",
+  "prefix_to_branch": {
+    "910": "030",
+    "101": "001",
+    "001": "001"
+  }
+}
