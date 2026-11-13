@@ -1,0 +1,17 @@
+{
+ "stage": "lua_subset_matcher_vs_native_pcre2_differential",
+ "run_at_utc": "2026-11-13T04:17:23Z",
+ "pcre2_version": "10.42 2022-12-11",
+ "lua_runtime": "LuaJIT 2.1.1703358377",
+ "lua_engine": "pii.syntax restricted-subset byte matcher (not PCRE2); authoritative engine is PCRE2",
+ "summary": {
+  "rules": 129,
+  "inputs_compared": 7363,
+  "agree_match": 722,
+  "agree_nomatch": 6641,
+  "disagreements": 0,
+  "missing": 0
+ },
+ "disagreements": [],
+ "missing": []
+}

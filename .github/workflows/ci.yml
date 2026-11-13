@@ -1,0 +1,56 @@
+name: ci
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Lua runtimes and PCRE2 tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lua5.4 lua5.1 luajit libpcre2-8-0 pcre2-utils
+          lua5.4 -v; lua5.1 -v; luajit -v; pcre2test --version; python3 --version
+
+      - name: Lint rules, algorithms, coverage and sources
+        run: python3 tools/check_rules.py
+
+      - name: Generated fixtures are up to date
+        run: |
+          python3 tools/gen_reference_vectors.py --out /tmp/reference-vectors.json
+          cmp /tmp/reference-vectors.json fixtures/reference-vectors.json
+          cp fixtures/regex-differential-corpus.json /tmp/corpus.committed.json
+          python3 tools/gen_regex_corpus.py
+          cmp /tmp/corpus.committed.json fixtures/regex-differential-corpus.json
+
+      - name: Native PCRE2 + pcre2test + Python re
+        run: |
+          python3 tests/pcre2/run_pcre2_tests.py --report reports/pcre2-regex-report.json
+          python3 tests/pcre2/run_pcre2test_cli.py --report reports/pcre2test-cli-report.json
+
+      - name: Lua suites on every runtime
+        run: make lua
+
+      - name: Lua subset matcher vs PCRE2 differential
+        run: make differential
+
+      - name: Coverage docs are in sync
+        run: python3 tools/gen_coverage_docs.py --check
+
+      - name: Committed reports match this run (case counts and pass/fail)
+        run: python3 tools/verify_reports.py
+
+      - name: Upload fresh reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            reports/*.json
+            reports/SUMMARY.md
+          if-no-files-found: warn

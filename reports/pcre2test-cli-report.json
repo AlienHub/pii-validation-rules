@@ -1,0 +1,11 @@
+{
+ "stage": "pcre2test_cli_secondary_check",
+ "command": "python3 tests/pcre2/run_pcre2test_cli.py",
+ "run_at_utc": "2026-11-13T04:17:22Z",
+ "status": "ok",
+ "pcre2test_version": "PCRE2 version 10.42 2022-12-11",
+ "subjects": 1176,
+ "mismatches": [],
+ "runtime_seconds": 0.01,
+ "note": "empty-string subjects are submitted as a single NUL byte (pcre2test has no empty-subject syntax); both must fail"
+}

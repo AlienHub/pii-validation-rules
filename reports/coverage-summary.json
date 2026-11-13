@@ -1,0 +1,100 @@
+{
+ "regex_rules_total": 129,
+ "regex_rules_by_status": {
+  "syntax_supported": 72,
+  "candidate_profile": 9,
+  "historical_syntax": 5,
+  "dated_numbering_profile": 4,
+  "country_code_envelope_only": 39
+ },
+ "regex_rules_by_pii_type": {
+  "iban": 16,
+  "national_id": 23,
+  "passport": 1,
+  "passport_mrz_field": 1,
+  "payment_card": 2,
+  "phone": 43,
+  "resident_id": 7,
+  "tax_id": 19,
+  "tax_id_entity": 17
+ },
+ "rules_by_checksum_status": {
+  "algorithm_available": 36,
+  "none_per_source": 2,
+  "not_applicable": 44,
+  "not_established": 47
+ },
+ "rules_with_checksum_enabled_by_default": [
+  "AE.iban",
+  "BH.iban",
+  "CN.resident_id",
+  "CN.uscc",
+  "GLOBAL.payment_pan_current",
+  "GLOBAL.payment_pan_legacy",
+  "IL.iban",
+  "IN.aadhaar",
+  "IQ.iban",
+  "JO.iban",
+  "JP.corporate_number",
+  "JP.my_number",
+  "KW.iban",
+  "KZ.iban",
+  "KZ.iin",
+  "LB.iban",
+  "MN.iban",
+  "OM.iban",
+  "PK.iban",
+  "PS.iban",
+  "QA.iban",
+  "SA.iban",
+  "TR.iban",
+  "YE.iban"
+ ],
+ "checksum_algorithms_total": 17,
+ "checksum_algorithms_by_default_policy": {
+  "enabled": 9,
+  "explicit_legacy_regime": 1,
+  "opt_in_secondary": 6,
+  "opt_in_secondary_m_series_experimental": 1
+ },
+ "checksum_algorithms_by_evidence": {
+  "legacy_secondary_algorithm": 1,
+  "official": 7,
+  "official_algorithm_name_secondary_tables": 1,
+  "official_structure_secondary_algorithm": 2,
+  "official_structure_secondary_formula": 1,
+  "reconstructed": 3,
+  "reconstructed_disputed_M": 1,
+  "standard_algorithm": 1
+ },
+ "jurisdictions_named": 39,
+ "jurisdictions_inventory_total": 53,
+ "jurisdictions_by_scope_group": {
+  "additional_asia": 19,
+  "core": 6,
+  "geographic_edge_inventory_only": 1,
+  "middle_east": 14,
+  "remaining_asia_inventory_only": 13
+ },
+ "coverage_cells_by_category_and_status": {
+  "bank:not_implemented_not_fully_researched": 13,
+  "bank:out_of_requested_named_scope_backlog": 1,
+  "bank:researched_partial": 16,
+  "bank:unsupported_insufficient_primary_spec": 23,
+  "national_resident_id:not_implemented_not_fully_researched": 13,
+  "national_resident_id:out_of_requested_named_scope_backlog": 1,
+  "national_resident_id:researched_partial": 23,
+  "national_resident_id:unsupported_insufficient_primary_spec": 16,
+  "passport:not_implemented_not_fully_researched": 13,
+  "passport:out_of_requested_named_scope_backlog": 1,
+  "passport:researched_partial": 1,
+  "passport:unsupported_insufficient_primary_spec": 38,
+  "phone:not_implemented_not_fully_researched": 13,
+  "phone:out_of_requested_named_scope_backlog": 1,
+  "phone:researched_partial": 39,
+  "tax:not_implemented_not_fully_researched": 13,
+  "tax:out_of_requested_named_scope_backlog": 1,
+  "tax:researched_partial": 25,
+  "tax:unsupported_insufficient_primary_spec": 14
+ }
+}
