@@ -1,7 +1,7 @@
 {
  "command": "lua tests/lua/run.lua --report <path> --syntax-verdicts <path>",
  "failures": {},
- "run_at_utc": "2026-11-13T13:14:17Z",
+ "run_at_utc": "2026-11-13T16:00:09Z",
  "runtime": "LuaJIT 2.1.1703358377",
  "stage": "implementation_lua_runtime_tests",
  "suites": [
@@ -190,7 +190,7 @@
     },
     {
      "assertions": 6000,
-     "ms": 2,
+     "ms": 3,
      "name": "cn_uscc_mod31: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -214,7 +214,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "iban_mod97: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -226,7 +226,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 23,
+     "ms": 21,
      "name": "iban_mod97: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -250,7 +250,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "ir_national_mod11: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -262,7 +262,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 2,
+     "ms": 1,
      "name": "ir_national_mod11: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -316,7 +316,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 3,
+     "ms": 2,
      "name": "kr_rrn_legacy: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -352,7 +352,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 1,
+     "ms": 2,
      "name": "luhn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -406,7 +406,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 16,
+     "ms": 15,
      "name": "tr_tckn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -430,7 +430,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "tw_citizen_new_ui: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -442,7 +442,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 1,
+     "ms": 2,
      "name": "tw_citizen_new_ui: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -472,7 +472,7 @@
     }
    ],
    "failed": 0,
-   "ms": 92,
+   "ms": 88,
    "name": "reference_vectors",
    "passed": 52
   },
@@ -997,7 +997,7 @@
     },
     {
      "assertions": 1163,
-     "ms": 1,
+     "ms": 2,
      "name": "ISO 7064 / Luhn / Verhoeff schemes detect every single-character substitution",
      "status": "pass"
     },
@@ -1060,7 +1060,7 @@
    "cases": [
     {
      "assertions": 180,
-     "ms": 2,
+     "ms": 1,
      "name": "all rule patterns compile in the restricted subset",
      "status": "pass"
     },
@@ -1072,7 +1072,7 @@
     },
     {
      "assertions": 1623,
-     "ms": 3,
+     "ms": 2,
      "name": "rule examples and negative examples match the expected verdicts",
      "status": "pass"
     },
@@ -1090,13 +1090,13 @@
     },
     {
      "assertions": 1,
-     "ms": 26,
+     "ms": 25,
      "name": "differential corpus verdicts recorded for PCRE2 comparison",
      "status": "pass"
     }
    ],
    "failed": 0,
-   "ms": 40,
+   "ms": 38,
    "name": "syntax_subset",
    "passed": 6
   },
@@ -1210,7 +1210,7 @@
     }
    ],
    "failed": 0,
-   "ms": 10,
+   "ms": 9,
    "name": "semantic",
    "passed": 9
   },
@@ -1267,7 +1267,7 @@
     }
    ],
    "failed": 0,
-   "ms": 11,
+   "ms": 10,
    "name": "policies",
    "passed": 8
   },
@@ -1816,7 +1816,7 @@
     }
    ],
    "failed": 0,
-   "ms": 10,
+   "ms": 12,
    "name": "edge_cases",
    "passed": 90
   },
@@ -1843,7 +1843,7 @@
     },
     {
      "assertions": 2945,
-     "ms": 8,
+     "ms": 9,
      "name": "every rule: positive examples pass syntax; negative examples fail",
      "status": "pass"
     },
@@ -1861,7 +1861,7 @@
     },
     {
      "assertions": 180,
-     "ms": 2,
+     "ms": 1,
      "name": "checksum_status vocabulary is respected per rule",
      "status": "pass"
     },
@@ -1873,7 +1873,7 @@
     },
     {
      "assertions": 2160,
-     "ms": 7,
+     "ms": 5,
      "name": "non-string and oversize inputs for every rule",
      "status": "pass"
     },
@@ -1885,7 +1885,7 @@
     }
    ],
    "failed": 0,
-   "ms": 27,
+   "ms": 24,
    "name": "api",
    "passed": 10
   },
@@ -1974,7 +1974,7 @@
  "summary": {
   "assertions": 91208,
   "cases": 311,
-  "cpu_seconds": 0.224,
+  "cpu_seconds": 0.214,
   "failed": 0,
   "passed": 311,
   "suites": 11

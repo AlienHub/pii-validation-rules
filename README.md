@@ -6,6 +6,8 @@
 
 English summary: [docs/README.en.md](docs/README.en.md)
 
+**PII Atlas 静态站**：`website/` 源码 → `python3 tools/build_website.py` → `website-dist/`。视觉风格对齐同一所有者的 [Agent Atlas](https://agent-atlas.pindo.page/)（仓库 `AlienHub/agent-catalog`，只读参考）。站点只浏览规则元数据与合成/说明性样本，**无在线试号、无登录、无支付**。公开前审计见 [`research/PUBLICATION-AUDIT.zh.md`](research/PUBLICATION-AUDIT.zh.md)。
+
 ---
 
 ## 1. 覆盖范围（按证据等级分类，不是一个总数）

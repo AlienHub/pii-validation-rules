@@ -11,7 +11,7 @@ LUAS    ?= $(shell found=""; for l in lua5.4 lua5.3 lua5.1 luajit; do command -v
              if [ -z "$$found" ]; then command -v lua >/dev/null 2>&1 && found="lua"; fi; echo $$found)
 REPORTS  = reports
 
-.PHONY: test lint pcre2 banking lua differential coverage fixtures reports clean-reports
+.PHONY: test lint pcre2 banking lua differential coverage fixtures reports clean-reports website
 
 test: lint pcre2 banking lua differential coverage
 	@echo "all checks passed"
@@ -52,6 +52,10 @@ fixtures:
 
 reports: test
 	$(PY) tools/write_summary.py
+
+website:
+	$(PY) tools/build_website.py
+	$(PY) tools/check_website.py
 
 clean-reports:
 	rm -f $(REPORTS)/lua-syntax-verdicts-*.json $(REPORTS)/pcre2-corpus-verdicts.json

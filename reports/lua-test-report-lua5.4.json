@@ -1,7 +1,7 @@
 {
  "command": "lua tests/lua/run.lua --report <path> --syntax-verdicts <path>",
  "failures": {},
- "run_at_utc": "2026-11-13T13:14:16Z",
+ "run_at_utc": "2026-11-13T16:00:08Z",
  "runtime": "Lua 5.4",
  "stage": "implementation_lua_runtime_tests",
  "suites": [
@@ -160,7 +160,7 @@
    "cases": [
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "cn_resident_id_mod11_2: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -286,7 +286,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "jp_mynumber: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -406,13 +406,13 @@
     },
     {
      "assertions": 19800,
-     "ms": 29,
+     "ms": 28,
      "name": "tr_tckn: every other value at the check position is rejected",
      "status": "pass"
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "tr_vkn: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -997,7 +997,7 @@
     },
     {
      "assertions": 1163,
-     "ms": 2,
+     "ms": 3,
      "name": "ISO 7064 / Luhn / Verhoeff schemes detect every single-character substitution",
      "status": "pass"
     },
@@ -1072,7 +1072,7 @@
     },
     {
      "assertions": 1623,
-     "ms": 2,
+     "ms": 3,
      "name": "rule examples and negative examples match the expected verdicts",
      "status": "pass"
     },
@@ -1966,7 +1966,7 @@
     }
    ],
    "failed": 0,
-   "ms": 17,
+   "ms": 19,
    "name": "banking",
    "passed": 12
   }
@@ -1974,7 +1974,7 @@
  "summary": {
   "assertions": 91208,
   "cases": 311,
-  "cpu_seconds": 0.42799999999999999,
+  "cpu_seconds": 0.432,
   "failed": 0,
   "passed": 311,
   "suites": 11

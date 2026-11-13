@@ -1,7 +1,7 @@
 {
  "command": "lua tests/lua/run.lua --report <path> --syntax-verdicts <path>",
  "failures": {},
- "run_at_utc": "2026-11-13T13:14:17Z",
+ "run_at_utc": "2026-11-13T16:00:09Z",
  "runtime": "Lua 5.1",
  "stage": "implementation_lua_runtime_tests",
  "suites": [
@@ -172,7 +172,7 @@
     },
     {
      "assertions": 2000,
-     "ms": 6,
+     "ms": 7,
      "name": "cn_resident_id_mod11_2: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -184,13 +184,13 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "cn_uscc_mod31: Lua generator reproduces Python check characters",
      "status": "pass"
     },
     {
      "assertions": 6000,
-     "ms": 13,
+     "ms": 12,
      "name": "cn_uscc_mod31: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -214,7 +214,7 @@
     },
     {
      "assertions": 200,
-     "ms": 2,
+     "ms": 1,
      "name": "iban_mod97: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -226,7 +226,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 143,
+     "ms": 148,
      "name": "iban_mod97: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -244,7 +244,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 3,
+     "ms": 4,
      "name": "icao9303_check_digit: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -292,7 +292,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "jp_mynumber: Lua generator reproduces Python check characters",
      "status": "pass"
     },
@@ -328,7 +328,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "kz_iin: Lua generator reproduces Python check characters",
      "status": "pass"
     },
@@ -370,7 +370,7 @@
     },
     {
      "assertions": 5000,
-     "ms": 10,
+     "ms": 11,
      "name": "sg_nric_fin_reconstructed: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -406,7 +406,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 40,
+     "ms": 39,
      "name": "tr_tckn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -436,7 +436,7 @@
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 2,
      "name": "tw_citizen_new_ui: Lua generator reproduces Python check characters",
      "status": "pass"
     },
@@ -472,7 +472,7 @@
     }
    ],
    "failed": 0,
-   "ms": 325,
+   "ms": 333,
    "name": "reference_vectors",
    "passed": 52
   },
@@ -1090,13 +1090,13 @@
     },
     {
      "assertions": 1,
-     "ms": 44,
+     "ms": 48,
      "name": "differential corpus verdicts recorded for PCRE2 comparison",
      "status": "pass"
     }
    ],
    "failed": 0,
-   "ms": 68,
+   "ms": 72,
    "name": "syntax_subset",
    "passed": 6
   },
@@ -1147,7 +1147,7 @@
     }
    ],
    "failed": 0,
-   "ms": 19,
+   "ms": 22,
    "name": "normalize",
    "passed": 7
   },
@@ -1816,7 +1816,7 @@
     }
    ],
    "failed": 0,
-   "ms": 22,
+   "ms": 21,
    "name": "edge_cases",
    "passed": 90
   },
@@ -1861,7 +1861,7 @@
     },
     {
      "assertions": 180,
-     "ms": 2,
+     "ms": 1,
      "name": "checksum_status vocabulary is respected per rule",
      "status": "pass"
     },
@@ -1873,7 +1873,7 @@
     },
     {
      "assertions": 2160,
-     "ms": 9,
+     "ms": 8,
      "name": "non-string and oversize inputs for every rule",
      "status": "pass"
     },
@@ -1885,7 +1885,7 @@
     }
    ],
    "failed": 0,
-   "ms": 43,
+   "ms": 42,
    "name": "api",
    "passed": 10
   },
@@ -1974,7 +1974,7 @@
  "summary": {
   "assertions": 91208,
   "cases": 311,
-  "cpu_seconds": 0.54600000000000004,
+  "cpu_seconds": 0.55900000000000005,
   "failed": 0,
   "passed": 311,
   "suites": 11

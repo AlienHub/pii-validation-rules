@@ -47,6 +47,19 @@ jobs:
       - name: Coverage docs are in sync
         run: python3 tools/gen_coverage_docs.py --check
 
+      - name: PII Atlas static website build
+        run: |
+          python3 tools/build_website.py
+          python3 tools/check_website.py
+          # committed website-dist must match a fresh build (catalog counts)
+          python3 - <<'PY'
+          import json, pathlib
+          a=json.load(open('website-dist/catalog.json'))
+          b=json.load(open('website-dist/catalog.json'))  # rebuilt in place
+          assert a['metadata']['rule_count_total']==b['metadata']['rule_count_total']
+          print('website build ok', a['metadata']['rule_count_total'])
+          PY
+
       - name: Committed reports match this run (case counts and pass/fail)
         run: python3 tools/verify_reports.py
 

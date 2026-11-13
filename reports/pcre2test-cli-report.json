@@ -1,12 +1,12 @@
 {
  "stage": "pcre2test_cli_secondary_check",
  "command": "python3 tests/pcre2/run_pcre2test_cli.py",
- "run_at_utc": "2026-11-13T13:14:16Z",
+ "run_at_utc": "2026-11-13T16:00:08Z",
  "status": "ok",
  "pcre2test_version": "PCRE2 version 10.42 2022-12-11",
  "subjects": 1622,
  "mismatches": [],
- "runtime_seconds": 0.012,
+ "runtime_seconds": 0.017,
  "skipped_empty_positives": 1,
  "note": "empty negatives submitted as NUL (must fail); empty positives skipped (no pcre2test empty-subject syntax)"
 }
