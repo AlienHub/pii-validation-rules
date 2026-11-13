@@ -20,7 +20,14 @@
 
 3. Pages 已启用后，向 `cursor/pii-validation-rules-impl-9e79`（或 `main`）推送会自动跑 `pages` build+deploy。也可在 Actions → **pages** → **Run workflow**（需所选 ref 上已有该 workflow 文件）。
 
-4. 站点 URL：`https://alienhub.github.io/pii-validation-rules/`  
+4. **当前阻塞（需 owner 在 UI 改一次）**：`github-pages` environment 的 Deployment branches 自定义策略目前**只允许 `main`**。  
+   失败 run（build 成功、deploy 未启动任何 step）：https://github.com/AlienHub/pii-validation-rules/actions/runs/43459652576  
+   请打开：Settings → Environments → **github-pages** → Deployment branches → 增加分支  
+   `cursor/pii-validation-rules-impl-9e79`  
+   （或 Selected branches 里勾选该功能分支；不要改成绕过环境保护的其他方式）。  
+   改完后无需 merge：再 push 一次本分支或 Re-run failed jobs 即可部署。
+
+5. 站点 URL：`https://alienhub.github.io/pii-validation-rules/`  
    验证：标题 **PII Atlas**，可加载 `catalog.json`，相对资源路径在 project base path 下可用。
 
 ## 本代理不会做的事
