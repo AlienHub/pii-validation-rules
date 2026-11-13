@@ -1,0 +1,477 @@
+{
+  "notice_zh": "专项边界用例。每条写明预期的分层结果（syntax / checksum / semantic），unknown 既不是通过也不是失败。所有样本为合成或官方说明性样本。",
+  "cases": [
+    {
+      "id": "cn_feb30_checksum_correct_date_invalid",
+      "rule_id": "CN.resident_id", "input": "11010519900230001X", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "fail", "summary": "fail" },
+      "reason": "GB11643 arithmetic is consistent but 1990-02-30 is not a Gregorian date; only the semantic layer may reject it"
+    },
+    {
+      "id": "cn_leap_2000_02_29",
+      "rule_id": "CN.resident_id", "input": "110105200002290013", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "pass" }
+    },
+    {
+      "id": "cn_nonleap_1900_02_29",
+      "rule_id": "CN.resident_id", "input": "110105190002290017", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "fail" }
+    },
+    {
+      "id": "cn_1880_example_year_not_rejected_by_regex",
+      "rule_id": "CN.resident_id", "input": "110105188001010017", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "pass" },
+      "reason": "standard appendix uses an 1880 example; birth years must not be hard-coded to 19xx/20xx"
+    },
+    {
+      "id": "cn_future_date_with_reference",
+      "rule_id": "CN.resident_id", "input": "110105209901010012", "options": { "reference_date": "2026-11-13" },
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "fail" },
+      "reason": "2099-01-01 is after the caller-supplied reference date"
+    },
+    {
+      "id": "cn_future_date_without_reference_is_not_checked",
+      "rule_id": "CN.resident_id", "input": "110105209901010012", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "pass" }
+    },
+    {
+      "id": "jp_mynumber_remainder_0",
+      "rule_id": "JP.my_number", "input": "123456000090", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass" }, "first_weighted_remainder": 0
+    },
+    {
+      "id": "jp_mynumber_remainder_1",
+      "rule_id": "JP.my_number", "input": "123456000040", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass" }, "first_weighted_remainder": 1
+    },
+    {
+      "id": "jp_mynumber_remainder_10",
+      "rule_id": "JP.my_number", "input": "123456000031", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass" }, "first_weighted_remainder": 10
+    },
+    {
+      "id": "jp_mynumber_algorithm_must_not_accept_corporate_number",
+      "rule_id": "JP.my_number", "input": "8700110005901", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "jp_corporate_official_example",
+      "rule_id": "JP.corporate_number", "input": "8700110005901", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass", "summary": "pass" }
+    },
+    {
+      "id": "th_remainder_0",
+      "rule_id": "TH.tin_envelope", "input": "0123456000081", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }, "first_weighted_remainder": 0
+    },
+    {
+      "id": "th_remainder_1",
+      "rule_id": "TH.tin_envelope", "input": "0123456000030", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }, "first_weighted_remainder": 1
+    },
+    {
+      "id": "th_remainder_10",
+      "rule_id": "TH.tin_envelope", "input": "0123456000021", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }, "first_weighted_remainder": 10
+    },
+    {
+      "id": "th_default_policy_is_unknown_not_fail",
+      "rule_id": "TH.citizen_id", "input": "1234567890120", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown", "summary": "pass_with_unknowns" },
+      "reason": "secondary formula not enabled by default; a wrong digit is NOT reported as fail"
+    },
+    {
+      "id": "th_enabled_policy_detects_mismatch",
+      "rule_id": "TH.citizen_id", "input": "1234567890120", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "fail", "summary": "fail" }
+    },
+    {
+      "id": "kz_two_stage_second_round_valid",
+      "rule_id": "KZ.iin", "input": "123456000405", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass" }, "r1": 10, "r2": 5
+    },
+    {
+      "id": "kz_two_stage_second_round_10_no_valid_digit_0",
+      "rule_id": "KZ.iin", "input": "123456000480", "options": {},
+      "expect": { "syntax": "pass", "checksum": "fail", "checksum_reason": "no_valid_check_digit" },
+      "reason": "both rounds give 10; 10 mod 10 = 0 must NOT be accepted"
+    },
+    {
+      "id": "kz_two_stage_second_round_10_no_valid_digit_1",
+      "rule_id": "KZ.iin", "input": "123456000481", "options": {},
+      "expect": { "syntax": "pass", "checksum": "fail", "checksum_reason": "no_valid_check_digit" }
+    },
+    {
+      "id": "sg_m_official_example_default",
+      "rule_id": "SG.fin", "input": "M1234567B", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown", "summary": "pass_with_unknowns" },
+      "reason": "ICA official format illustration; official checksum not published; M table disputed"
+    },
+    {
+      "id": "sg_m_official_example_secondary_only_still_unknown",
+      "rule_id": "SG.fin", "input": "M1234567B", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "unknown" },
+      "reason": "secondary_checksums alone must not evaluate the disputed M table"
+    },
+    {
+      "id": "sg_m_official_example_experimental_reconstruction_disagrees",
+      "rule_id": "SG.fin", "input": "M1234567B", "options": { "sg_m_series_experimental": true },
+      "expect": { "syntax": "pass", "checksum": "fail" },
+      "reason": "documented: the reconstructed M table yields K, not B; this is a property of the reconstruction, not proof the example is invalid"
+    },
+    {
+      "id": "sg_s_series_default_unknown",
+      "rule_id": "SG.nric", "input": "S1234567D", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown" }
+    },
+    {
+      "id": "sg_s_series_secondary_enabled",
+      "rule_id": "SG.nric", "input": "S1234567D", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }
+    },
+    {
+      "id": "kr_rrn_unknown_regime_legacy_mismatch_not_fail",
+      "rule_id": "KR.rrn", "input": "9001011234560", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown", "semantic": "pass", "summary": "pass_with_unknowns" }
+    },
+    {
+      "id": "kr_rrn_current_regime_not_applicable",
+      "rule_id": "KR.rrn", "input": "9001011234560", "options": { "kr_rrn_regime": "current_post_2020_10" },
+      "expect": { "syntax": "pass", "checksum": "not_applicable", "summary": "pass" }
+    },
+    {
+      "id": "kr_rrn_legacy_regime_runs_formula_pass",
+      "rule_id": "KR.rrn", "input": "9001011234568", "options": { "kr_rrn_regime": "legacy_pre_2020_10" },
+      "expect": { "syntax": "pass", "checksum": "pass" }
+    },
+    {
+      "id": "kr_rrn_legacy_regime_runs_formula_fail",
+      "rule_id": "KR.rrn", "input": "9001011234560", "options": { "kr_rrn_regime": "legacy_pre_2020_10" },
+      "expect": { "syntax": "pass", "checksum": "fail" }
+    },
+    {
+      "id": "kr_rrn_century_digit_3_2000s_date",
+      "rule_id": "KR.rrn", "input": "0002293000000", "options": { "kr_rrn_regime": "current_post_2020_10" },
+      "expect": { "syntax": "pass", "semantic": "pass" }, "reason": "2000-02-29 exists"
+    },
+    {
+      "id": "kr_rrn_century_digit_1_1900_feb29_invalid",
+      "rule_id": "KR.rrn", "input": "0002291000000", "options": { "kr_rrn_regime": "current_post_2020_10" },
+      "expect": { "syntax": "pass", "semantic": "fail" }, "reason": "1900-02-29 does not exist"
+    },
+    {
+      "id": "tr_ykn_is_not_validated_with_tckn_formula",
+      "rule_id": "TR.ykn", "input": "99000000001", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "unknown" },
+      "reason": "YKN has no supported algorithm even when secondary checksums are enabled"
+    },
+    {
+      "id": "tr_ykn_non_99_prefix_not_rejected",
+      "rule_id": "TR.ykn", "input": "98000000001", "options": {},
+      "expect": { "syntax": "pass" }
+    },
+    {
+      "id": "tr_tckn_default_unknown",
+      "rule_id": "TR.tckn", "input": "12345678950", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown" }
+    },
+    {
+      "id": "tr_tckn_enabled_pass",
+      "rule_id": "TR.tckn", "input": "12345678950", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }
+    },
+    {
+      "id": "tr_tckn_leading_zero_regex_rejects",
+      "rule_id": "TR.tckn", "input": "02345678950", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "tr_vkn_leading_zero_preserved",
+      "rule_id": "TR.vkn", "input": "0010213576", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }
+    },
+    {
+      "id": "iban_check_digits_00_rejected",
+      "rule_id": "AE.iban", "input": "AE001111111111111111111", "options": {},
+      "expect": { "syntax": "pass", "checksum": "fail", "checksum_reason": "check_digits_out_of_range" }
+    },
+    {
+      "id": "iban_check_digits_01_rejected",
+      "rule_id": "AE.iban", "input": "AE011111111111111111111", "options": {},
+      "expect": { "syntax": "pass", "checksum": "fail", "checksum_reason": "check_digits_out_of_range" }
+    },
+    {
+      "id": "iban_check_digits_99_rejected",
+      "rule_id": "AE.iban", "input": "AE991111111111111111111", "options": {},
+      "expect": { "syntax": "pass", "checksum": "fail", "checksum_reason": "check_digits_out_of_range" }
+    },
+    {
+      "id": "iban_print_format_requires_normalize",
+      "rule_id": "AE.iban", "input": "AE15 1111 1111 1111 1111 111", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "iban_print_format_normalized",
+      "rule_id": "AE.iban", "input": "AE15 1111 1111 1111 1111 111", "options": { "normalize": true },
+      "expect": { "syntax": "pass", "checksum": "pass", "transformations": ["strip_print_format_spaces"] }
+    },
+    {
+      "id": "iban_lowercase_requires_explicit_uppercase",
+      "rule_id": "AE.iban", "input": "ae151111111111111111111", "options": { "normalize": true },
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "iban_lowercase_with_explicit_uppercase",
+      "rule_id": "AE.iban", "input": "ae151111111111111111111", "options": { "normalize": true, "ascii_uppercase": true },
+      "expect": { "syntax": "pass", "checksum": "pass", "transformations": ["ascii_uppercase"] }
+    },
+    {
+      "id": "pan_luhn_is_not_bank_account",
+      "rule_id": "GLOBAL.payment_pan_current", "input": "4242424242424242", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "not_applicable", "summary": "pass" },
+      "reason": "processor test PAN; summary pass means Luhn arithmetic only"
+    },
+    {
+      "id": "pan_too_short_for_current_profile",
+      "rule_id": "GLOBAL.payment_pan_current", "input": "123456789", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "pan_legacy_profile_accepts_8_digits_syntax",
+      "rule_id": "GLOBAL.payment_pan_legacy", "input": "12345674", "options": {},
+      "expect": { "syntax": "pass", "checksum": "pass" }
+    },
+    {
+      "id": "il_id_luhn_default_unknown",
+      "rule_id": "IL.id_tin", "input": "123456782", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown" }
+    },
+    {
+      "id": "il_id_luhn_opt_in",
+      "rule_id": "IL.id_tin", "input": "123456782", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }
+    },
+    {
+      "id": "il_entity_tin_never_runs_luhn",
+      "rule_id": "IL.entity_tin", "input": "123456780", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "unknown" }
+    },
+    {
+      "id": "ir_repeated_digits_rejected_by_policy_not_arithmetic",
+      "rule_id": "IR.national_code", "input": "1111111111", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "fail", "summary": "fail" }
+    },
+    {
+      "id": "ir_repeated_digits_policy_disabled",
+      "rule_id": "IR.national_code", "input": "1111111111", "options": { "secondary_checksums": true, "ir_reject_repeated_digits": false },
+      "expect": { "syntax": "pass", "checksum": "pass", "semantic": "unknown" }
+    },
+    {
+      "id": "ir_leading_zeros_preserved",
+      "rule_id": "IR.national_code", "input": "0012345679", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }
+    },
+    {
+      "id": "ir_short_input_not_left_padded",
+      "rule_id": "IR.national_code", "input": "12345679", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "hkid_parentheses_require_normalize",
+      "rule_id": "HK.hkid", "input": "A123456(3)", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "hkid_parentheses_normalized",
+      "rule_id": "HK.hkid", "input": "A123456(3)", "options": { "secondary_checksums": true, "normalize": true },
+      "expect": { "syntax": "pass", "checksum": "pass", "transformations": ["strip_trailing_parenthesised_check"] }
+    },
+    {
+      "id": "hkid_official_dpo_example_is_not_checksum_positive",
+      "rule_id": "HK.hkid", "input": "A123456A", "options": { "secondary_checksums": true },
+      "expect": { "syntax": "pass", "checksum": "fail" }
+    },
+    {
+      "id": "my_nric_hyphens_require_normalize",
+      "rule_id": "MY.nric", "input": "900101-01-0001", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "my_nric_hyphens_normalized",
+      "rule_id": "MY.nric", "input": "900101-01-0001", "options": { "normalize": true },
+      "expect": { "syntax": "pass", "checksum": "unknown", "semantic": "pass", "transformations": ["strip_fixed_separators"] }
+    },
+    {
+      "id": "my_nric_wrong_hyphen_positions_not_stripped",
+      "rule_id": "MY.nric", "input": "9001-0101-0001", "options": { "normalize": true },
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "sg_foreign_company_legacy_spaces_normalized",
+      "rule_id": "SG.foreign_company_tax_ref", "input": "F   12345A", "options": { "normalize": true },
+      "expect": { "syntax": "pass", "transformations": ["sg_foreign_company_legacy_spaces"] }
+    },
+    {
+      "id": "sg_foreign_company_legacy_spaces_not_globally_stripped",
+      "rule_id": "SG.foreign_company_tax_ref", "input": "F   12345A", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "id_nik_female_day_plus_40",
+      "rule_id": "ID.nik", "input": "3273014101900002", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown", "semantic": "pass" }
+    },
+    {
+      "id": "id_nik_day_32_invalid",
+      "rule_id": "ID.nik", "input": "3273013201900002", "options": {},
+      "expect": { "syntax": "pass", "semantic": "fail" }
+    },
+    {
+      "id": "id_nik_day_72_invalid_even_as_female",
+      "rule_id": "ID.nik", "input": "3273017201900002", "options": {},
+      "expect": { "syntax": "pass", "semantic": "fail" }
+    },
+    {
+      "id": "id_nik_feb29_yy00_ambiguous_century_pass",
+      "rule_id": "ID.nik", "input": "3273012902000002", "options": {},
+      "expect": { "syntax": "pass", "semantic": "pass" }, "reason": "2000-02-29 exists even though 1900-02-29 does not"
+    },
+    {
+      "id": "in_pan_serial_0000_semantic_fail",
+      "rule_id": "IN.pan", "input": "ZZZPZ0000A", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown", "semantic": "fail" }
+    },
+    {
+      "id": "in_pan_holder_type_k_not_in_profile",
+      "rule_id": "IN.pan", "input": "ZZZKZ0001A", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "mo_tin_no_check_digit_per_source",
+      "rule_id": "MO.entity_tin", "input": "81234567", "options": {},
+      "expect": { "syntax": "pass", "checksum": "not_applicable", "summary": "pass" }
+    },
+    {
+      "id": "phone_envelope_is_not_a_phone_validator",
+      "rule_id": "CN.phone_country_envelope", "input": "+861", "options": {},
+      "expect": { "syntax": "pass", "checksum": "not_applicable", "summary": "pass", "warning_contains": "country_code_envelope_only" }
+    },
+    {
+      "id": "phone_envelope_16_digits_rejected",
+      "rule_id": "CN.phone_country_envelope", "input": "+8611111111111111", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "phone_envelope_without_plus_rejected",
+      "rule_id": "CN.phone_country_envelope", "input": "8613800000000", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "phone_profile_national_format_not_accepted",
+      "rule_id": "TH.phone_mobile_profile", "input": "0800000000", "options": {},
+      "expect": { "syntax": "fail" }, "reason": "caller must choose international format; national 0 is not auto-converted"
+    },
+    {
+      "id": "historical_rule_warns_without_import_mode",
+      "rule_id": "ID.npwp15_legacy", "input": "123456789012345", "options": {},
+      "expect": { "syntax": "pass", "warning_contains": "historical_syntax" }
+    },
+    {
+      "id": "historical_rule_silent_in_import_mode",
+      "rule_id": "ID.npwp15_legacy", "input": "123456789012345", "options": { "historical_import": true },
+      "expect": { "syntax": "pass", "warning_not_contains": "historical_syntax" }
+    },
+    {
+      "id": "candidate_profile_warns",
+      "rule_id": "MY.tin_individual", "input": "IG123456789", "options": {},
+      "expect": { "syntax": "pass", "warning_contains": "candidate_profile" }
+    },
+    {
+      "id": "cn_passport_second_letter_I_excluded",
+      "rule_id": "CN.ordinary_passport", "input": "EI0000001", "options": {},
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "cn_passport_checksum_not_established",
+      "rule_id": "CN.ordinary_passport", "input": "EA0000001", "options": {},
+      "expect": { "syntax": "pass", "checksum": "unknown" }
+    },
+    {
+      "id": "uscc_lowercase_rejected_without_uppercase_option",
+      "rule_id": "CN.uscc", "input": "91110101abcdefgh1e", "options": { "normalize": true },
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "uscc_lowercase_accepted_with_explicit_uppercase",
+      "rule_id": "CN.uscc", "input": "91110101abcdefgh1e", "options": { "normalize": true, "ascii_uppercase": true },
+      "expect": { "syntax": "pass", "checksum": "pass" }
+    },
+    {
+      "id": "cn_resident_lowercase_x_explicit_option",
+      "rule_id": "CN.resident_id", "input": "11010519491231002x", "options": { "normalize": true, "ascii_uppercase": true },
+      "expect": { "syntax": "pass", "checksum": "pass", "transformations": ["ascii_uppercase_last_char"] }
+    },
+    {
+      "id": "cn_resident_lowercase_x_without_option",
+      "rule_id": "CN.resident_id", "input": "11010519491231002x", "options": { "normalize": true },
+      "expect": { "syntax": "fail" }
+    },
+    {
+      "id": "input_too_long_guard",
+      "rule_id": "CN.resident_id", "input": "11010519491231002X11010519491231002X11010519491231002X11010519491231002X11010519491231002X11010519491231002X11010519491231002X11010519491231002X", "options": {},
+      "expect": { "syntax": "fail", "syntax_error": "input_too_long" }
+    },
+    {
+      "id": "nul_byte_rejected",
+      "rule_id": "CN.resident_id", "input": "11010519491231002\u0000", "options": {},
+      "expect": { "syntax": "fail", "syntax_error": "control_character" }
+    },
+    {
+      "id": "zero_width_space_rejected",
+      "rule_id": "CN.resident_id", "input": "11010519491231002\u200bX", "options": {},
+      "expect": { "syntax": "fail", "syntax_error": "format_control_character" }
+    },
+    {
+      "id": "rtl_override_rejected",
+      "rule_id": "CN.resident_id", "input": "\u202e11010519491231002X", "options": {},
+      "expect": { "syntax": "fail", "syntax_error": "format_control_character" }
+    },
+    {
+      "id": "fullwidth_digit_rejected",
+      "rule_id": "CN.resident_id", "input": "１1010519491231002X", "options": {},
+      "expect": { "syntax": "fail", "syntax_error": "non_ascii_character" }
+    },
+    {
+      "id": "arabic_indic_digit_rejected",
+      "rule_id": "SA.national_id", "input": "١000000000", "options": {},
+      "expect": { "syntax": "fail", "syntax_error": "non_ascii_character" }
+    },
+    {
+      "id": "thai_digit_rejected",
+      "rule_id": "TH.citizen_id", "input": "๑234567890121", "options": {},
+      "expect": { "syntax": "fail", "syntax_error": "non_ascii_character" }
+    },
+    {
+      "id": "icao_mrz_field_rule_has_no_rule_level_checksum",
+      "rule_id": "GLOBAL.icao_mrz_field", "input": "L898902C3", "options": {},
+      "expect": { "syntax": "pass", "checksum": "not_applicable" }
+    },
+    {
+      "id": "icao_mrz_lowercase_rejected",
+      "rule_id": "GLOBAL.icao_mrz_field", "input": "l898902c3", "options": {},
+      "expect": { "syntax": "fail" }
+    }
+  ],
+  "icao_composite": {
+    "notice": "ICAO Doc 9303 TD3 illustrative MRZ (UTO / ERIKSSON sample). Composite check digit covers positions 1-10, 14-20 and 22-43 of line 2.",
+    "line2": "L898902C36UTO7408122F1204159ZE184226B<<<<<10",
+    "slices": [[1, 10], [14, 20], [22, 43]],
+    "expected_composite_check": "0",
+    "field_checks": [
+      { "field": "L898902C3", "check": "6" },
+      { "field": "740812", "check": "2" },
+      { "field": "120415", "check": "9" },
+      { "field": "ZE184226B<", "check": "1" }
+    ]
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "notice_zh": "合成或官方说明性样本，非真实身份库。expected_arithmetic 是算法在显式启用时的算术结果，与默认策略（是否运行）无关。来源于研究交接包的用例已在实现阶段用 tools/reference_impl.py 独立复算；新增用例标注 added_in_implementation。",
+  "algorithms": [
+    {
+      "algorithm_id": "cn_resident_id_mod11_2",
+      "cases": [
+        { "rule_id": "CN.resident_id", "input": "110105199001010010", "expected_arithmetic": true, "mutated_input": "110105199001010011", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "CN.resident_id", "input": "11010519491231002X", "expected_arithmetic": true, "mutated_input": "110105194912310020", "mutated_expected": false, "provenance": "official_GB11643_illustrative_example_not_reserved" },
+        { "rule_id": "CN.resident_id", "input": "11010519491231002x", "expected_arithmetic": false, "mutated_input": "11010519491231002X", "mutated_expected": true, "provenance": "added_in_implementation", "reason": "lowercase x is not accepted without explicit ascii_uppercase normalization" }
+      ]
+    },
+    {
+      "algorithm_id": "cn_uscc_mod31",
+      "cases": [
+        { "rule_id": "CN.uscc", "input": "91110101ABCDEFGH1E", "expected_arithmetic": true, "mutated_input": "91110101ABCDEFGH10", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "CN.uscc", "input": "91110101ABCDEFGH1I", "expected_arithmetic": false, "mutated_input": "91110101ABCDEFGH1E", "mutated_expected": true, "provenance": "added_in_implementation", "reason": "I is outside the GB 32100 alphabet" }
+      ]
+    },
+    {
+      "algorithm_id": "th_mod11",
+      "cases": [
+        { "rule_id": "TH.citizen_id", "input": "1234567890121", "expected_arithmetic": true, "mutated_input": "1234567890120", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "TH.tin_envelope", "input": "0991123456781", "expected_arithmetic": true, "mutated_input": "0991123456780", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "TH.tin_envelope", "input": "0101234567899", "expected_arithmetic": true, "mutated_input": "0101234567890", "mutated_expected": false, "provenance": "synthetic_research_fixture" }
+      ]
+    },
+    {
+      "algorithm_id": "jp_mynumber",
+      "cases": [
+        { "rule_id": "JP.my_number", "input": "123456789018", "expected_arithmetic": true, "mutated_input": "123456789010", "mutated_expected": false, "provenance": "synthetic_research_fixture" }
+      ]
+    },
+    {
+      "algorithm_id": "jp_corporate_number",
+      "cases": [
+        { "rule_id": "JP.corporate_number", "input": "8700110005901", "expected_arithmetic": true, "mutated_input": "7700110005901", "mutated_expected": false, "provenance": "official_NTA_checkdigit_pdf_worked_example", "added_in_implementation": true },
+        { "rule_id": "JP.corporate_number", "input": "9234567890123", "expected_arithmetic": true, "mutated_input": "1234567890123", "mutated_expected": false, "provenance": "synthetic_research_fixture", "added_in_implementation": true }
+      ]
+    },
+    {
+      "algorithm_id": "kz_iin",
+      "cases": [
+        { "rule_id": "KZ.iin", "input": "123456789013", "expected_arithmetic": true, "mutated_input": "123456789010", "mutated_expected": false, "provenance": "synthetic_research_fixture" }
+      ]
+    },
+    {
+      "algorithm_id": "luhn",
+      "cases": [
+        { "rule_id": "IL.id_tin", "input": "123456782", "expected_arithmetic": true, "mutated_input": "123456780", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "GLOBAL.payment_pan_current", "input": "4242424242424242", "expected_arithmetic": true, "mutated_input": "4242424242424240", "mutated_expected": false, "provenance": "processor_test_pan_stripe_docs" },
+        { "rule_id": "GLOBAL.payment_pan_current", "input": "4000056655665556", "expected_arithmetic": true, "mutated_input": "4000056655665557", "mutated_expected": false, "provenance": "processor_test_pan_stripe_docs", "added_in_implementation": true },
+        { "rule_id": "GLOBAL.payment_pan_current", "input": "5555555555554444", "expected_arithmetic": true, "mutated_input": "5555555555554440", "mutated_expected": false, "provenance": "processor_test_pan_stripe_docs", "added_in_implementation": true },
+        { "rule_id": "GLOBAL.payment_pan_current", "input": "378282246310005", "expected_arithmetic": true, "mutated_input": "378282246310004", "mutated_expected": false, "provenance": "processor_test_pan_stripe_docs", "added_in_implementation": true },
+        { "rule_id": "GLOBAL.payment_pan_legacy", "input": "4242424242424242", "expected_arithmetic": true, "mutated_input": "4242424242424240", "mutated_expected": false, "provenance": "processor_test_pan_stripe_docs" }
+      ]
+    },
+    {
+      "algorithm_id": "iban_mod97",
+      "cases": [
+        { "rule_id": "AE.iban", "input": "AE151111111111111111111", "expected_arithmetic": true, "mutated_input": "AE051111111111111111111", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "BH.iban", "input": "BH08ZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "BH18ZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "IL.iban", "input": "IL191111111111111111111", "expected_arithmetic": true, "mutated_input": "IL091111111111111111111", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "IQ.iban", "input": "IQ09ZZZZ111111111111111", "expected_arithmetic": true, "mutated_input": "IQ19ZZZZ111111111111111", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "JO.iban", "input": "JO42ZZZZ1111ZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "JO02ZZZZ1111ZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "KW.iban", "input": "KW85ZZZZZZZZZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "KW05ZZZZZZZZZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "KZ.iban", "input": "KZ13111ZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "KZ03111ZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "LB.iban", "input": "LB781111ZZZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "LB081111ZZZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "MN.iban", "input": "MN361111111111111111", "expected_arithmetic": true, "mutated_input": "MN061111111111111111", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "OM.iban", "input": "OM12111ZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "OM02111ZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "PK.iban", "input": "PK65ZZZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "PK05ZZZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "PS.iban", "input": "PS30ZZZZZZZZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "PS00ZZZZZZZZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "QA.iban", "input": "QA75ZZZZZZZZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "QA05ZZZZZZZZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "SA.iban", "input": "SA7411ZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "SA0411ZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "TR.iban", "input": "TR14111110ZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "TR04111110ZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "YE.iban", "input": "YE34ZZZZ1111ZZZZZZZZZZZZZZZZZZ", "expected_arithmetic": true, "mutated_input": "YE04ZZZZ1111ZZZZZZZZZZZZZZZZZZ", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "AE.iban", "input": "AE15111111111111111111", "expected_arithmetic": false, "mutated_input": "AE151111111111111111111", "mutated_expected": true, "provenance": "added_in_implementation", "reason": "22 characters: wrong length for AE even though arithmetic might coincide" },
+        { "rule_id": "KW.iban", "input": "KW85zzzzzzzzzzzzzzzzzzzzzzzzzz", "expected_arithmetic": false, "mutated_input": "KW85ZZZZZZZZZZZZZZZZZZZZZZZZZZ", "mutated_expected": true, "provenance": "added_in_implementation", "reason": "lowercase BBAN rejected unless ascii_uppercase normalization is requested" },
+        { "rule_id": "IQ.iban", "input": "IQ09ZZZZ1111111111111A1", "expected_arithmetic": false, "mutated_input": "IQ09ZZZZ111111111111111", "mutated_expected": true, "provenance": "added_in_implementation", "reason": "IQ account field is 12!n; a letter there violates the registry class" }
+      ]
+    },
+    {
+      "algorithm_id": "icao9303_check_digit",
+      "cases": [
+        { "field": "L898902C3", "check_digit": "6", "expected_arithmetic": true, "invalid_check_digit": "7", "invalid_expected": false, "provenance": "ICAO_Doc9303_illustrative_document_number" },
+        { "field": "ABC123<<<", "check_digit": "1", "expected_arithmetic": true, "invalid_check_digit": "2", "invalid_expected": false, "provenance": "synthetic_research_fixture" },
+        { "field": "740812", "check_digit": "2", "expected_arithmetic": true, "invalid_check_digit": "3", "invalid_expected": false, "provenance": "ICAO_Doc9303_illustrative_date_field", "added_in_implementation": true },
+        { "field": "120415", "check_digit": "9", "expected_arithmetic": true, "invalid_check_digit": "0", "invalid_expected": false, "provenance": "ICAO_Doc9303_illustrative_date_field", "added_in_implementation": true },
+        { "field": "<<<<<<<<<<<<<<", "check_digit": "0", "expected_arithmetic": true, "invalid_check_digit": "1", "invalid_expected": false, "provenance": "synthetic_all_filler_field", "added_in_implementation": true }
+      ]
+    },
+    {
+      "algorithm_id": "verhoeff",
+      "cases": [
+        { "rule_id": "IN.aadhaar", "input": "234567890124", "expected_arithmetic": true, "mutated_input": "234567890120", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "IN.aadhaar", "input": "2363", "expected_arithmetic": true, "mutated_input": "2364", "mutated_expected": false, "provenance": "classic_textbook_verhoeff_example_236_3", "added_in_implementation": true }
+      ]
+    },
+    {
+      "algorithm_id": "tr_tckn",
+      "cases": [
+        { "rule_id": "TR.tckn", "input": "12345678950", "expected_arithmetic": true, "mutated_input": "12345678951", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "TR.tckn", "input": "12345678940", "expected_arithmetic": false, "mutated_input": "12345678950", "mutated_expected": true, "provenance": "added_in_implementation", "reason": "d10 mutated, d11 recomputed consistently: must still fail on d10" },
+        { "rule_id": "TR.tckn", "input": "02345678950", "expected_arithmetic": false, "mutated_input": "12345678950", "mutated_expected": true, "provenance": "added_in_implementation", "reason": "leading zero not allowed" }
+      ]
+    },
+    {
+      "algorithm_id": "tr_vkn",
+      "cases": [
+        { "rule_id": "TR.vkn", "input": "0010213576", "expected_arithmetic": true, "mutated_input": "0010213570", "mutated_expected": false, "provenance": "synthetic_research_fixture" }
+      ]
+    },
+    {
+      "algorithm_id": "sg_nric_fin_reconstructed",
+      "cases": [
+        { "rule_id": "SG.nric", "input": "S1234567D", "expected_arithmetic": true, "mutated_input": "S12345670", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "SG.nric", "input": "T1234567J", "expected_arithmetic": true, "mutated_input": "T12345670", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "SG.fin", "input": "F1234567N", "expected_arithmetic": true, "mutated_input": "F12345670", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "SG.fin", "input": "G1234567X", "expected_arithmetic": true, "mutated_input": "G12345670", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "SG.fin", "input": "M1234567K", "expected_arithmetic": true, "mutated_input": "M12345670", "mutated_expected": false, "provenance": "synthetic_research_fixture_experimental_M_table" }
+      ]
+    },
+    {
+      "algorithm_id": "tw_citizen_new_ui",
+      "cases": [
+        { "rule_id": "TW.citizen_id", "input": "A100000001", "expected_arithmetic": true, "mutated_input": "A100000000", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "TW.new_ui", "input": "A800000005", "expected_arithmetic": true, "mutated_input": "A800000000", "mutated_expected": false, "provenance": "synthetic_research_fixture" }
+      ]
+    },
+    {
+      "algorithm_id": "hkid_mod11",
+      "cases": [
+        { "rule_id": "HK.hkid", "input": "A1234563", "expected_arithmetic": true, "mutated_input": "A1234560", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "HK.hkid", "input": "AB1234569", "expected_arithmetic": true, "mutated_input": "AB1234560", "mutated_expected": false, "provenance": "synthetic_research_fixture" },
+        { "rule_id": "HK.hkid", "input": "A123456A", "expected_arithmetic": false, "mutated_input": "A1234563", "mutated_expected": true, "provenance": "official_DPO_schema_illustrative_example_not_checksum_valid", "added_in_implementation": true }
+      ]
+    },
+    {
+      "algorithm_id": "ir_national_mod11",
+      "cases": [
+        { "rule_id": "IR.national_code", "input": "0012345679", "expected_arithmetic": true, "mutated_input": "0012345670", "mutated_expected": false, "provenance": "synthetic_research_fixture" }
+      ]
+    },
+    {
+      "algorithm_id": "kr_rrn_legacy",
+      "cases": [
+        { "rule_id": "KR.rrn", "input": "9001011234568", "expected_arithmetic": true, "mutated_input": "9001011234560", "mutated_expected": false, "provenance": "synthetic_research_fixture", "regime": "explicit_legacy_pre_2020_10" }
+      ]
+    }
+  ]
+}
