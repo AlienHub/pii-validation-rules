@@ -1,0 +1,1177 @@
+{
+  "schema_version": "1.0",
+  "adapted_from": "pii-banking-deep-research handoff 2026-11-13",
+  "note_zh": "实现阶段独立改编；52个研究profile中TR.iban.2021并入TR.iban；未盲从导入。",
+  "rules": [
+    {
+      "id": "GLOBAL.pan.iso8iin",
+      "country": "GLOBAL",
+      "type": "payment_card_pan",
+      "issuer_scope": "ISO eight-digit-IIN framework",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{10,19}",
+      "pcre2_full": "\\A(?:[0-9]{10,19})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "",
+      "checksum_relationship": "luhn function available; enforce only scheme/product policy; not universal issuer guarantee",
+      "status": "standard_announcement_envelope",
+      "evidence": [
+        "pan.iso",
+        "pan.visa"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "pan.iso": "2016-11-21",
+        "pan.visa": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "GLOBAL.pan.iso6iin.legacy",
+      "country": "GLOBAL",
+      "type": "payment_card_pan",
+      "issuer_scope": "legacy ISO six-digit-IIN framework",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{8,19}",
+      "pcre2_full": "\\A(?:[0-9]{8,19})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "",
+      "checksum_relationship": "not enforced by envelope",
+      "status": "historical_compatibility",
+      "evidence": [
+        "pan.iso"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "pan.iso": "2016-11-21"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "GLOBAL.pan.visa.worldpay",
+      "country": "GLOBAL",
+      "type": "payment_card_pan",
+      "issuer_scope": "Worldpay cnpAPI Visa acceptance profile",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "4(?:[0-9]{15}|[0-9]{18})",
+      "pcre2_full": "\\A(?:4(?:[0-9]{15}|[0-9]{18}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "",
+      "checksum_relationship": "luhn",
+      "status": "processor_scoped_profile",
+      "evidence": [
+        "pan.worldpay",
+        "pan.luhn"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "pan.worldpay": null,
+        "pan.luhn": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "GLOBAL.pan.mastercard.worldpay",
+      "country": "GLOBAL",
+      "type": "payment_card_pan",
+      "issuer_scope": "Worldpay cnpAPI Mastercard profile",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "(?:5[1-5][0-9]{4}|222[1-9][0-9]{2}|22[3-9][0-9]{3}|2[3-6][0-9]{4}|27[01][0-9]{3}|2720[0-9]{2})(?:[0-9]{10}|[0-9]{13})",
+      "pcre2_full": "\\A(?:(?:5[1-5][0-9]{4}|222[1-9][0-9]{2}|22[3-9][0-9]{3}|2[3-6][0-9]{4}|27[01][0-9]{3}|2720[0-9]{2})(?:[0-9]{10}|[0-9]{13}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "",
+      "checksum_relationship": "luhn",
+      "status": "processor_scoped_profile",
+      "evidence": [
+        "pan.worldpay",
+        "pan.luhn"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "pan.worldpay": null,
+        "pan.luhn": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "GLOBAL.pan.amex.worldpay",
+      "country": "GLOBAL",
+      "type": "payment_card_pan",
+      "issuer_scope": "Worldpay cnpAPI American Express profile",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "3[47][0-9]{13}",
+      "pcre2_full": "\\A(?:3[47][0-9]{13})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "",
+      "checksum_relationship": "luhn",
+      "status": "processor_scoped_profile",
+      "evidence": [
+        "pan.worldpay",
+        "pan.luhn"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "pan.worldpay": null,
+        "pan.luhn": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.pan.jrt0008_2000",
+      "country": "CN",
+      "type": "payment_card_pan",
+      "issuer_scope": "JR/T0008-2000 historical RMB card series",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "9[0-9]{12,18}",
+      "pcre2_full": "\\A(?:9[0-9]{12,18})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "",
+      "checksum_relationship": "luhn",
+      "status": "historical_standard_only",
+      "evidence": [
+        "cn.pan.legacy"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.pan.legacy": "2000-11-10"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "TH.bbl.personal_deposit",
+      "country": "TH",
+      "type": "domestic_bank_account",
+      "issuer_scope": "Bangkok Bank personal savings/current in SMS Account Alert",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{10}",
+      "pcre2_full": "\\A(?:[0-9]{10})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "unknown account check digit; do not apply Luhn",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "th.bbl"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "th.bbl": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "TH.bbl.atm_be1st",
+      "country": "TH",
+      "type": "payment_card_number",
+      "issuer_scope": "Bangkok Bank ATM or Be1st card in SMS Account Alert",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{16}",
+      "pcre2_full": "\\A(?:[0-9]{16})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "only length documented for this service; no BIN or Luhn obligation established",
+      "checksum_relationship": "unknown; not apply account checksum",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "th.bbl"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "th.bbl": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "TH.kbank.cdm_account",
+      "country": "TH",
+      "type": "domestic_bank_account",
+      "issuer_scope": "KBank K-CDM deposit account-number field",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{10}",
+      "pcre2_full": "\\A(?:[0-9]{10})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "scoped CDM input; not virtual account or every deposit product",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "th.kbank"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "th.kbank": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "TH.scb.company_add_account",
+      "country": "TH",
+      "type": "domestic_bank_account",
+      "issuer_scope": "SCB company-admin Add Bank Account manual",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "(?:[0-9]{10}|[0-9]{13})",
+      "pcre2_full": "\\A(?:(?:[0-9]{10}|[0-9]{13}))\\z",
+      "normalization": "manual says omit hyphens; no evidence of specific grouping: canonical input only",
+      "semantic_constraints": "10/13 product mapping not published in source; do not claim personal-only or all-Thai length",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "th.scb"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "th.scb": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "TR.iban.2021",
+      "country": "TR",
+      "type": "iban",
+      "issuer_scope": "TCMB banks and permitted nonbank payment service providers",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "TR[0-9]{2}[0-9]{5}0[A-Z0-9]{16}",
+      "pcre2_full": "\\A(?:TR[0-9]{2}[0-9]{5}0[A-Z0-9]{16})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "positions5..9 PSP code lookup; position10=0; 11..26 account field right-aligned and zero-filled by PSP; no uniform native account format; check digits02..98 and MOD97",
+      "checksum_relationship": "iban_mod97",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "tr.iban"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "tr.iban": "2021-08-05"
+      },
+      "effective_from": "2021-08-05",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.dbs.account",
+      "country": "SG",
+      "type": "domestic_bank_account",
+      "issuer_scope": "DBS 10-digit accounts",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{10}",
+      "pcre2_full": "\\A(?:[0-9]{10})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "bank7171; branch=first3; full10 retained",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.dbs"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.dbs": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.posb.account",
+      "country": "SG",
+      "type": "domestic_bank_account",
+      "issuer_scope": "POSB 9-digit accounts",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{9}",
+      "pcre2_full": "\\A(?:[0-9]{9})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "bank7171; branch081 constant; full9 retained",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.dbs"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.dbs": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.hsbc.account",
+      "country": "SG",
+      "type": "domestic_bank_account",
+      "issuer_scope": "HSBC SG current/savings full account",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{12}",
+      "pcre2_full": "\\A(?:[0-9]{12})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "full account includes branch3+account9; HSBC personal9548 vs corporate7232 in2026UOB guide",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.abs"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.abs": "2015-03-23"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.sbi.account",
+      "country": "SG",
+      "type": "domestic_bank_account",
+      "issuer_scope": "SBI SG current full account",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{14}",
+      "pcre2_full": "\\A(?:[0-9]{14})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "full account includes branch3+account11",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.abs"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.abs": "2015-03-23"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.uob.account",
+      "country": "SG",
+      "type": "domestic_bank_account",
+      "issuer_scope": "UOB ordinary account (not VAN)",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{10}",
+      "pcre2_full": "\\A(?:[0-9]{10})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "bank7375; first3 maps through Appendix A, not necessarily branch; example910->030",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.uob"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.standard_chartered.account",
+      "country": "SG",
+      "type": "domestic_bank_account",
+      "issuer_scope": "Standard Chartered SG ordinary account in ACH guide",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{10}",
+      "pcre2_full": "\\A(?:[0-9]{10})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "bank9496 in2026 guide; branch=0+first2; do not revive old7144 automatically",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.uob"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.ocbc.full_account",
+      "country": "SG",
+      "type": "domestic_bank_account",
+      "issuer_scope": "OCBC savings/current after23Mar2015",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "(?:[0-9]{10}|[0-9]{12})",
+      "pcre2_full": "\\A(?:(?:[0-9]{10}|[0-9]{12}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "bank7339; full account includes branch3; oldIBG field splits account7/9; FAST/GIRO full10/12",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.abs",
+        "sg.uob"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.abs": "2015-03-23",
+        "sg.uob": "2026-10-08"
+      },
+      "effective_from": "2015-03-23",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.uob.van",
+      "country": "SG",
+      "type": "virtual_bank_account",
+      "issuer_scope": "UOB Virtual Account Number only",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "(?:[0-9]{7}|[0-9]{9}|[0-9]{11,14}|[0-9]{17,18})",
+      "pcre2_full": "\\A(?:(?:[0-9]{7}|[0-9]{9}|[0-9]{11,14}|[0-9]{17,18}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "bank7375; branch001 default; not ordinary 10-digit UOB account",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.uob"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.ach.bank_code",
+      "country": "SG",
+      "type": "routing_bank_code",
+      "issuer_scope": "ACH Bank Code syntax",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{4}",
+      "pcre2_full": "\\A(?:[0-9]{4})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "directory relation, country context and date required; not PII alone",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.uob"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.ach.branch_code",
+      "country": "SG",
+      "type": "routing_branch_code",
+      "issuer_scope": "ACH branch syntax",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{3}",
+      "pcre2_full": "\\A(?:[0-9]{3})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "pair with bank code; channel-specific; not a secret/checksum/PII alone",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.uob"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.paynow.corporate_suffix",
+      "country": "SG",
+      "type": "payment_alias_suffix",
+      "issuer_scope": "PayNow corporate optional suffix, separate from validated UEN root",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "(?:[A-Z0-9]{3})?",
+      "pcre2_full": "\\A(?:(?:[A-Z0-9]{3})?)\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "concatenate only after independent UEN root parse; #GRAB VPA not suffix",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "sg.paynow.suffix"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.paynow.suffix": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "HK.hsbc.full_account",
+      "country": "HK",
+      "type": "domestic_bank_account",
+      "issuer_scope": "HSBC Hong Kong inward payments account",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "(?:[0-9]{10}|[0-9]{12})",
+      "pcre2_full": "\\A(?:(?:[0-9]{10}|[0-9]{12}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "first3 branch; account7or9. Do not include bank004 in account field. Integrated remittance suffix selection is purpose/currency-dependent, not universal regex",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "hk.hsbc"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "hk.hsbc": "2026-01 (filename/search title; PDF body undated)"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "HK.bochk.payroll_account",
+      "country": "HK",
+      "type": "domestic_bank_account",
+      "issuer_scope": "BOCHK payroll HKD savings/current autopay account",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{14}",
+      "pcre2_full": "\\A(?:[0-9]{14})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "payroll-specific scope; 14digits disprove HK universal9-12 assertion; do not require all HongKong accounts14",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "hk.bochk"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "hk.bochk": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "HK.clearing.bank_code",
+      "country": "HK",
+      "type": "clearing_bank_code",
+      "issuer_scope": "HKICL clearing directory syntax",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{3}",
+      "pcre2_full": "\\A(?:[0-9]{3})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "bank-branch membership requires live maintained table; not PII alone; 3-digit candidate grammar pending direct directory evidence; directory landing alone not authoritative for length; no default hard reject",
+      "checksum_relationship": "unknown",
+      "status": "candidate_routing_syntax_directory_unverified",
+      "evidence": [
+        "hk.clearing"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "hk.clearing": "2026-11-16 (future-dated landing; not effective snapshot)"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "evidence_limitations": "Live landing is future-dated; indexed23Oct2026PDF now404; current directory body not obtained. Primary bank indexed example is consistent but not an exhaustive clearing specification."
+    },
+    {
+      "id": "HK.clearing.branch_code",
+      "country": "HK",
+      "type": "clearing_branch_code",
+      "issuer_scope": "HKICL branch directory syntax",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{3}",
+      "pcre2_full": "\\A(?:[0-9]{3})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "branch is within bank namespace, cannot route on branch alone; 3-digit candidate grammar pending direct directory evidence; directory landing alone not authoritative for length; no default hard reject",
+      "checksum_relationship": "unknown",
+      "status": "candidate_routing_syntax_directory_unverified",
+      "evidence": [
+        "hk.clearing"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "hk.clearing": "2026-11-16 (future-dated landing; not effective snapshot)"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "evidence_limitations": "Live landing is future-dated; indexed23Oct2026PDF now404; current directory body not obtained. Primary bank indexed example is consistent but not an exhaustive clearing specification."
+    },
+    {
+      "id": "HK.fps.id",
+      "country": "HK",
+      "type": "payment_alias",
+      "issuer_scope": "HK FPS-generated ID",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "(?:[0-9]{7}|[0-9]{9})",
+      "pcre2_full": "\\A(?:(?:[0-9]{7}|[0-9]{9}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "registration/unique mapping unknown offline; not bank account and not Macau FPS",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "hk.fps"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "hk.fps": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.bnu.eapplication_savings",
+      "country": "MO",
+      "type": "domestic_bank_account",
+      "issuer_scope": "BNU e-Application MOP/HKD/RMB savings inward remittance",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{10}",
+      "pcre2_full": "\\A(?:[0-9]{10})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "scoped to these savings accounts; no public checksum found",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "mo.bnu"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.bnu": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.icbc.ebanking_main",
+      "country": "MO",
+      "type": "domestic_bank_account",
+      "issuer_scope": "ICBC Macau online-banking main account",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{19}",
+      "pcre2_full": "\\A(?:[0-9]{19})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "undated legacy-looking service page; no claim all transfer products; no Luhn",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax_date_unknown",
+      "evidence": [
+        "mo.icbc"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.icbc": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.boc.standard17",
+      "country": "MO",
+      "type": "domestic_bank_account",
+      "issuer_scope": "BOC Macau standard accounts after2018 upgrade except FI/NHG",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{17}",
+      "pcre2_full": "\\A(?:[0-9]{17})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "do not reject FI/NHG using this profile; source says17 except these, general savings passage says up to17",
+      "checksum_relationship": "unknown",
+      "status": "dated_bank_generation_profile",
+      "evidence": [
+        "mo.boc"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.boc": "2018-03"
+      },
+      "effective_from": "2018-03-25",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.boc.selfservice15",
+      "country": "MO",
+      "type": "account_channel_input",
+      "issuer_scope": "BOC Macau ATM/CDM/BOC Express2018 input for00-prefixed17",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{15}",
+      "pcre2_full": "\\A(?:[0-9]{15})\\z",
+      "normalization": "explicit channel transform only: canonical17 must start00, then remove exactly00; reverse prepend00",
+      "semantic_constraints": "only this channel maps input ->00+15. Do not globally trim zeros or infer arbitrary17->15",
+      "checksum_relationship": "unknown",
+      "status": "dated_channel_profile",
+      "evidence": [
+        "mo.boc"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.boc": "2018-03"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.boc.old12",
+      "country": "MO",
+      "type": "domestic_bank_account",
+      "issuer_scope": "BOC Macau pre-upgrade account numbers",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{12}",
+      "pcre2_full": "\\A(?:[0-9]{12})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "2018document allowed continued old use;2026acceptance unconfirmed",
+      "checksum_relationship": "unknown",
+      "status": "historical_compatibility",
+      "evidence": [
+        "mo.boc"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.boc": "2018-03"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.boc.loan15",
+      "country": "MO",
+      "type": "loan_account",
+      "issuer_scope": "BOC Macau post2018 loan account",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{15}",
+      "pcre2_full": "\\A(?:[0-9]{15})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "separate loan profile; same15length does not mean selfservice normalization",
+      "checksum_relationship": "unknown",
+      "status": "dated_bank_generation_profile",
+      "evidence": [
+        "mo.boc"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.boc": "2018-03"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.boc.passbook12",
+      "country": "CN",
+      "type": "domestic_bank_account",
+      "issuer_scope": "BOC mainland intra-bank passbook new account in2012announcement",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{12}",
+      "pcre2_full": "\\A(?:[0-9]{12})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "not all BOC accounts or cardPAN; no public checksum",
+      "checksum_relationship": "unknown",
+      "status": "dated_bank_generation_profile",
+      "evidence": [
+        "cn.boc"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.boc": "2012-04-10"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.cnaps.routing",
+      "country": "CN",
+      "type": "payment_system_routing_code",
+      "issuer_scope": "PBOC payment system participant code",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{12}",
+      "pcre2_full": "\\A(?:[0-9]{12})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "12digit routing ID, not customer account; directory membership required; checksum formula not obtained",
+      "checksum_relationship": "unknown; do not use Luhn",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "cn.cnaps"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.cnaps": "2013-05-31"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.cmb.professional_legacy_card",
+      "country": "CN",
+      "type": "bank_card_number",
+      "issuer_scope": "CMB Professional3.0+ historical batch payer card field",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "(?:[0-9]{8}|[0-9]{16})",
+      "pcre2_full": "\\A(?:(?:[0-9]{8}|[0-9]{16}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "historical8-digit card not current ISO8IIN PAN; source does not specify Luhn",
+      "checksum_relationship": "unknown",
+      "status": "historical_interface_profile",
+      "evidence": [
+        "cn.cmb.legacy"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.cmb.legacy": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.foreign_permanent_resident2023",
+      "country": "CN",
+      "type": "foreign_resident_id",
+      "issuer_scope": "NIA foreign permanent resident ID issued from1Dec2023",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "9[0-9]{5}[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X]",
+      "pcre2_full": "\\A(?:9[0-9]{5}[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X])\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "positions2-3 reception province;4-6numeric country/region;7-14GregorianDOB;15-17sequence;18check; maintain code dictionaries separately",
+      "checksum_relationship": "cn_mod11_2 (same mathematical function as GB11643, different semantic profile)",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "cn.foreign"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.foreign": "2023-10 (URL; 启用2023-12-01)"
+      },
+      "effective_from": "2023-12-01",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.foreign_permanent_resident_legacy",
+      "country": "CN",
+      "type": "foreign_resident_id",
+      "issuer_scope": "NIA2017/prior foreign permanent resident card",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[A-Z]{3}[0-9]{12}",
+      "pcre2_full": "\\A(?:[A-Z]{3}[0-9]{12})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "3lettercountry+4address+YYMMDD+sequence+check; century/code/oldcheck unknown; retained only explicit legacy",
+      "checksum_relationship": "unknown old algorithm; not reuse new18digit",
+      "status": "historical_compatibility",
+      "evidence": [
+        "cn.foreign"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.foreign": "2023-10 (URL; 启用2023-12-01)"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.hk_mainland_residence",
+      "country": "CN",
+      "type": "mainland_residence_permit",
+      "issuer_scope": "HK resident mainland residence permit under2018rules",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "810000[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X]",
+      "pcre2_full": "\\A(?:810000[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X])\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "DOB Gregorian + nonfuture policy separate; citizen-number standard checksum; not HKID/BIR or H/M permit",
+      "checksum_relationship": "cn_mod11_2",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "cn.hmtres",
+        "cn.foreign"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.hmtres": "2018-08-06",
+        "cn.foreign": "2023-10 (URL; 启用2023-12-01)"
+      },
+      "effective_from": "2018-09-01",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.mo_mainland_residence",
+      "country": "CN",
+      "type": "mainland_residence_permit",
+      "issuer_scope": "MO resident mainland residence permit under2018rules",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "820000[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X]",
+      "pcre2_full": "\\A(?:820000[0-9]{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9X])\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "DOB Gregorian + nonfuture policy separate; citizen-number standard checksum; not HKID/BIR or H/M permit",
+      "checksum_relationship": "cn_mod11_2",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "cn.hmtres",
+        "cn.foreign"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.hmtres": "2018-08-06",
+        "cn.foreign": "2023-10 (URL; 启用2023-12-01)"
+      },
+      "effective_from": "2018-09-01",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "CN.travel_hkmo_electronic",
+      "country": "CN",
+      "type": "exit_entry_permit",
+      "issuer_scope": "Mainland resident electronic exit-entry permit for HK/MO",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "C(?:[0-9]{8}|[A-HJ-NP-Z][0-9]{7})",
+      "pcre2_full": "\\A(?:C(?:[0-9]{8}|[A-HJ-NP-Z][0-9]{7}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "Cdigits series before3Dec2018; Cletterseries after, noI/O; old expiry not proven merely from syntax",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "cn.travel"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.travel": "2019-12-26"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "HK.mainland_travel_permit",
+      "country": "CN/HK",
+      "type": "mainland_travel_permit",
+      "issuer_scope": "Chinese-national HK resident return-home permit",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "H[0-9]{8}",
+      "pcre2_full": "\\A(?:H[0-9]{8})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "first application territory controlsH/M; appended2renewalcount separate; nonChinese2024series notcovered",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "cn.travel"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.travel": "2019-12-26"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.mainland_travel_permit",
+      "country": "CN/MO",
+      "type": "mainland_travel_permit",
+      "issuer_scope": "Chinese-national MO resident return-home permit",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "M[0-9]{8}",
+      "pcre2_full": "\\A(?:M[0-9]{8})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "first application territory controlsH/M; appended2renewalcount separate; nonChinese2024series notcovered",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "cn.travel"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "cn.travel": "2019-12-26"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.resident_id",
+      "country": "MO",
+      "type": "resident_identity_card",
+      "issuer_scope": "Macao Resident Identity Card",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9]{8}",
+      "pcre2_full": "\\A(?:[0-9]{8})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "7number+1check; first1/5/7 not inferred nationality/permanent-status; no published formula here",
+      "checksum_relationship": "present_but_algorithm_unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "mo.bir"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.bir": "2002-10-24 (制定)"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "HK.hkid.identifier_field",
+      "country": "HK",
+      "type": "identity_identifier_without_check",
+      "issuer_scope": "Government Common Schema HKID Identifier field",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[A-Z]{1,2}[0-9]{6}",
+      "pcre2_full": "\\A(?:[A-Z]{1,2}[0-9]{6})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "no check intentionally: government schema separates optionalcheck field; fullHKID baseline remains separately checked",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "hk.hkid"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "hk.hkid": "2005-02-01"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "HK.hkid.check_field",
+      "country": "HK",
+      "type": "identity_check_character",
+      "issuer_scope": "Government Common Schema separate HKID check digit field",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "[0-9A]",
+      "pcre2_full": "\\A(?:[0-9A])\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "a separate field, not completeID and not checksum validation",
+      "checksum_relationship": "unknown",
+      "status": "official_scoped_syntax",
+      "evidence": [
+        "hk.hkid"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "hk.hkid": "2005-02-01"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.phone.radio_network",
+      "country": "SG",
+      "type": "phone_number",
+      "issuer_scope": "IMDA2026series8and9 radio network",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "\\+65(?:8[0-9]{7}|9[0-8][0-9]{6})",
+      "pcre2_full": "\\A(?:\\+65(?:8[0-9]{7}|9[0-8][0-9]{6}))\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "exclude99reserved; no current operator or individual mobile ownership inferred",
+      "checksum_relationship": "unknown",
+      "status": "dated_numbering_series_profile",
+      "evidence": [
+        "sg.phone"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.phone": "2026-02"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.phone.pstn_ipt",
+      "country": "SG",
+      "type": "phone_number",
+      "issuer_scope": "IMDA2026series6 PSTN/IPT",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "\\+656[0-9]{7}",
+      "pcre2_full": "\\A(?:\\+656[0-9]{7})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "series grammar only, some subblocks reserved; no allocated subscriber assertion",
+      "checksum_relationship": "unknown",
+      "status": "dated_numbering_series_profile",
+      "evidence": [
+        "sg.phone"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.phone": "2026-02"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "SG.phone.ipt_ucdo",
+      "country": "SG",
+      "type": "phone_number",
+      "issuer_scope": "IMDA2026series3 IPT/UCDO",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "\\+653[0-9]{7}",
+      "pcre2_full": "\\A(?:\\+653[0-9]{7})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "not all numbers callable voice;UCDOdataonly; suballocation separate",
+      "checksum_relationship": "unknown",
+      "status": "dated_numbering_series_profile",
+      "evidence": [
+        "sg.phone"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "sg.phone": "2026-02"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.phone.mobile_series",
+      "country": "MO",
+      "type": "phone_number",
+      "issuer_scope": "CTT2026mobile series62,63,65,66,68",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "\\+8536[23568][0-9]{6}",
+      "pcre2_full": "\\A(?:\\+8536[23568][0-9]{6})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "allocation lookup file mandatory for assigned-range result;65one-card-two-number;660VASnotnormalconsumer",
+      "checksum_relationship": "unknown",
+      "status": "dated_numbering_series_profile",
+      "evidence": [
+        "mo.phone",
+        "mo.phone.62",
+        "mo.phone.63",
+        "mo.phone.65",
+        "mo.phone.66",
+        "mo.phone.68"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.phone": null,
+        "mo.phone.62": "2026-04-23",
+        "mo.phone.63": "2026-04-23",
+        "mo.phone.65": "2026-04-23",
+        "mo.phone.66": "2026-04-23",
+        "mo.phone.68": "2026-04-23"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "MO.phone.fixed28",
+      "country": "MO",
+      "type": "phone_number",
+      "issuer_scope": "CTTfixed28series",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "\\+85328[0-9]{6}",
+      "pcre2_full": "\\A(?:\\+85328[0-9]{6})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "series syntax not user allocation;8xDIDseparate",
+      "checksum_relationship": "unknown",
+      "status": "dated_numbering_series_profile",
+      "evidence": [
+        "mo.phone"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "mo.phone": null
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    },
+    {
+      "id": "HK.phone.mobile_candidate",
+      "country": "HK",
+      "type": "phone_number",
+      "issuer_scope": "OFCA8-digit mobile range lookup input",
+      "regex_engine": "PCRE2-8 ASCII; Python re.fullmatch compatible body",
+      "regex_body": "\\+852[4-9][0-9]{7}",
+      "pcre2_full": "\\A(?:\\+852[4-9][0-9]{7})\\z",
+      "normalization": "none; canonical ASCII string only; preserve leading zeros",
+      "semantic_constraints": "only candidate grammar; EXACT mobile service/range/status lookup REQUIRED using hk-mobile-ranges.json;7x/8xcanbeotherusage",
+      "checksum_relationship": "unknown",
+      "status": "syntax_plus_required_allocation_lookup",
+      "evidence": [
+        "hk.phone"
+      ],
+      "version": "2026-11-13.research1",
+      "source_dates": {
+        "hk.phone": "2026-10-31 (issued 2026-11-02)"
+      },
+      "effective_from": null,
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation"
+    }
+  ]
+}

@@ -31,7 +31,9 @@ M.registry = {
   PS = { total = 29, bban = { { 4, "a" }, { 21, "c" } }, notation = "4!a21!c" },
   QA = { total = 29, bban = { { 4, "a" }, { 21, "c" } }, notation = "4!a21!c" },
   SA = { total = 24, bban = { { 2, "n" }, { 18, "c" } }, notation = "2!n18!c" },
-  TR = { total = 26, bban = { { 5, "n" }, { 1, "n" }, { 16, "c" } }, notation = "5!n1!n16!c" },
+  -- TR reserved national field (position 10 / BBAN index 6) must be ASCII '0'
+  -- per TCMB 2021-08-05 gazette; character class alone is insufficient.
+  TR = { total = 26, bban = { { 5, "n" }, { 1, "n" }, { 16, "c" } }, notation = "5!n1!n16!c", reserved_zero_at = 10 },
   YE = { total = 30, bban = { { 4, "a" }, { 4, "n" }, { 18, "c" } }, notation = "4!a4!n18!c" },
 }
 
@@ -64,6 +66,11 @@ function M.validate_structure(s)
       if not class_ok(string.byte(s, i), seg[2]) then return false, "bad_character" end
     end
     pos = pos + seg[1]
+  end
+  if entry.reserved_zero_at then
+    if string.sub(s, entry.reserved_zero_at, entry.reserved_zero_at) ~= "0" then
+      return false, "reserved_field_nonzero"
+    end
   end
   return true
 end

@@ -5,16 +5,24 @@ return function(T)
   local reg = pii.load(T.opts.rules)
   local json = require("pii.json")
 
-  local ALL_ON = { secondary_checksums = true, sg_m_series_experimental = true, kr_rrn_regime = "legacy_pre_2020_10", historical_import = true }
+  local ALL_ON = {
+    secondary_checksums = true,
+    sg_m_series_experimental = true,
+    kr_rrn_regime = "legacy_pre_2020_10",
+    historical_import = true,
+    processor_profiles = { worldpay = true },
+  }
 
   T.case("registry statistics match the documented inventory", function()
     local c = reg:count_by_status()
-    T.eq(#reg:ids(), 129, "129 regex rules")
+    T.eq(#reg:ids(), 180, "180 regex rules after banking deep-research")
     T.eq(c.syntax_supported, 72, "syntax_supported")
-    T.eq(c.historical_syntax, 5, "historical_syntax")
-    T.eq(c.candidate_profile, 9, "candidate_profile")
+    T.eq(c.official_scoped_syntax, 30, "official_scoped_syntax")
+    T.eq(c.historical_syntax, 10, "historical_syntax")
+    T.eq(c.candidate_profile, 11, "candidate_profile")
     T.eq(c.country_code_envelope_only, 39, "country_code_envelope_only")
-    T.eq(c.dated_numbering_profile, 4, "dated_numbering_profile")
+    T.eq(c.dated_numbering_profile, 9, "dated_numbering_profile")
+    T.eq(c.processor_scoped_profile, 3, "processor_scoped_profile")
     local n = 0
     for _ in pairs(reg.algorithms) do n = n + 1 end
     T.eq(n, 17, "17 checksum algorithm specs")
@@ -23,13 +31,19 @@ return function(T)
 
   T.case("result shape and vocabulary", function()
     local r = pii.validate("CN.resident_id", "11010519491231002X")
-    for _, k in ipairs({ "rule_id", "jurisdiction", "pii_type", "rule_status", "rule_version", "library_version", "syntax", "checksum", "semantic", "issuer_verification", "summary", "warnings", "transformations", "checksum_status" }) do
+    for _, k in ipairs({
+      "rule_id", "jurisdiction", "pii_type", "rule_status", "rule_version", "library_version",
+      "syntax", "checksum", "semantic", "registry", "ownership", "issuer_verification",
+      "summary", "warnings", "transformations", "checksum_status",
+    }) do
       T.check(r[k] ~= nil, "field present: " .. k)
     end
     T.eq(r.issuer_verification, "unknown", "issuer unknown")
-    T.eq(r.rule_version, "2026.11.13", "rule version")
+    T.eq(r.ownership, "unknown", "ownership unknown")
+    T.eq(r.registry, "unknown", "registry unknown by default")
+    T.eq(r.rule_version, "2026.11.13.banking", "rule version")
     local vocab = { pass = true, fail = true, unknown = true, not_applicable = true, not_evaluated = true }
-    for _, k in ipairs({ "syntax", "checksum", "semantic" }) do
+    for _, k in ipairs({ "syntax", "checksum", "semantic", "registry", "ownership" }) do
       T.check(vocab[r[k]], k .. " in vocabulary")
     end
     T.eq(r.normalized_value, nil, "no normalized value without normalize option")
@@ -137,8 +151,8 @@ return function(T)
   end)
 
   T.case("rules_for() and jurisdiction headers", function()
-    T.eq(#reg:rules_for("SG"), 10, "SG rules")
-    T.eq(#reg:rules_for("SG", "phone"), 2, "SG phone rules")
+    T.eq(#reg:rules_for("SG"), 24, "SG rules")
+    T.eq(#reg:rules_for("SG", "phone"), 5, "SG phone rules")
     T.eq(reg.jurisdictions.CN.calling_code, "86", "CN calling code")
     T.eq(reg.jurisdictions.GLOBAL.scope_group, "international", "GLOBAL group")
   end)

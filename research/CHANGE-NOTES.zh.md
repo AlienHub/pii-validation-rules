@@ -59,3 +59,12 @@
 | 来源 | 84 | 86（+2 日本法人番号来源） |
 | 辖区清单 | 39 指定 + 14 其余 = 53 | 相同 |
 | 明确未支持的覆盖格子 | 同交接包 | 同交接包（见 COVERAGE.zh.md 末节） |
+
+## 6. 银行深度调研实现（2026-11-13）
+
+详见 `research/banking-2026-11/IMPLEMENTATION-NOTES.zh.md`。要点：
+
+- 重新执行交接包研究测试后改编；新增/收紧六地银行与证件规则；规则总数 129→180（含组件）。
+- `TR.iban` 保留位收紧为 `0`；Worldpay PAN 默认关闭；UOB/OFCA 全表不提交。
+- API 增加 `registry` / `ownership` 层与 `processor_profiles`；`pii.directories` 可注入自备目录。
+- 夹具：`fixtures/banking-format-fixtures.json`（458）、`banking-algorithm-fixtures.json`（62）、合成 directories。

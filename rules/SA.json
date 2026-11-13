@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "SA",
   "name_zh": "沙特阿拉伯",
   "scope_group": "middle_east",

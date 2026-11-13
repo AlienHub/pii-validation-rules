@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "QA",
   "name_zh": "卡塔尔",
   "scope_group": "middle_east",

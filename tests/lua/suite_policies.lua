@@ -73,7 +73,13 @@ return function(T)
   end)
 
   T.case("every rule with an algorithm has a policy from the known vocabulary", function()
-    local known = { enabled = true, opt_in_secondary = true, opt_in_secondary_m_series_experimental = true, explicit_legacy_regime = true }
+    local known = {
+      enabled = true,
+      opt_in_secondary = true,
+      opt_in_secondary_m_series_experimental = true,
+      explicit_legacy_regime = true,
+      opt_in_processor_profile = true,
+    }
     for _, id in ipairs(reg:ids()) do
       local r = reg:get(id)
       if r.checksum.status == "algorithm_available" then

@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "TR",
   "name_zh": "土耳其",
   "scope_group": "core",
@@ -239,8 +239,8 @@
       "id": "TR.iban",
       "pii_type": "iban",
       "status": "syntax_supported",
-      "regex_pcre2": "\\A(?:TR[0-9]{2}[0-9]{5}[0-9]{1}[A-Z0-9]{16})\\z",
-      "python_fullmatch_body": "TR[0-9]{2}[0-9]{5}[0-9]{1}[A-Z0-9]{16}",
+      "regex_pcre2": "\\A(?:TR[0-9]{2}[0-9]{5}0[A-Z0-9]{16})\\z",
+      "python_fullmatch_body": "TR[0-9]{2}[0-9]{5}0[A-Z0-9]{16}",
       "length": 26,
       "iban_bban_notation": "5!n1!n16!c",
       "checksum": {
@@ -249,8 +249,11 @@
         "evidence": "official",
         "policy": "enabled"
       },
-      "notes_zh": "SWIFT IBAN Registry（Release 103，2026-09）结构；n=数字、a=大写字母、c=字母数字。MOD 97-10 只证明算术一致性，不证明银行/账户存在。合成样本使用非真实银行代码。",
-      "semantic_checks": [],
+      "notes_zh": "TCMB 2021-08-05 修订公报：TR+2位校验(02..98)+5位PSP代码+保留位0+16位字母数字账户域；账户域无统一内部格式，由PSP右对齐左补零；非银行支付服务商亦可获分配。不得把末16位当各银行native account；MOD97只证明算术；PSP目录成员资格为registry层。旧 Information Booklet「16 digits」概述不得压过公报 alphanumeric 条文。",
+      "semantic_checks": [
+        "tr_iban_reserved_zero",
+        "tr_iban_psp_directory_not_bundled"
+      ],
       "normalization": [
         {
           "transform": "strip_print_format_spaces",
@@ -263,14 +266,30 @@
       ],
       "source_ids": [
         "swift.103",
-        "swift.copy"
+        "swift.copy",
+        "tr.iban",
+        "tr.booklet"
       ],
       "source_urls": [
         "https://www.swift.com/sites/default/files/files/iban-registry_4.pdf",
-        "https://www.cby-ye.com/files/67335413e8237.pdf"
+        "https://www.cby-ye.com/files/67335413e8237.pdf",
+        "https://tcmb.gov.tr/wps/wcm/connect/864e0313-07a4-4c06-ab3b-938574089c2c/COMMUNIQUE_2021_5.pdf?MOD=AJPERES",
+        "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Bottom+Menu/IBAN/Information+Booklet"
       ],
       "accessed_on": "2026-11-13",
       "examples": [
+        {
+          "input": "TR470000100100000350930001",
+          "expected_syntax": true,
+          "provenance": "official_TCMB_appendix_illustrative_example",
+          "expected_checksum_arithmetic": true
+        },
+        {
+          "input": "TR90000010000000000000000A",
+          "expected_syntax": true,
+          "provenance": "synthetic_alphanumeric_bban",
+          "expected_checksum_arithmetic": true
+        },
         {
           "input": "TR14111110ZZZZZZZZZZZZZZZZ",
           "expected_syntax": true,
@@ -285,39 +304,39 @@
           "reason": "empty"
         },
         {
-          "input": "!TR14111110ZZZZZZZZZZZZZZZZ",
+          "input": "TR470000110100000350930001",
           "expected_syntax": false,
-          "reason": "invalid_character"
+          "reason": "reserved_field_nonzero"
         },
         {
-          "input": "TR14111110ZZZZZZZZZZZZZZZZ\n",
+          "input": "TR470000100100000350930001\n",
           "expected_syntax": false,
           "reason": "trailing_newline"
         },
         {
-          "input": "\nTR14111110ZZZZZZZZZZZZZZZZ",
+          "input": "\nTR470000100100000350930001",
           "expected_syntax": false,
           "reason": "leading_newline"
         },
         {
-          "input": "TR14111110ZZZZZZZZZZZZZZZZ!",
-          "expected_syntax": false,
-          "reason": "invalid_suffix"
-        },
-        {
-          "input": "TR14111110ZZZZZZZZZZZZZZZ",
+          "input": "TR47000010010000035093000",
           "expected_syntax": false,
           "reason": "too_short_or_missing_field"
         },
         {
-          "input": "TR14111110ZZZZZZZZZZZZZZZZ0",
+          "input": "TR4700001001000003509300010",
           "expected_syntax": false,
           "reason": "too_long"
         },
         {
-          "input": "TR1411111０ZZZZZZZZZZZZZZZZ",
+          "input": "tr470000100100000350930001",
           "expected_syntax": false,
-          "reason": "non_ascii_digit"
+          "reason": "lowercase"
+        },
+        {
+          "input": "TR47 0000 1001 0000 0350 9300 01",
+          "expected_syntax": false,
+          "reason": "print_format_requires_normalize"
         }
       ],
       "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"

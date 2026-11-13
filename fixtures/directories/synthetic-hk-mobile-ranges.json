@@ -1,0 +1,27 @@
+{
+  "schema_version": "directory-1",
+  "directory": "hk_mobile_allocation",
+  "notice_zh": "合成分配状态样例（含 handoff 关键回归号段）。完整 OFCA 当前表请由调用方自备并注入；分配记录≠当前运营商（携号转网）。",
+  "source_id": "hk.phone",
+  "source_date": "2026-10-31",
+  "ranges": [
+    {
+      "start": "40400000",
+      "end": "40409999",
+      "status": "reserved",
+      "service": "mobile"
+    },
+    {
+      "start": "40600000",
+      "end": "40609999",
+      "status": "allocated_to_operator",
+      "service": "mobile"
+    },
+    {
+      "start": "51000000",
+      "end": "51999999",
+      "status": "allocated_to_operator",
+      "service": "mobile"
+    }
+  ]
+}

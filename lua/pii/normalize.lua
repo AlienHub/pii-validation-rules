@@ -66,6 +66,25 @@ transforms.ascii_uppercase_last_char = function(value, spec, o)
   return value, false
 end
 
+-- BOC Macau self-service channel only: when the caller supplies the canonical
+-- 17-digit form that starts with "00", map to the 15-digit channel input by
+-- removing exactly those two zeros. Never expand 15→17 here (that would break
+-- syntax of the 15-digit channel rule) and never trim arbitrary leading zeros.
+transforms.mo_boc_selfservice_00_prefix_channel = function(value, spec)
+  if type(value) ~= "string" then return value, false end
+  if #value == 17 and string.sub(value, 1, 2) == "00" then
+    return string.sub(value, 3), true
+  end
+  return value, false
+end
+
+-- Explicit reverse helper for callers mapping channel input → canonical 17.
+function M.mo_boc_selfservice_to_canonical17(channel15)
+  if type(channel15) ~= "string" or #channel15 ~= 15 then return nil, "bad_length" end
+  if not string.match(channel15, "^[0-9]+$") then return nil, "bad_character" end
+  return "00" .. channel15
+end
+
 -- apply(rule, value, options) -> normalized_value, applied_transforms (array of names)
 function M.apply(rule, value, o)
   local applied = {}

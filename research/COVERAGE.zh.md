@@ -7,11 +7,17 @@
 | 规则状态 | 数量 |
 |---|---|
 | `syntax_supported` 现行官方结构（仅语法） | 72 |
-| `candidate_profile` 候选剖面 | 9 |
-| `historical_syntax` 历史格式 | 5 |
-| `dated_numbering_profile` 带年代的电话编号剖面 | 4 |
+| `official_scoped_syntax` 官方但产品/渠道限定 | 30 |
+| `processor_scoped_profile` 处理商接入剖面（默认不启用） | 3 |
+| `dated_bank_generation_profile` 银行代际/产品年代剖面 | 3 |
+| `dated_channel_profile` 渠道输入剖面 | 1 |
+| `standard_announcement_envelope` 标准公告外壳（非发卡目录） | 1 |
+| `syntax_plus_required_allocation_lookup` 语法+分配表查找（表外unknown） | 1 |
+| `candidate_profile` 候选剖面 | 11 |
+| `historical_syntax` 历史格式 | 10 |
+| `dated_numbering_profile` 带年代的电话编号剖面 | 9 |
 | `country_code_envelope_only` 仅国家区号外壳 | 39 |
-| **合计** | **129** |
+| **合计** | **180** |
 
 129 条规则中只有 `syntax_supported` 具备现行官方结构证据，且仍只是语法；其余为候选、历史、年代快照或区号外壳。
 
@@ -38,11 +44,11 @@
 
 | 辖区 | 分组 | 国民/居民身份号 | 税号 | 电话 | 护照 | 银行/IBAN |
 |---|---|---|---|---|---|---|
-| CN 中国大陆 | `core` | 部分<br>`CN.resident_id`(S ✓ck) | 部分<br>`CN.uscc`(S ✓ck) | 部分<br>`CN.phone_country_envelope`(E) | 部分<br>`CN.ordinary_passport`(S) | 未支持 |
-| TH 泰国 | `core` | 部分<br>`TH.citizen_id`(S ?ck) | 部分<br>`TH.tin_envelope`(S ?ck) | 部分<br>`TH.phone_country_envelope`(E)<br>`TH.phone_mobile_profile`(D) | 未支持 | 未支持 |
+| CN 中国大陆 | `core` | 部分<br>`CN.resident_id`(S ✓ck)<br>`CN.foreign_permanent_resident2023`(O ✓ck)<br>`CN.foreign_permanent_resident_legacy`(H)<br>`CN.hk_mainland_residence`(O ✓ck)<br>`CN.mo_mainland_residence`(O ✓ck) | 部分<br>`CN.uscc`(S ✓ck) | 部分<br>`CN.phone_country_envelope`(E) | 部分<br>`CN.ordinary_passport`(S)<br>`CN.travel_hkmo_electronic`(O) | 部分<br>`CN.pan.jrt0008_2000`(H ✓ck)<br>`CN.boc.passbook12`(Bg)<br>`CN.cnaps.routing`(O)<br>`CN.cmb.professional_legacy_card`(H) |
+| TH 泰国 | `core` | 部分<br>`TH.citizen_id`(S ?ck) | 部分<br>`TH.tin_envelope`(S ?ck) | 部分<br>`TH.phone_country_envelope`(E)<br>`TH.phone_mobile_profile`(D) | 未支持 | 部分<br>`TH.bbl.personal_deposit`(O)<br>`TH.bbl.atm_be1st`(O)<br>`TH.kbank.cdm_account`(O)<br>`TH.scb.company_add_account`(O) |
 | ID 印度尼西亚 | `core` | 部分<br>`ID.nik`(S) | 部分<br>`ID.npwp16`(S)<br>`ID.npwp15_legacy`(H) | 部分<br>`ID.phone_country_envelope`(E) | 未支持 | 未支持 |
 | MY 马来西亚 | `core` | 部分<br>`MY.nric`(S) | 部分<br>`MY.tin_individual`(C)<br>`MY.tin_individual_legacy`(H)<br>`MY.tin_entity`(C) | 部分<br>`MY.phone_country_envelope`(E)<br>`MY.phone_011_profile`(D) | 未支持 | 未支持 |
-| SG 新加坡 | `core` | 部分<br>`SG.nric`(S ?ck)<br>`SG.fin`(S ?ck) | 部分<br>`SG.iras_asgd`(S)<br>`SG.uen_rob`(S)<br>`SG.uen_roc`(S)<br>`SG.uen_others`(S)<br>`SG.foreign_company_tax_ref`(S)<br>`SG.itr`(S) | 部分<br>`SG.phone_country_envelope`(E)<br>`SG.phone_nsn_profile`(D) | 未支持 | 未支持 |
+| SG 新加坡 | `core` | 部分<br>`SG.nric`(S ?ck)<br>`SG.fin`(S ?ck) | 部分<br>`SG.iras_asgd`(S)<br>`SG.uen_rob`(S)<br>`SG.uen_roc`(S)<br>`SG.uen_others`(S)<br>`SG.foreign_company_tax_ref`(S)<br>`SG.itr`(S) | 部分<br>`SG.phone_country_envelope`(E)<br>`SG.phone_nsn_profile`(D)<br>`SG.phone.radio_network`(D)<br>`SG.phone.pstn_ipt`(D)<br>`SG.phone.ipt_ucdo`(D) | 未支持 | 部分<br>`SG.dbs.account`(O)<br>`SG.posb.account`(O)<br>`SG.hsbc.account`(O)<br>`SG.sbi.account`(O)<br>`SG.uob.account`(O)<br>`SG.standard_chartered.account`(O)<br>`SG.ocbc.full_account`(O)<br>`SG.uob.van`(O)<br>`SG.ach.bank_code`(O)<br>`SG.ach.branch_code`(O)<br>`SG.paynow.corporate_suffix`(O) |
 | TR 土耳其 | `core` | 部分<br>`TR.tckn`(S ?ck)<br>`TR.ykn`(S) | 部分<br>`TR.vkn`(S ?ck) | 部分<br>`TR.phone_country_envelope`(E)<br>`TR.phone_nsn_profile`(D) | 未支持 | 部分<br>`TR.iban`(S ✓ck) |
 | SA 沙特阿拉伯 | `middle_east` | 部分<br>`SA.national_id`(S)<br>`SA.iqama`(S) | 部分<br>`SA.tin`(S) | 部分<br>`SA.phone_country_envelope`(E) | 未支持 | 部分<br>`SA.iban`(S ✓ck) |
 | AE 阿联酋 | `middle_east` | 部分<br>`AE.emirates_id`(S) | 未支持 | 部分<br>`AE.phone_country_envelope`(E) | 未支持 | 部分<br>`AE.iban`(S ✓ck) |
@@ -61,8 +67,8 @@
 | JP 日本 | `additional_asia` | 部分<br>`JP.my_number`(S ✓ck) | 部分<br>`JP.corporate_number`(S ✓ck) | 部分<br>`JP.phone_country_envelope`(E) | 未支持 | 未支持 |
 | KR 韩国 | `additional_asia` | 部分<br>`KR.rrn`(S ~ck) | 部分<br>`KR.business_registration`(S)<br>`KR.corporation_registration`(S) | 部分<br>`KR.phone_country_envelope`(E) | 未支持 | 未支持 |
 | TW 台湾 | `additional_asia` | 部分<br>`TW.citizen_id`(S ?ck)<br>`TW.new_ui`(S ?ck)<br>`TW.old_ui`(H) | 未支持 | 部分<br>`TW.phone_country_envelope`(E) | 未支持 | 未支持 |
-| HK 香港 | `additional_asia` | 部分<br>`HK.hkid`(S ?ck) | 部分<br>`HK.business_registration`(S) | 部分<br>`HK.phone_country_envelope`(E) | 未支持 | 未支持 |
-| MO 澳门 | `additional_asia` | 未支持 | 部分<br>`MO.individual_commercial_tin`(S)<br>`MO.entity_tin`(S) | 部分<br>`MO.phone_country_envelope`(E) | 未支持 | 未支持 |
+| HK 香港 | `additional_asia` | 部分<br>`HK.hkid`(S ?ck)<br>`HK.hkid.identifier_field`(O)<br>`HK.hkid.check_field`(O) | 部分<br>`HK.business_registration`(S) | 部分<br>`HK.phone_country_envelope`(E)<br>`HK.phone.mobile_candidate`(L) | 部分<br>`HK.mainland_travel_permit`(O) | 部分<br>`HK.hsbc.full_account`(O)<br>`HK.bochk.payroll_account`(O)<br>`HK.clearing.bank_code`(C)<br>`HK.clearing.branch_code`(C)<br>`HK.fps.id`(O) |
+| MO 澳门 | `additional_asia` | 部分<br>`MO.resident_id`(O) | 部分<br>`MO.individual_commercial_tin`(S)<br>`MO.entity_tin`(S) | 部分<br>`MO.phone_country_envelope`(E)<br>`MO.phone.mobile_series`(D)<br>`MO.phone.fixed28`(D) | 部分<br>`MO.mainland_travel_permit`(O) | 部分<br>`MO.bnu.eapplication_savings`(O)<br>`MO.icbc.ebanking_main`(O)<br>`MO.boc.standard17`(Bg)<br>`MO.boc.selfservice15`(Ch)<br>`MO.boc.old12`(H)<br>`MO.boc.loan15`(Bg) |
 | IN 印度 | `additional_asia` | 部分<br>`IN.aadhaar`(S ✓ck) | 部分<br>`IN.pan`(S) | 部分<br>`IN.phone_country_envelope`(E) | 未支持 | 未支持 |
 | PK 巴基斯坦 | `additional_asia` | 部分<br>`PK.cnic`(S) | 部分<br>`PK.entity_ntn`(S) | 部分<br>`PK.phone_country_envelope`(E) | 未支持 | 部分<br>`PK.iban`(S ✓ck) |
 | BD 孟加拉国 | `additional_asia` | 未支持 | 部分<br>`BD.etin`(C) | 部分<br>`BD.phone_country_envelope`(E) | 未支持 | 未支持 |
@@ -99,18 +105,23 @@
 | `GLOBAL.payment_pan_current` | payment_card | `syntax_supported` | `luhn` (enabled) |
 | `GLOBAL.payment_pan_legacy` | payment_card | `historical_syntax` | `luhn` (enabled) |
 | `GLOBAL.icao_mrz_field` | passport_mrz_field | `syntax_supported` | not_applicable |
+| `GLOBAL.pan.iso8iin` | payment_card | `standard_announcement_envelope` | not_established |
+| `GLOBAL.pan.iso6iin.legacy` | payment_card | `historical_syntax` | not_established |
+| `GLOBAL.pan.visa.worldpay` | payment_card | `processor_scoped_profile` | `luhn` (opt_in_processor_profile) |
+| `GLOBAL.pan.mastercard.worldpay` | payment_card | `processor_scoped_profile` | `luhn` (opt_in_processor_profile) |
+| `GLOBAL.pan.amex.worldpay` | payment_card | `processor_scoped_profile` | `luhn` (opt_in_processor_profile) |
 
 ## 校验算法清单
 
 | 算法 | Lua 模块 | 证据等级 | 默认策略 | 使用规则 |
 |---|---|---|---|---|
-| `cn_resident_id_mod11_2` | `pii.checksums.east_asia` | `official` | `enabled` | `CN.resident_id` |
+| `cn_resident_id_mod11_2` | `pii.checksums.east_asia` | `official` | `enabled` | `CN.resident_id`, `CN.foreign_permanent_resident2023`, `CN.hk_mainland_residence`, `CN.mo_mainland_residence` |
 | `cn_uscc_mod31` | `pii.checksums.east_asia` | `official` | `enabled` | `CN.uscc` |
 | `th_mod11` | `pii.checksums.southeast_asia` | `official_structure_secondary_formula` | `opt_in_secondary` | `TH.citizen_id`, `TH.tin_envelope` |
 | `jp_mynumber` | `pii.checksums.east_asia` | `official` | `enabled` | `JP.my_number` |
 | `jp_corporate_number` | `pii.checksums.east_asia` | `official` | `enabled` | `JP.corporate_number` |
 | `kz_iin` | `pii.checksums.west_central_asia` | `official` | `enabled` | `KZ.iin` |
-| `luhn` | `pii.checksums.luhn` | `standard_algorithm` | `enabled` | `GLOBAL.payment_pan_current`, `GLOBAL.payment_pan_legacy`, `IL.id_tin` |
+| `luhn` | `pii.checksums.luhn` | `standard_algorithm` | `enabled` | `CN.pan.jrt0008_2000`, `GLOBAL.payment_pan_current`, `GLOBAL.payment_pan_legacy`, `GLOBAL.pan.visa.worldpay`, `GLOBAL.pan.mastercard.worldpay`, `GLOBAL.pan.amex.worldpay`, `IL.id_tin` |
 | `iban_mod97` | `pii.checksums.iban` | `official` | `enabled` | `AE.iban`, `BH.iban`, `IL.iban`, `IQ.iban`, `JO.iban`, `KW.iban`, `KZ.iban`, `LB.iban`, `MN.iban`, `OM.iban`, `PK.iban`, `PS.iban`, `QA.iban`, `SA.iban`, `TR.iban`, `YE.iban` |
 | `icao9303_check_digit` | `pii.checksums.icao9303` | `official` | `enabled` |  |
 | `verhoeff` | `pii.checksums.verhoeff` | `official_algorithm_name_secondary_tables` | `enabled` | `IN.aadhaar` |
@@ -126,11 +137,10 @@
 
 以下单元格没有任何规则。这不是“格式不存在”，而是本仓库没有取得足够的一手规范，拒绝编造严格正则。
 
-- **CN 中国大陆**：银行/IBAN。旧 15 位号、外国人证件、港澳台居住证等代际/变体不完整；逐条规则读 notes_zh。
-- **TH 泰国**：护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
+- **TH 泰国**：护照。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **ID 印度尼西亚**：护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **MY 马来西亚**：护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
-- **SG 新加坡**：护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
+- **SG 新加坡**：护照。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **TR 土耳其**：护照。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **SA 沙特阿拉伯**：护照。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **AE 阿联酋**：税号、护照。OECD 2021 年称无 CRS TIN 且 VAT 号不是 TIN；不得由此推断 2026 年没有公司税 TRN/VAT 号，需另行研究 FTA。
@@ -149,8 +159,6 @@
 - **JP 日本**：护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **KR 韩国**：护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **TW 台湾**：税号、护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
-- **HK 香港**：护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
-- **MO 澳门**：国民/居民身份号、护照、银行/IBAN。薪俸税可能使用居民身份证号，但 BIR 校验来源未审阅；商业税号 OECD 明确无检查位。
 - **IN 印度**：护照、银行/IBAN。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **PK 巴基斯坦**：护照。历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。
 - **BD 孟加拉国**：国民/居民身份号、护照、银行/IBAN。NID 10/13/17 位说法需选举委员会原始格式；TIN 不是 NID。

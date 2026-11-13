@@ -1,7 +1,7 @@
 {
  "command": "lua tests/lua/run.lua --report <path> --syntax-verdicts <path>",
  "failures": {},
- "run_at_utc": "2026-11-13T04:24:09Z",
+ "run_at_utc": "2026-11-13T13:14:17Z",
  "runtime": "LuaJIT 2.1.1703358377",
  "stage": "implementation_lua_runtime_tests",
  "suites": [
@@ -214,7 +214,7 @@
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "iban_mod97: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -226,7 +226,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 24,
+     "ms": 23,
      "name": "iban_mod97: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -250,7 +250,7 @@
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "ir_national_mod11: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -262,7 +262,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 1,
+     "ms": 2,
      "name": "ir_national_mod11: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -298,7 +298,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 1,
+     "ms": 2,
      "name": "jp_mynumber: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -340,7 +340,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "luhn: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -352,7 +352,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 2,
+     "ms": 1,
      "name": "luhn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -370,13 +370,13 @@
     },
     {
      "assertions": 5000,
-     "ms": 3,
+     "ms": 4,
      "name": "sg_nric_fin_reconstructed: every other value at the check position is rejected",
      "status": "pass"
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "th_mod11: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -406,7 +406,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 15,
+     "ms": 16,
      "name": "tr_tckn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -424,7 +424,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 2,
+     "ms": 3,
      "name": "tr_vkn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -442,7 +442,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 3,
+     "ms": 1,
      "name": "tw_citizen_new_ui: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -472,7 +472,7 @@
     }
    ],
    "failed": 0,
-   "ms": 91,
+   "ms": 92,
    "name": "reference_vectors",
    "passed": 52
   },
@@ -997,7 +997,7 @@
     },
     {
      "assertions": 1163,
-     "ms": 2,
+     "ms": 1,
      "name": "ISO 7064 / Luhn / Verhoeff schemes detect every single-character substitution",
      "status": "pass"
     },
@@ -1056,11 +1056,11 @@
    "passed": 95
   },
   {
-   "assertions": 1333,
+   "assertions": 1831,
    "cases": [
     {
-     "assertions": 129,
-     "ms": 1,
+     "assertions": 180,
+     "ms": 2,
      "name": "all rule patterns compile in the restricted subset",
      "status": "pass"
     },
@@ -1071,8 +1071,8 @@
      "status": "pass"
     },
     {
-     "assertions": 1176,
-     "ms": 1,
+     "assertions": 1623,
+     "ms": 3,
      "name": "rule examples and negative examples match the expected verdicts",
      "status": "pass"
     },
@@ -1090,13 +1090,13 @@
     },
     {
      "assertions": 1,
-     "ms": 15,
+     "ms": 26,
      "name": "differential corpus verdicts recorded for PCRE2 comparison",
      "status": "pass"
     }
    ],
    "failed": 0,
-   "ms": 25,
+   "ms": 40,
    "name": "syntax_subset",
    "passed": 6
   },
@@ -1147,7 +1147,7 @@
     }
    ],
    "failed": 0,
-   "ms": 8,
+   "ms": 12,
    "name": "normalize",
    "passed": 7
   },
@@ -1210,12 +1210,12 @@
     }
    ],
    "failed": 0,
-   "ms": 7,
+   "ms": 10,
    "name": "semantic",
    "passed": 9
   },
   {
-   "assertions": 178,
+   "assertions": 199,
    "cases": [
     {
      "assertions": 7,
@@ -1254,7 +1254,7 @@
      "status": "pass"
     },
     {
-     "assertions": 108,
+     "assertions": 129,
      "ms": 0,
      "name": "every rule with an algorithm has a policy from the known vocabulary",
      "status": "pass"
@@ -1267,7 +1267,7 @@
     }
    ],
    "failed": 0,
-   "ms": 6,
+   "ms": 11,
    "name": "policies",
    "passed": 8
   },
@@ -1816,21 +1816,21 @@
     }
    ],
    "failed": 0,
-   "ms": 9,
+   "ms": 10,
    "name": "edge_cases",
    "passed": 90
   },
   {
-   "assertions": 3935,
+   "assertions": 5405,
    "cases": [
     {
-     "assertions": 8,
+     "assertions": 10,
      "ms": 0,
      "name": "registry statistics match the documented inventory",
      "status": "pass"
     },
     {
-     "assertions": 22,
+     "assertions": 28,
      "ms": 0,
      "name": "result shape and vocabulary",
      "status": "pass"
@@ -1842,26 +1842,26 @@
      "status": "pass"
     },
     {
-     "assertions": 2159,
-     "ms": 5,
+     "assertions": 2945,
+     "ms": 8,
      "name": "every rule: positive examples pass syntax; negative examples fail",
      "status": "pass"
     },
     {
-     "assertions": 44,
+     "assertions": 50,
      "ms": 1,
      "name": "every rule: expected_checksum_arithmetic holds when all algorithms are enabled",
      "status": "pass"
     },
     {
-     "assertions": 13,
+     "assertions": 20,
      "ms": 0,
      "name": "default mode never reports checksum=fail for opt-in or regime-gated algorithms",
      "status": "pass"
     },
     {
-     "assertions": 129,
-     "ms": 1,
+     "assertions": 180,
+     "ms": 2,
      "name": "checksum_status vocabulary is respected per rule",
      "status": "pass"
     },
@@ -1872,8 +1872,8 @@
      "status": "pass"
     },
     {
-     "assertions": 1548,
-     "ms": 3,
+     "assertions": 2160,
+     "ms": 7,
      "name": "non-string and oversize inputs for every rule",
      "status": "pass"
     },
@@ -1885,17 +1885,98 @@
     }
    ],
    "failed": 0,
-   "ms": 19,
+   "ms": 27,
    "name": "api",
    "passed": 10
+  },
+  {
+   "assertions": 187,
+   "cases": [
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "TH SCB accepts 10 and 13; rejects 11",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "SG UOB VAN lengths vs ordinary 10",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "HK HSBC 10/12 reject 11; BOCHK 14",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "MO BOC generations and no global zero trim",
+     "status": "pass"
+    },
+    {
+     "assertions": 7,
+     "ms": 0,
+     "name": "TR IBAN alphanumeric BBAN, reserved 0, MOD97; ownership unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 6,
+     "ms": 0,
+     "name": "CN foreign ID checksum pass but impossible date fails semantic",
+     "status": "pass"
+    },
+    {
+     "assertions": 8,
+     "ms": 0,
+     "name": "HK/MO mainland residence and travel permit field split",
+     "status": "pass"
+    },
+    {
+     "assertions": 2,
+     "ms": 0,
+     "name": "MO BIR format only; checksum unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 4,
+     "ms": 0,
+     "name": "Worldpay MC19 opt-in processor profile",
+     "status": "pass"
+    },
+    {
+     "assertions": 8,
+     "ms": 0,
+     "name": "phone allocation: assigned/reserved/hole/VAS; unlisted unknown",
+     "status": "pass"
+    },
+    {
+     "assertions": 125,
+     "ms": 1,
+     "name": "banking algorithm fixtures via Lua checksums",
+     "status": "pass"
+    },
+    {
+     "assertions": 5,
+     "ms": 0,
+     "name": "NUL newline unicode types still fail syntax on bank rules",
+     "status": "pass"
+    }
+   ],
+   "failed": 0,
+   "ms": 11,
+   "name": "banking",
+   "passed": 12
   }
  ],
  "summary": {
-  "assertions": 89032,
-  "cases": 299,
-  "cpu_seconds": 0.17499999999999999,
+  "assertions": 91208,
+  "cases": 311,
+  "cpu_seconds": 0.224,
   "failed": 0,
-  "passed": 299,
-  "suites": 10
+  "passed": 311,
+  "suites": 11
  }
 }

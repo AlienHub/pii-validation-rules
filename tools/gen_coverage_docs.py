@@ -15,6 +15,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATUS_ZH = OrderedDict([
     ("syntax_supported", "现行官方结构（仅语法）"),
+    ("official_scoped_syntax", "官方但产品/渠道限定"),
+    ("processor_scoped_profile", "处理商接入剖面（默认不启用）"),
+    ("dated_bank_generation_profile", "银行代际/产品年代剖面"),
+    ("dated_channel_profile", "渠道输入剖面"),
+    ("standard_announcement_envelope", "标准公告外壳（非发卡目录）"),
+    ("syntax_plus_required_allocation_lookup", "语法+分配表查找（表外unknown）"),
     ("candidate_profile", "候选剖面"),
     ("historical_syntax", "历史格式"),
     ("dated_numbering_profile", "带年代的电话编号剖面"),
@@ -33,7 +39,10 @@ COV_ZH = {
     "not_implemented_not_fully_researched": "待办",
     "out_of_requested_named_scope_backlog": "范围外待办",
 }
-SHORT = {"syntax_supported": "S", "candidate_profile": "C", "historical_syntax": "H",
+SHORT = {"syntax_supported": "S", "official_scoped_syntax": "O", "processor_scoped_profile": "P",
+         "dated_bank_generation_profile": "Bg", "dated_channel_profile": "Ch",
+         "standard_announcement_envelope": "A", "syntax_plus_required_allocation_lookup": "L",
+         "candidate_profile": "C", "historical_syntax": "H",
          "dated_numbering_profile": "D", "country_code_envelope_only": "E"}
 
 

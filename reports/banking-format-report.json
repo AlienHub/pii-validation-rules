@@ -1,0 +1,12 @@
+{
+  "fixture_count": 458,
+  "unique_rules_compiled": 52,
+  "passed": true,
+  "failures": [],
+  "failure_count": 0,
+  "elapsed_seconds": 0.00244,
+  "note": "syntax-only; checksum not asserted from format fixtures",
+  "alias": {
+    "TR.iban.2021": "TR.iban"
+  }
+}

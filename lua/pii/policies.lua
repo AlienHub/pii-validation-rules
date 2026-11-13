@@ -11,6 +11,7 @@
 --   kr_rrn_regime            string   "unknown" (default) | "current_post_2020_10" | "legacy_pre_2020_10"
 --   historical_import        boolean  acknowledge historical_syntax rules (suppresses the warning)
 --   ir_reject_repeated_digits boolean default true; anti-placeholder policy for IR national code
+--   processor_profiles       table    { worldpay = true } enables opt_in_processor_profile rules
 
 local M = {}
 
@@ -26,6 +27,7 @@ M.defaults = {
   semantic = true,
   max_input_length = 128,
   reference_date = nil, -- "YYYY-MM-DD"; when nil, future-date checks are skipped
+  processor_profiles = {},
 }
 
 function M.merge(options)
@@ -35,6 +37,7 @@ function M.merge(options)
     for k, v in pairs(options) do o[k] = v end
   end
   if type(o.algorithms) ~= "table" then o.algorithms = {} end
+  if type(o.processor_profiles) ~= "table" then o.processor_profiles = {} end
   return o
 end
 
@@ -74,6 +77,14 @@ function M.decide(rule, algo, value, o)
     if regime == "legacy_pre_2020_10" then return "run" end
     if regime == "current_post_2020_10" then return "not_applicable", "current_regime_has_no_public_checksum" end
     return "skip", "issuance_regime_unknown_legacy_formula_not_applied"
+  end
+
+  if policy == "opt_in_processor_profile" then
+    if override == false then return "skip", "algorithm_disabled_by_caller" end
+    if override == true then return "run" end
+    local proc = rule.checksum and rule.checksum.processor
+    if proc and o.processor_profiles[proc] then return "run" end
+    return "skip", "processor_profile_not_enabled:" .. tostring(proc or "unspecified")
   end
 
   return "skip", "unknown_policy:" .. tostring(policy)

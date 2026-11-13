@@ -1,0 +1,2753 @@
+{
+  "classification": "synthetic format strings only; positives are NOT checksum-valid unless separately asserted",
+  "fixtures": [
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "4000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "6200000000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "4000000000\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": " 4000000000",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "4000000000\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "4000000000x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "４０００００００００",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "123456789",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso8iin",
+      "input": "11111111111111111111",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": "40000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": "4000000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": "40000000\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": " 40000000",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": "40000000\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": "40000000x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": "４０００００００",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "GLOBAL.pan.iso6iin.legacy",
+      "input": "1234567",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "4000000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "4000000000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "4000000000000000\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": " 4000000000000000",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "4000000000000000\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "4000000000000000x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "４０００００００００００００００",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "4000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "GLOBAL.pan.visa.worldpay",
+      "input": "40000000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "5100000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "2221000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "2720990000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "5100000000000000\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": " 5100000000000000",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "5100000000000000\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "5100000000000000x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "٥١００００００００００００００",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "2220990000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "2721000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "GLOBAL.pan.mastercard.worldpay",
+      "input": "5600000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": "340000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": "370000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": "340000000000000\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": " 340000000000000",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": "340000000000000\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": "340000000000000x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": "٣４０００００００００００００",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "GLOBAL.pan.amex.worldpay",
+      "input": "350000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": "9000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": "9000000000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": "9000000000000\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": " 9000000000000",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": "9000000000000\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": "9000000000000x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": "٩００００００００００００",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.pan.jrt0008_2000",
+      "input": "6200000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "0123456789",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "9876543210",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "0123456789\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": " 0123456789",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "0123456789\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "0123456789x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "０١２٣４٥６٧８٩",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "TH.bbl.personal_deposit",
+      "input": "00000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "TH.bbl.atm_be1st",
+      "input": "0000123456789012",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TH.bbl.atm_be1st",
+      "input": "9876543210987654",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TH.bbl.atm_be1st",
+      "input": "0000123456789012\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "TH.bbl.atm_be1st",
+      "input": " 0000123456789012",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "TH.bbl.atm_be1st",
+      "input": "0000123456789012\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "TH.bbl.atm_be1st",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "TH.bbl.atm_be1st",
+      "input": "0000123456789012x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "TH.bbl.atm_be1st",
+      "input": "００００١２٣４٥６٧８٩０١２",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "TH.kbank.cdm_account",
+      "input": "0012345678",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TH.kbank.cdm_account",
+      "input": "9876543210",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TH.kbank.cdm_account",
+      "input": "0012345678\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "TH.kbank.cdm_account",
+      "input": " 0012345678",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "TH.kbank.cdm_account",
+      "input": "0012345678\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "TH.kbank.cdm_account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "TH.kbank.cdm_account",
+      "input": "0012345678x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "TH.kbank.cdm_account",
+      "input": "００١２٣４٥６٧８",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "TH.scb.company_add_account",
+      "input": "0012345678",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TH.scb.company_add_account",
+      "input": "0012345678901",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TH.scb.company_add_account",
+      "input": "0012345678\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "TH.scb.company_add_account",
+      "input": " 0012345678",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "TH.scb.company_add_account",
+      "input": "0012345678\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "TH.scb.company_add_account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "TH.scb.company_add_account",
+      "input": "0012345678x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "TH.scb.company_add_account",
+      "input": "００١２٣４٥６٧８",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "TR000000100000000000000001",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "TR00000620000000000000000A",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "TR000000100000000000000001\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": " TR000000100000000000000001",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "TR000000100000000000000001\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "TR000000100000000000000001x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "TR００００００١００００００００００００００００١",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "TR000000110000000000000001",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "TR.iban.2021",
+      "input": "TR00000010000000000000000İ",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.dbs.account",
+      "input": "0123456789",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.dbs.account",
+      "input": "9999999999",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.dbs.account",
+      "input": "0123456789\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.dbs.account",
+      "input": " 0123456789",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.dbs.account",
+      "input": "0123456789\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.dbs.account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.dbs.account",
+      "input": "0123456789x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.dbs.account",
+      "input": "０١２٣４٥６٧８٩",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.posb.account",
+      "input": "012345678",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.posb.account",
+      "input": "999999999",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.posb.account",
+      "input": "012345678\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.posb.account",
+      "input": " 012345678",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.posb.account",
+      "input": "012345678\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.posb.account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.posb.account",
+      "input": "012345678x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.posb.account",
+      "input": "０١２٣４٥６٧８",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.hsbc.account",
+      "input": "012345678901",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.hsbc.account",
+      "input": "999999999999",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.hsbc.account",
+      "input": "012345678901\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.hsbc.account",
+      "input": " 012345678901",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.hsbc.account",
+      "input": "012345678901\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.hsbc.account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.hsbc.account",
+      "input": "012345678901x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.hsbc.account",
+      "input": "０١２٣４٥６٧８٩０١",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.sbi.account",
+      "input": "01234567890123",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.sbi.account",
+      "input": "99999999999999",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.sbi.account",
+      "input": "01234567890123\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.sbi.account",
+      "input": " 01234567890123",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.sbi.account",
+      "input": "01234567890123\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.sbi.account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.sbi.account",
+      "input": "01234567890123x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.sbi.account",
+      "input": "０١２٣４٥６٧８٩０١２٣",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.uob.account",
+      "input": "0123456789",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.uob.account",
+      "input": "9999999999",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.uob.account",
+      "input": "0123456789\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.uob.account",
+      "input": " 0123456789",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.uob.account",
+      "input": "0123456789\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.uob.account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.uob.account",
+      "input": "0123456789x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.uob.account",
+      "input": "０١２٣４٥６٧８٩",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.standard_chartered.account",
+      "input": "0123456789",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.standard_chartered.account",
+      "input": "9999999999",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.standard_chartered.account",
+      "input": "0123456789\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.standard_chartered.account",
+      "input": " 0123456789",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.standard_chartered.account",
+      "input": "0123456789\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.standard_chartered.account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.standard_chartered.account",
+      "input": "0123456789x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.standard_chartered.account",
+      "input": "０١２٣４٥６٧８٩",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": "0012345678",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": "001234567890",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": "0012345678\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": " 0012345678",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": "0012345678\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": "0012345678x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": "００١２٣４٥６٧８",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.ocbc.full_account",
+      "input": "00000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "1234567",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "123456789",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "123456789012",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "123456789012345678",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "1234567\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": " 1234567",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "1234567\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "1234567x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "١２٣４٥６٧",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "00000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "0000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "000000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "0000000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.uob.van",
+      "input": "0000000000000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.ach.bank_code",
+      "input": "7171",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.ach.bank_code",
+      "input": "7375",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.ach.bank_code",
+      "input": "7171\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.ach.bank_code",
+      "input": " 7171",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.ach.bank_code",
+      "input": "7171\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.ach.bank_code",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.ach.bank_code",
+      "input": "7171x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.ach.bank_code",
+      "input": "٧١٧١",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.ach.branch_code",
+      "input": "001",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.ach.branch_code",
+      "input": "081",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.ach.branch_code",
+      "input": "001\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.ach.branch_code",
+      "input": " 001",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.ach.branch_code",
+      "input": "001\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.ach.branch_code",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.ach.branch_code",
+      "input": "001x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.ach.branch_code",
+      "input": "００١",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "ABC",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "0Z9",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "ABC\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": " ABC",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "ABC\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "ABCx",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "ＡＢＣ",
+      "expect_syntax": false,
+      "kind": "non_ASCII_letters"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "AB",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "ABCD",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.paynow.corporate_suffix",
+      "input": "abc",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "0012345678",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "001234567890",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "0012345678\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": " 0012345678",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "0012345678\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "0012345678x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "００١２٣４٥６٧８",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "00000000000",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "HK.hsbc.full_account",
+      "input": "000123456833HKD",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "HK.bochk.payroll_account",
+      "input": "00123456789012",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.bochk.payroll_account",
+      "input": "98765432109876",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.bochk.payroll_account",
+      "input": "00123456789012\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.bochk.payroll_account",
+      "input": " 00123456789012",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.bochk.payroll_account",
+      "input": "00123456789012\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.bochk.payroll_account",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.bochk.payroll_account",
+      "input": "00123456789012x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.bochk.payroll_account",
+      "input": "００١２٣４٥６٧８٩０١２",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.clearing.bank_code",
+      "input": "004",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.clearing.bank_code",
+      "input": "012",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.clearing.bank_code",
+      "input": "004\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.clearing.bank_code",
+      "input": " 004",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.clearing.bank_code",
+      "input": "004\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.clearing.bank_code",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.clearing.bank_code",
+      "input": "004x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.clearing.bank_code",
+      "input": "００４",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.clearing.branch_code",
+      "input": "001",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.clearing.branch_code",
+      "input": "123",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.clearing.branch_code",
+      "input": "001\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.clearing.branch_code",
+      "input": " 001",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.clearing.branch_code",
+      "input": "001\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.clearing.branch_code",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.clearing.branch_code",
+      "input": "001x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.clearing.branch_code",
+      "input": "００١",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": "0123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": "012345678",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": "0123456\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": " 0123456",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": "0123456\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": "0123456x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": "０١２٣４٥６",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.fps.id",
+      "input": "12345678",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "MO.bnu.eapplication_savings",
+      "input": "0012345678",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.bnu.eapplication_savings",
+      "input": "9876543210",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.bnu.eapplication_savings",
+      "input": "0012345678\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.bnu.eapplication_savings",
+      "input": " 0012345678",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.bnu.eapplication_savings",
+      "input": "0012345678\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.bnu.eapplication_savings",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.bnu.eapplication_savings",
+      "input": "0012345678x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.bnu.eapplication_savings",
+      "input": "００١２٣４٥６٧８",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "MO.icbc.ebanking_main",
+      "input": "0000123456789012345",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.icbc.ebanking_main",
+      "input": "9876543210987654321",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.icbc.ebanking_main",
+      "input": "0000123456789012345\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.icbc.ebanking_main",
+      "input": " 0000123456789012345",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.icbc.ebanking_main",
+      "input": "0000123456789012345\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.icbc.ebanking_main",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.icbc.ebanking_main",
+      "input": "0000123456789012345x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.icbc.ebanking_main",
+      "input": "００００١２٣４٥６٧８٩０١２٣４٥",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "MO.boc.standard17",
+      "input": "00123456789012345",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.boc.standard17",
+      "input": "00987654321098765",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.boc.standard17",
+      "input": "00123456789012345\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.boc.standard17",
+      "input": " 00123456789012345",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.boc.standard17",
+      "input": "00123456789012345\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.boc.standard17",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.boc.standard17",
+      "input": "00123456789012345x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.boc.standard17",
+      "input": "００١２٣４٥６٧８٩０١２٣４٥",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "MO.boc.selfservice15",
+      "input": "123456789012345",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.boc.selfservice15",
+      "input": "098765432109876",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.boc.selfservice15",
+      "input": "123456789012345\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.boc.selfservice15",
+      "input": " 123456789012345",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.boc.selfservice15",
+      "input": "123456789012345\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.boc.selfservice15",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.boc.selfservice15",
+      "input": "123456789012345x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.boc.selfservice15",
+      "input": "١２٣４٥６٧８٩０١２٣４٥",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "MO.boc.old12",
+      "input": "001234567890",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.boc.old12",
+      "input": "987654321098",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.boc.old12",
+      "input": "001234567890\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.boc.old12",
+      "input": " 001234567890",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.boc.old12",
+      "input": "001234567890\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.boc.old12",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.boc.old12",
+      "input": "001234567890x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.boc.old12",
+      "input": "００١２٣４٥６٧８٩０",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "MO.boc.loan15",
+      "input": "001234567890123",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.boc.loan15",
+      "input": "987654321098765",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.boc.loan15",
+      "input": "001234567890123\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.boc.loan15",
+      "input": " 001234567890123",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.boc.loan15",
+      "input": "001234567890123\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.boc.loan15",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.boc.loan15",
+      "input": "001234567890123x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.boc.loan15",
+      "input": "００١２٣４٥６٧８٩０١２٣",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.boc.passbook12",
+      "input": "001234567890",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.boc.passbook12",
+      "input": "987654321098",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.boc.passbook12",
+      "input": "001234567890\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.boc.passbook12",
+      "input": " 001234567890",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.boc.passbook12",
+      "input": "001234567890\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.boc.passbook12",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.boc.passbook12",
+      "input": "001234567890x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.boc.passbook12",
+      "input": "００١２٣４٥６٧８٩０",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.cnaps.routing",
+      "input": "000123456789",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.cnaps.routing",
+      "input": "987654321098",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.cnaps.routing",
+      "input": "000123456789\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.cnaps.routing",
+      "input": " 000123456789",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.cnaps.routing",
+      "input": "000123456789\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.cnaps.routing",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.cnaps.routing",
+      "input": "000123456789x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.cnaps.routing",
+      "input": "０００١２٣４٥６٧８٩",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.cmb.professional_legacy_card",
+      "input": "00123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.cmb.professional_legacy_card",
+      "input": "0012345678901234",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.cmb.professional_legacy_card",
+      "input": "00123456\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.cmb.professional_legacy_card",
+      "input": " 00123456",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.cmb.professional_legacy_card",
+      "input": "00123456\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.cmb.professional_legacy_card",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.cmb.professional_legacy_card",
+      "input": "00123456x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.cmb.professional_legacy_card",
+      "input": "００١２٣４٥６",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident2023",
+      "input": "932682198501010017",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident2023",
+      "input": "91115620000229001X",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident2023",
+      "input": "932682198501010017\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident2023",
+      "input": " 932682198501010017",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident2023",
+      "input": "932682198501010017\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident2023",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident2023",
+      "input": "932682198501010017x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident2023",
+      "input": "٩٣２６８２١٩８٥０١０١００١٧",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident_legacy",
+      "input": "ZZZ110090123105",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident_legacy",
+      "input": "AAA000000000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident_legacy",
+      "input": "ZZZ110090123105\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident_legacy",
+      "input": " ZZZ110090123105",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident_legacy",
+      "input": "ZZZ110090123105\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident_legacy",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident_legacy",
+      "input": "ZZZ110090123105x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.foreign_permanent_resident_legacy",
+      "input": "ZZZ١١００٩０١２٣١０٥",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.hk_mainland_residence",
+      "input": "81000019850101001X",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.hk_mainland_residence",
+      "input": "810000200002290010",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.hk_mainland_residence",
+      "input": "81000019850101001X\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.hk_mainland_residence",
+      "input": " 81000019850101001X",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.hk_mainland_residence",
+      "input": "81000019850101001X\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.hk_mainland_residence",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.hk_mainland_residence",
+      "input": "81000019850101001Xx",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.hk_mainland_residence",
+      "input": "８١００００١٩８٥０١０١００١X",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.mo_mainland_residence",
+      "input": "82000019850101001X",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.mo_mainland_residence",
+      "input": "820000200002290010",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.mo_mainland_residence",
+      "input": "82000019850101001X\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.mo_mainland_residence",
+      "input": " 82000019850101001X",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.mo_mainland_residence",
+      "input": "82000019850101001X\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.mo_mainland_residence",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.mo_mainland_residence",
+      "input": "82000019850101001Xx",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.mo_mainland_residence",
+      "input": "８２００００١٩８٥０١０١００١X",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "C00012345",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "CA0123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "C00012345\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": " C00012345",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "C00012345\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "C00012345x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "C０００١２٣４٥",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "CI0123456",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "CN.travel_hkmo_electronic",
+      "input": "CO0123456",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": "H00012345",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": "H98765432",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": "H00012345\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": " H00012345",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": "H00012345\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": "H00012345x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": "H０００١２٣４٥",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.mainland_travel_permit",
+      "input": "H0001234501",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": "M00012345",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": "M98765432",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": "M00012345\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": " M00012345",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": "M00012345\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": "M00012345x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": "M０００١２٣４٥",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "MO.mainland_travel_permit",
+      "input": "M0001234501",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": "10000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": "50000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": "70000000",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": "10000000\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": " 10000000",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": "10000000\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": "10000000x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.resident_id",
+      "input": "١０００００００",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.hkid.identifier_field",
+      "input": "A000123",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.hkid.identifier_field",
+      "input": "AB000123",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.hkid.identifier_field",
+      "input": "A000123\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.hkid.identifier_field",
+      "input": " A000123",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.hkid.identifier_field",
+      "input": "A000123\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.hkid.identifier_field",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.hkid.identifier_field",
+      "input": "A000123x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.hkid.identifier_field",
+      "input": "A０００١２٣",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": "0",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": "A",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": "9",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": "0\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": " 0",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": "0\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": "0x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.hkid.check_field",
+      "input": "０",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "+6580123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "+6598123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "+6580123456\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": " +6580123456",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "+6580123456\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "+6580123456x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "+６٥８０١２٣４٥６",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "+6599123456",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.phone.radio_network",
+      "input": "+6561234567",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "SG.phone.pstn_ipt",
+      "input": "+6561234567",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.phone.pstn_ipt",
+      "input": "+6569876543",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.phone.pstn_ipt",
+      "input": "+6561234567\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.phone.pstn_ipt",
+      "input": " +6561234567",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.phone.pstn_ipt",
+      "input": "+6561234567\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.phone.pstn_ipt",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.phone.pstn_ipt",
+      "input": "+6561234567x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.phone.pstn_ipt",
+      "input": "+６٥６١２٣４٥６٧",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "SG.phone.ipt_ucdo",
+      "input": "+6531234567",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.phone.ipt_ucdo",
+      "input": "+6539876543",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "SG.phone.ipt_ucdo",
+      "input": "+6531234567\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "SG.phone.ipt_ucdo",
+      "input": " +6531234567",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "SG.phone.ipt_ucdo",
+      "input": "+6531234567\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "SG.phone.ipt_ucdo",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "SG.phone.ipt_ucdo",
+      "input": "+6531234567x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "SG.phone.ipt_ucdo",
+      "input": "+６٥٣١２٣４٥６٧",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85362123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85365123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85368123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85362123456\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": " +85362123456",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85362123456\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85362123456x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+８٥٣６２١２٣４٥６",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85364123456",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85367123456",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "MO.phone.mobile_series",
+      "input": "+85369123456",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    },
+    {
+      "rule_id": "MO.phone.fixed28",
+      "input": "+85328123456",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.phone.fixed28",
+      "input": "+85328987654",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "MO.phone.fixed28",
+      "input": "+85328123456\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "MO.phone.fixed28",
+      "input": " +85328123456",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "MO.phone.fixed28",
+      "input": "+85328123456\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "MO.phone.fixed28",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "MO.phone.fixed28",
+      "input": "+85328123456x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "MO.phone.fixed28",
+      "input": "+８٥٣２８١２٣４٥６",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": "+85240601234",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": "+85291234567",
+      "expect_syntax": true,
+      "kind": "synthetic_format_only"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": "+85240601234\n",
+      "expect_syntax": false,
+      "kind": "strict_end"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": " +85240601234",
+      "expect_syntax": false,
+      "kind": "leading_space"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": "+85240601234\u0000",
+      "expect_syntax": false,
+      "kind": "NUL"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": "",
+      "expect_syntax": false,
+      "kind": "empty"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": "+85240601234x",
+      "expect_syntax": false,
+      "kind": "extra_character"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": "+８٥２４０６０١２٣４",
+      "expect_syntax": false,
+      "kind": "non_ASCII_digits"
+    },
+    {
+      "rule_id": "HK.phone.mobile_candidate",
+      "input": "+85221234567",
+      "expect_syntax": false,
+      "kind": "field_boundary"
+    }
+  ]
+}

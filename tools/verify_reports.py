@@ -25,6 +25,8 @@ COUNT_KEYS = {
     "lua-vs-pcre2-differential-*.json": ["summary.rules", "summary.inputs_compared", "summary.agree_match",
                                          "summary.agree_nomatch", "summary.disagreements", "summary.missing"],
     "coverage-summary.json": ["regex_rules_total", "checksum_algorithms_total", "jurisdictions_named", "jurisdictions_inventory_total"],
+    "banking-format-report.json": ["fixture_count", "unique_rules_compiled", "failure_count", "passed"],
+    "banking-algorithm-report.json": ["fixture_count", "failure_count", "passed"],
 }
 
 

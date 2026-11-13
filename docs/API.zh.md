@@ -24,8 +24,11 @@ pii.load("rules")        -- 可选；默认读取 ./rules（相对当前工作�
 | `syntax` | `pass` / `fail`。失败时 `syntax_error` ∈ `not_a_string`、`input_too_long`、`control_character`（含 NUL、换行）、`format_control_character`（U+200B–200F、U+202A–202E、U+2060–2064、U+FEFF）、`non_ascii_character`、`pattern_mismatch` |
 | `checksum` | `pass` / `fail` / `unknown` / `not_applicable` / `not_evaluated`；`checksum_status` 为规则声明（`algorithm_available`、`not_established`、`none_per_source`、`not_applicable`）；`checksum_algorithm`、`checksum_evidence`、`checksum_policy`、`checksum_reason` 说明算法、证据等级、策略和未运行/失败原因 |
 | `semantic` | 同上词汇；`semantic_details` 列出实际执行的每项检查及结果（如 `birth_date_gregorian = "pass"`, `region_code = "unknown"`） |
+| `registry` | 离线目录成员资格：`pass`（命中已注入目录行）/ `unknown`（无目录或未命中）。**不是**线上清算成员证明 |
+| `ownership` | 恒为 `"unknown"`（开户存在、别名注册、姓名匹配永不执行） |
 | `issuer_verification` | 恒为 `"unknown"`；本库永远不做发证核验 |
-| `summary` | `pass`（所有可运行层通过或不适用）、`pass_with_unknowns`、`fail`。**不是“有效”** |
+| `issuer_scope` / `rule_role` / `validation_scope` | 产品/渠道范围元数据；`rule_role` ∈ `full_identifier`、`component`、`routing`、`processor_profile`、`channel_input` 等 |
+| `summary` | `pass`（syntax/checksum/semantic 可运行层通过或不适用）、`pass_with_unknowns`、`fail`。**不是“有效”**；ownership/registry 的 unknown 不单独改写既有 summary 语义 |
 | `warnings` | 字符串数组：规则状态提醒（`rule_status:*`）、证据提醒（`checksum:evidence_*`）、语义层未核验项（`semantic:*`） |
 | `transformations`, `normalized_value` | 仅 `options.normalize = true` 且实际发生变换时出现 |
 | `input_type` | `"string"` 或原始类型名 |
@@ -47,6 +50,7 @@ pii.load("rules")        -- 可选；默认读取 ./rules（相对当前工作�
 | `semantic` | `true` | 置 `false` 跳过语义层（`not_evaluated`） |
 | `reference_date` | `nil` | `"YYYY-MM-DD"`；提供后 CN/KR 出生日期晚于该日 → 语义失败；不提供则不检查未来日期 |
 | `max_input_length` | `128` | 字节长度上限 |
+| `processor_profiles` | `{}` | 如 `{ worldpay = true }`：启用 `opt_in_processor_profile` 规则的校验码 |
 
 ## 归一化 `pii.normalize(rule_id, value, options) -> normalized, transformations`
 

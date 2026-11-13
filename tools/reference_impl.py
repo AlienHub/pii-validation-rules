@@ -114,9 +114,15 @@ def iban_check_digits(cc: str, bban: str) -> str:
 def iban_random_bban(cc: str, rng: random.Random) -> str:
     import re
     out = []
-    for cls, n in re.findall(r"([nac])(\d+)", IBAN_LAYOUT[cc][1]):
+    segments = re.findall(r"([nac])(\d+)", IBAN_LAYOUT[cc][1])
+    for i, (cls, n) in enumerate(segments):
+        n = int(n)
+        # TCMB 2021: TR reserved national field (BBAN index after 5-digit PSP) is 0.
+        if cc == "TR" and i == 1 and n == 1:
+            out.append("0")
+            continue
         pool = {"n": string.digits, "a": string.ascii_uppercase, "c": string.digits + string.ascii_uppercase}[cls]
-        out.append("".join(rng.choice(pool) for _ in range(int(n))))
+        out.append("".join(rng.choice(pool) for _ in range(n)))
     return "".join(out)
 
 

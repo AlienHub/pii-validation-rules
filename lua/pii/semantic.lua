@@ -4,6 +4,8 @@
 -- anything the repository could not verify (region tables, issuance, century)
 -- is reported as "unknown" in the details and as a warning, never as pass.
 
+local directories = require("pii.directories")
+
 local M = {}
 
 -- ------------------------------------------------------------------ calendar helpers
@@ -126,6 +128,87 @@ checks["IR.national_code"] = function(value, o, details, warnings)
   end
   local first = string.sub(value, 1, 1)
   details.repeated_digits_placeholder = (string.rep(first, #value) == value) and "fail" or "pass"
+end
+
+local function cn_mod11_layout_date(value, o, details, warnings, label)
+  local y, m, d = num(value, 7, 10), num(value, 11, 12), num(value, 13, 14)
+  local ok = M.valid_date(y, m, d)
+  details.birth_date_gregorian = ok and "pass" or "fail"
+  if ok and o.reference_date then
+    local ry, rm, rd = M.parse_iso_date(o.reference_date)
+    if ry then
+      details.not_after_reference_date = after(y, m, d, ry, rm, rd) and "fail" or "pass"
+    end
+  end
+  details[label or "region_or_country_code"] = "unknown"
+  warnings[#warnings + 1] = "semantic:embedded_codes_not_verified_against_allocation_table"
+end
+
+checks["CN.foreign_permanent_resident2023"] = function(value, o, details, warnings)
+  cn_mod11_layout_date(value, o, details, warnings, "reception_and_country_codes")
+end
+
+checks["CN.hk_mainland_residence"] = function(value, o, details, warnings)
+  cn_mod11_layout_date(value, o, details, warnings, "address_code_810000")
+end
+
+checks["CN.mo_mainland_residence"] = function(value, o, details, warnings)
+  cn_mod11_layout_date(value, o, details, warnings, "address_code_820000")
+end
+
+checks["SG.uob.account"] = function(value, o, details, warnings)
+  local prefix = string.sub(value, 1, 3)
+  local st, detail = directories.lookup("sg_uob_prefix_branch", prefix)
+  details.uob_prefix_branch_directory = st
+  details.uob_prefix = prefix
+  if st == "pass" then
+    details.uob_mapped_branch = detail.branch
+  end
+  warnings[#warnings + 1] = "semantic:uob_prefix_is_lookup_key_not_necessarily_branch"
+  warnings[#warnings + 1] = "semantic:full_uob_appendix_not_bundled_inject_directory_or_unknown"
+end
+
+checks["HK.phone.mobile_candidate"] = function(value, o, details, warnings)
+  -- Accept national 8-digit or +852 prefixed forms already reduced by caller.
+  local national = value
+  if string.sub(value, 1, 4) == "+852" then national = string.sub(value, 5) end
+  local st, detail = directories.lookup("hk_mobile_allocation", national)
+  details.hk_mobile_allocation = st
+  if st == "pass" then
+    details.allocation_status = detail.status
+    details.allocation_service = detail.service or "unknown"
+    -- Reserved / spare are still "in directory"; hard-fail only if caller asks.
+    if detail.status == "reserved" or detail.status == "spare" then
+      details.allocation_usable = "unknown"
+      warnings[#warnings + 1] = "semantic:allocation_row_reserved_or_spare_not_proof_of_invalid"
+    else
+      details.allocation_usable = "pass"
+    end
+  else
+    details.allocation_usable = "unknown"
+  end
+  warnings[#warnings + 1] = "semantic:allocation_snapshot_not_current_carrier_due_to_portability"
+end
+
+checks["MO.phone.mobile_series"] = function(value, o, details, warnings)
+  local national = value
+  if string.sub(value, 1, 4) == "+853" then national = string.sub(value, 5) end
+  local st, detail = directories.lookup("mo_mobile_allocation", national)
+  details.mo_mobile_allocation = st
+  if st == "pass" then
+    details.allocation_status = detail.status
+    details.allocation_service = detail.service or "unknown"
+  end
+  warnings[#warnings + 1] = "semantic:unlisted_number_is_unknown_not_fail"
+  warnings[#warnings + 1] = "semantic:allocation_snapshot_not_current_carrier_due_to_portability"
+end
+
+checks["TR.iban"] = function(value, o, details, warnings)
+  details.reserved_national_field_zero = (string.sub(value, 10, 10) == "0") and "pass" or "fail"
+  details.psp_code = string.sub(value, 5, 9)
+  details.psp_directory_membership = "unknown"
+  warnings[#warnings + 1] = "semantic:psp_directory_not_bundled_membership_unknown"
+  warnings[#warnings + 1] = "semantic:native_bank_account_not_derived_from_iban_padding"
 end
 
 M.checks = checks

@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "GLOBAL",
   "name_zh": "全球/国际统一类型",
   "scope_group": "international",
@@ -210,6 +210,440 @@
         }
       ],
       "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "GLOBAL.pan.iso8iin",
+      "pii_type": "payment_card",
+      "status": "standard_announcement_envelope",
+      "regex_pcre2": "\\A(?:[0-9]{10,19})\\z",
+      "python_fullmatch_body": "[0-9]{10,19}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=ISO eight-digit-IIN framework；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=standard_announcement_envelope",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "pan.iso",
+        "pan.visa"
+      ],
+      "source_urls": [
+        "https://www.iso.org/news/2016/11/Ref2146.html",
+        "https://www.visa.com/en-us/business/support/numerics-initiative"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "4000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "6200000000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "4000000000\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 4000000000",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "4000000000\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "4000000000x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "４０００００００００",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "123456789",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "11111111111111111111",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "ISO eight-digit-IIN framework",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "pan.iso": "2016-11-21",
+        "pan.visa": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "GLOBAL.pan.iso6iin.legacy",
+      "pii_type": "payment_card",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{8,19})\\z",
+      "python_fullmatch_body": "[0-9]{8,19}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=legacy ISO six-digit-IIN framework；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=historical_compatibility",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "pan.iso"
+      ],
+      "source_urls": [
+        "https://www.iso.org/news/2016/11/Ref2146.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "40000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "4000000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "40000000\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 40000000",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "40000000\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "40000000x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "４０００００００",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "1234567",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "legacy ISO six-digit-IIN framework",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "pan.iso": "2016-11-21"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "GLOBAL.pan.visa.worldpay",
+      "pii_type": "payment_card",
+      "status": "processor_scoped_profile",
+      "regex_pcre2": "\\A(?:4(?:[0-9]{15}|[0-9]{18}))\\z",
+      "python_fullmatch_body": "4(?:[0-9]{15}|[0-9]{18})",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "luhn",
+        "evidence": "primary_payment_processor",
+        "policy": "opt_in_processor_profile",
+        "processor": "worldpay"
+      },
+      "notes_zh": "issuer_scope=Worldpay cnpAPI Visa acceptance profile；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=processor_scoped_profile；processor_scoped_profile：默认不启用；需 options.processor_profiles.worldpay=true 或 options.algorithms.luhn 在本规则策略下显式打开。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "pan.worldpay",
+        "pan.luhn"
+      ],
+      "source_urls": [
+        "https://docs.worldpay.com/apis/cnpapi/creditcardnumberformats",
+        "https://docs.worldpay.com/apis/cnpapi/creditcardnumberformats"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "4000000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "4000000000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "4000000000000000\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 4000000000000000",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "4000000000000000\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "4000000000000000x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "４０００００００００００００００",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "4000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "40000000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Worldpay cnpAPI Visa acceptance profile",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "pan.worldpay": null,
+        "pan.luhn": null
+      },
+      "rule_role": "processor_profile"
+    },
+    {
+      "id": "GLOBAL.pan.mastercard.worldpay",
+      "pii_type": "payment_card",
+      "status": "processor_scoped_profile",
+      "regex_pcre2": "\\A(?:(?:5[1-5][0-9]{4}|222[1-9][0-9]{2}|22[3-9][0-9]{3}|2[3-6][0-9]{4}|27[01][0-9]{3}|2720[0-9]{2})(?:[0-9]{10}|[0-9]{13}))\\z",
+      "python_fullmatch_body": "(?:5[1-5][0-9]{4}|222[1-9][0-9]{2}|22[3-9][0-9]{3}|2[3-6][0-9]{4}|27[01][0-9]{3}|2720[0-9]{2})(?:[0-9]{10}|[0-9]{13})",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "luhn",
+        "evidence": "primary_payment_processor",
+        "policy": "opt_in_processor_profile",
+        "processor": "worldpay"
+      },
+      "notes_zh": "issuer_scope=Worldpay cnpAPI Mastercard profile；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=processor_scoped_profile；processor_scoped_profile：默认不启用；需 options.processor_profiles.worldpay=true 或 options.algorithms.luhn 在本规则策略下显式打开。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "pan.worldpay",
+        "pan.luhn"
+      ],
+      "source_urls": [
+        "https://docs.worldpay.com/apis/cnpapi/creditcardnumberformats",
+        "https://docs.worldpay.com/apis/cnpapi/creditcardnumberformats"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "5100000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "2221000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "2720990000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "5100000000000000\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 5100000000000000",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "5100000000000000\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "5100000000000000x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "٥١００００００００００００００",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "2220990000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "2721000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "5600000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Worldpay cnpAPI Mastercard profile",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "pan.worldpay": null,
+        "pan.luhn": null
+      },
+      "rule_role": "processor_profile"
+    },
+    {
+      "id": "GLOBAL.pan.amex.worldpay",
+      "pii_type": "payment_card",
+      "status": "processor_scoped_profile",
+      "regex_pcre2": "\\A(?:3[47][0-9]{13})\\z",
+      "python_fullmatch_body": "3[47][0-9]{13}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "luhn",
+        "evidence": "primary_payment_processor",
+        "policy": "opt_in_processor_profile",
+        "processor": "worldpay"
+      },
+      "notes_zh": "issuer_scope=Worldpay cnpAPI American Express profile；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=processor_scoped_profile；processor_scoped_profile：默认不启用；需 options.processor_profiles.worldpay=true 或 options.algorithms.luhn 在本规则策略下显式打开。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "pan.worldpay",
+        "pan.luhn"
+      ],
+      "source_urls": [
+        "https://docs.worldpay.com/apis/cnpapi/creditcardnumberformats",
+        "https://docs.worldpay.com/apis/cnpapi/creditcardnumberformats"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "340000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "370000000000000",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "340000000000000\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 340000000000000",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "340000000000000\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "340000000000000x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "٣４０００００００００００００",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "350000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Worldpay cnpAPI American Express profile",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "pan.worldpay": null,
+        "pan.luhn": null
+      },
+      "rule_role": "processor_profile"
     }
   ]
 }

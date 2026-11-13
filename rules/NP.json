@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "NP",
   "name_zh": "尼泊尔",
   "scope_group": "additional_asia",

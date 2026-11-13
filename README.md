@@ -15,11 +15,15 @@ English summary: [docs/README.en.md](docs/README.en.md)
 | 正则规则状态 | 数量 | 含义 |
 |---|---|---|
 | `syntax_supported` | 72 | 有**现行官方结构**证据，但只覆盖语法；并非所有限制都写进正则 |
-| `candidate_profile` | 9 | 候选剖面：证据不足以作为权威硬拒绝（MY 税号、LK/NP/BD/MN、IR） |
-| `historical_syntax` | 5 | 历史格式：仅历史数据导入模式有意义（ID 旧 NPWP、MY SG/OG、TW 旧式 UI、LA 2007 税号、旧 PAN 长度） |
-| `dated_numbering_profile` | 4 | 带资料年代的电话编号剖面（SG 2019、TH 2024、MY 2010、TR 2018），不是 2026 年分配库 |
+| `official_scoped_syntax` | 30 | 官方但**产品/渠道限定**（银行账户、别名、部分证件） |
+| `processor_scoped_profile` | 3 | Worldpay 等处理商接入；默认不启用 |
+| `dated_bank_generation_profile` / `dated_channel_profile` | 3+1 | 银行代际/渠道输入（如澳中银 17/15） |
+| `standard_announcement_envelope` / `syntax_plus_required_allocation_lookup` | 1+1 | ISO PAN 外壳；HK 手机需分配表 |
+| `candidate_profile` | 11 | 候选剖面（含未核验 HK 清算码） |
+| `historical_syntax` | 10 | 历史格式（含旧永居/旧卡/旧账号代际） |
+| `dated_numbering_profile` | 9 | 带资料年代的电话编号剖面 |
 | `country_code_envelope_only` | 39 | **仅“+国家区号 + 最多 15 位数字”外壳**，不是手机号验证器 |
-| 合计 | 129 | **不得宣传为 129 条官方完整 PII 验证** |
+| 合计 | **180** | **不得宣传为 180 条官方完整 PII 验证**；其中约 9 条为组件/路由（`rule_role`），不单计为完整 PII 类型 |
 
 | 校验算法 | 数量 | 默认策略 |
 |---|---|---|
@@ -36,7 +40,19 @@ English summary: [docs/README.en.md](docs/README.en.md)
 | 地理边界条目（EG），范围外待办 | 1 |
 | 清单合计 | 53 |
 
-39 个指定辖区 + 14 个待办**不是**“全亚洲覆盖”。护照仅中国普通护照有规则；38 个指定辖区的护照、23 个辖区的国内银行账号、多个中东国家的身份证/税号均为 **`unsupported_insufficient_primary_spec`**（未取得足够一手规范，不编造正则；这不证明格式不存在）。逐格矩阵见 [`research/COVERAGE.zh.md`](research/COVERAGE.zh.md)。
+39 个指定辖区 + 14 个待办**不是**“全亚洲覆盖”。护照仍非穷尽；多家大行国内账号仍为 **`unsupported_insufficient_primary_spec`**（见银行矩阵）。逐格矩阵见 [`research/COVERAGE.zh.md`](research/COVERAGE.zh.md)；六地银行逐产品表见 [`research/banking-2026-11/coverage-by-country-bank.csv`](research/banking-2026-11/coverage-by-country-bank.csv)。
+
+### 六地银行 / 证件增量清单（摘要）
+
+| 辖区 | 本轮银行相关规则 | 其他高价值增量 | 仍明确不做 |
+|---|---|---|---|
+| TH | BBL 存款10 / ATM卡16；KBank CDM10；SCB 公司添加账户 **10或13** | — | Krungthai/Krungsri/ttb 等无一手长度；不伪造更严手机号 |
+| TR | `TR.iban`：26 位、保留位0、末16字母数字、MOD97、PSP 可非银行 | — | 各行 native 账号长度；YKN≠TCKN |
+| SG | DBS10、POSB9、OCBC10\|12、UOB10、UOB VAN 变长、HSBC12、SBI14、渣打、ACH 行/分行码、PayNow 后缀组件 | 电话 radio/PSTN/IPT 分系列 | 完整 UOB Appendix A 不打包；旧昵称≠归属 |
+| CN | 中行存折12限定、CNAPS12路由、招行历史一卡通、JR/T0008 历史 PAN | 2023 五星卡、旧永居兼容、港澳居住证、C 系列往来港澳通行证 | **无全国账号长度**；物联网号段附件未取 |
+| HK | HSBC **10或12**、BOCHK 工资14、FPS ID 7\|9、清算行/分行候选 | 回乡证 H 本体；HKID 字段拆分组件；手机分配查找 | 清算目录正文未核验；完整 OFCA 表自备注入 |
+| MO | BNU10、ICBC 网银19、中银17/15渠道/15贷款/12旧 | 回乡证 M 本体；BIR 仅结构；手机系列+分配查找 | 澳门 FPS ID；BIR 校验公式不发明 |
+| GLOBAL | ISO6/8 外壳；Worldpay Visa/MC/Amex（opt-in） | — | 无全球 BIN 库；MC19 非卡组织全产品权威 |
 
 ## 2. 仓库结构
 
@@ -52,21 +68,23 @@ research/CHANGE-NOTES.zh.md       实现阶段对研究交接包的修订与理�
 research/COVERAGE.zh.md           覆盖矩阵（自动生成）
 research/coverage.json            逐辖区、逐类型状态（含明确未支持项）
 research/sources.json             86 条来源：URL、查阅日期、质量、读取方式、局限
-rules/<辖区>.json                  39 个辖区 + GLOBAL，共 129 条规则（PCRE2 正则、状态、校验、来源、样本、归一化）
+rules/<辖区>.json                  39 个辖区 + GLOBAL，共 180 条规则（PCRE2 正则、状态、校验、来源、样本、归一化）
 rules/algorithms.json             17 个校验算法规格（步骤、参数、证据、默认策略）
-lua/pii/init.lua                  pii.validate / pii.normalize / pii.rules
+lua/pii/init.lua                  pii.validate / pii.normalize / pii.rules（syntax/checksum/semantic/registry/ownership）
 lua/pii/syntax.lua                受限正则子集匹配器（字节级，全串）
 lua/pii/checksums/                luhn、verhoeff、iban、icao9303、east_asia、southeast_asia、west_central_asia
-lua/pii/policies.lua              证据等级 → 是否运行算法
-lua/pii/normalize.lua             显式展示归一化（仅字段特定分隔符）
-lua/pii/semantic.lua              日期/世纪/占位符等语义层
+lua/pii/policies.lua              证据等级 → 是否运行算法（含 processor_profiles）
+lua/pii/directories.lua           可注入离线目录（UOB 前缀、HK/MO 号段）；缺表→unknown
+lua/pii/normalize.lua             显式展示归一化（仅字段特定分隔符；澳中银渠道 00 映射）
+lua/pii/semantic.lua              日期/世纪/占位符/目录查找等语义层
 lua/pii/json.lua                  纯 Lua JSON（加载规则与夹具、写报告）
-fixtures/                         合成/官方说明性样本、参考向量、边界用例、差分语料
-tests/pcre2/                      原生 PCRE2（ctypes）+ pcre2test CLI + Python re 对照
-tests/lua/                        Lua 测试运行器与 10 个套件
-tools/                            参考实现、夹具生成、规则 lint、覆盖文档、报告汇总
+fixtures/                         合成/官方说明性样本、参考向量、边界用例、差分语料、banking 458+62、合成目录
+research/banking-2026-11/         银行深度调研实现笔记与银行矩阵 CSV
+tests/pcre2/                      原生 PCRE2（ctypes）+ pcre2test CLI + banking 夹具 + Python re 对照
+tests/lua/                        Lua 测试运行器与 11 个套件（含 suite_banking）
+tools/                            参考实现、夹具生成、规则 lint、覆盖文档、报告汇总、banking 导入器
 reports/                          已提交的机器可读测试报告与 SUMMARY.md
-.github/workflows/ci.yml          CI：lint → PCRE2 → Lua(5.4/5.1/LuaJIT) → 差分 → 覆盖/报告漂移检查
+.github/workflows/ci.yml          CI：lint → PCRE2 → banking → Lua(5.4/5.1/LuaJIT) → 差分 → 覆盖/报告漂移检查
 Makefile                          make test / make reports / make fixtures
 ```
 

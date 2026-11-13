@@ -19,10 +19,14 @@
       "coverage": {
         "national_resident_id": {
           "rule_ids": [
-            "CN.resident_id"
+            "CN.resident_id",
+            "CN.foreign_permanent_resident2023",
+            "CN.foreign_permanent_resident_legacy",
+            "CN.hk_mainland_residence",
+            "CN.mo_mainland_residence"
           ],
           "status": "researched_partial",
-          "limit_zh": "不做发证存在性/归属核验。"
+          "limit_zh": "含永居证/居住证等；不做发证存在性/归属核验。"
         },
         "tax": {
           "rule_ids": [
@@ -40,19 +44,25 @@
         },
         "passport": {
           "rule_ids": [
-            "CN.ordinary_passport"
+            "CN.ordinary_passport",
+            "CN.travel_hkmo_electronic"
           ],
           "status": "researched_partial",
-          "limit_zh": "不做发证存在性/归属核验。"
+          "limit_zh": "通行证/回乡证本体规则；换证次数等后缀是独立组件；不做发证核验。"
         },
         "bank": {
-          "rule_ids": [],
-          "status": "unsupported_insufficient_primary_spec",
-          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+          "rule_ids": [
+            "CN.pan.jrt0008_2000",
+            "CN.boc.passbook12",
+            "CN.cnaps.routing",
+            "CN.cmb.professional_legacy_card"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "银行规则均为产品/渠道/代际限定 profile，不是国家级通用账号长度；目录成员资格与开户归属均为 unknown。"
         }
       },
-      "notes_zh": "旧 15 位号、外国人证件、港澳台居住证等代际/变体不完整；逐条规则读 notes_zh。",
-      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+      "notes_zh": "已增加2023外国人永居证/旧永居兼容、港澳居民内地居住证、电子往来港澳通行证、中行存折12位限定profile、CNAPS路由、招行历史一卡通接口；不存在全国统一国内账号长度规则。",
+      "domestic_bank_account_policy_zh": "国内银行账号：仅产品/渠道/代际限定 profile；禁止全国16/19位一刀切；PAN≠存款账号；CNAPS≠个人账号。"
     },
     {
       "jurisdiction": "TH",
@@ -88,13 +98,18 @@
           "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
         },
         "bank": {
-          "rule_ids": [],
-          "status": "unsupported_insufficient_primary_spec",
-          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+          "rule_ids": [
+            "TH.bbl.personal_deposit",
+            "TH.bbl.atm_be1st",
+            "TH.kbank.cdm_account",
+            "TH.scb.company_add_account"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "银行规则均为产品/渠道/代际限定 profile，不是国家级通用账号长度；目录成员资格与开户归属均为 unknown。"
         }
       },
       "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
-      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+      "domestic_bank_account_policy_zh": "泰国：BBL 10位存款 vs 16位ATM卡；KBank CDM 10位渠道；SCB公司管理员手册10或13位；Krungthai/Krungsri/ttb等仍 unsupported。"
     },
     {
       "jurisdiction": "ID",
@@ -211,10 +226,13 @@
         "phone": {
           "rule_ids": [
             "SG.phone_country_envelope",
-            "SG.phone_nsn_profile"
+            "SG.phone_nsn_profile",
+            "SG.phone.radio_network",
+            "SG.phone.pstn_ipt",
+            "SG.phone.ipt_ucdo"
           ],
           "status": "researched_partial",
-          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+          "limit_zh": "带年代的编号/分配快照；携号转网后分配记录不等于当前运营商；表外返回 unknown，不证明无效。"
         },
         "passport": {
           "rule_ids": [],
@@ -222,13 +240,25 @@
           "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
         },
         "bank": {
-          "rule_ids": [],
-          "status": "unsupported_insufficient_primary_spec",
-          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+          "rule_ids": [
+            "SG.dbs.account",
+            "SG.posb.account",
+            "SG.hsbc.account",
+            "SG.sbi.account",
+            "SG.uob.account",
+            "SG.standard_chartered.account",
+            "SG.ocbc.full_account",
+            "SG.uob.van",
+            "SG.ach.bank_code",
+            "SG.ach.branch_code",
+            "SG.paynow.corporate_suffix"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "银行规则均为产品/渠道/代际限定 profile，不是国家级通用账号长度；目录成员资格与开户归属均为 unknown。"
         }
       },
       "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
-      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+      "domestic_bank_account_policy_zh": "新加坡：DBS10/POSB9/OCBC10|12/UOB普通10/VAN变长/HSBC12/SBI14/渣打等产品限定；旧IBG与FAST分行处理不得混用；UOB前3位为查表键非直接分行码。"
     },
     {
       "jurisdiction": "TR",
@@ -273,7 +303,7 @@
         }
       },
       "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
-      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+      "domestic_bank_account_policy_zh": "土耳其：正式IBAN为26位且账户域字母数字；原生各银行账号长度仍未取得完整一手规范；KOLAS为别名不是通用账号格式。"
     },
     {
       "jurisdiction": "SA",
@@ -971,10 +1001,12 @@
       "coverage": {
         "national_resident_id": {
           "rule_ids": [
-            "HK.hkid"
+            "HK.hkid",
+            "HK.hkid.identifier_field",
+            "HK.hkid.check_field"
           ],
           "status": "researched_partial",
-          "limit_zh": "不做发证存在性/归属核验。"
+          "limit_zh": "含永居证/居住证等；不做发证存在性/归属核验。"
         },
         "tax": {
           "rule_ids": [
@@ -985,24 +1017,33 @@
         },
         "phone": {
           "rule_ids": [
-            "HK.phone_country_envelope"
+            "HK.phone_country_envelope",
+            "HK.phone.mobile_candidate"
           ],
           "status": "researched_partial",
-          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+          "limit_zh": "带年代的编号/分配快照；携号转网后分配记录不等于当前运营商；表外返回 unknown，不证明无效。"
         },
         "passport": {
-          "rule_ids": [],
-          "status": "unsupported_insufficient_primary_spec",
-          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+          "rule_ids": [
+            "HK.mainland_travel_permit"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "通行证/回乡证本体规则；换证次数等后缀是独立组件；不做发证核验。"
         },
         "bank": {
-          "rule_ids": [],
-          "status": "unsupported_insufficient_primary_spec",
-          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+          "rule_ids": [
+            "HK.hsbc.full_account",
+            "HK.bochk.payroll_account",
+            "HK.clearing.bank_code",
+            "HK.clearing.branch_code",
+            "HK.fps.id"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "银行规则均为产品/渠道/代际限定 profile，不是国家级通用账号长度；目录成员资格与开户归属均为 unknown。"
         }
       },
       "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
-      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+      "domestic_bank_account_policy_zh": "香港：HSBC 10或12（非10–12任意）；BOCHK工资自动转账14位限定；清算行/分行码为候选语法，目录正文未核验前不作权威拒绝。"
     },
     {
       "jurisdiction": "MO",
@@ -1011,9 +1052,11 @@
       "calling_code": "853",
       "coverage": {
         "national_resident_id": {
-          "rule_ids": [],
-          "status": "unsupported_insufficient_primary_spec",
-          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+          "rule_ids": [
+            "MO.resident_id"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "含永居证/居住证等；不做发证存在性/归属核验。"
         },
         "tax": {
           "rule_ids": [
@@ -1025,24 +1068,35 @@
         },
         "phone": {
           "rule_ids": [
-            "MO.phone_country_envelope"
+            "MO.phone_country_envelope",
+            "MO.phone.mobile_series",
+            "MO.phone.fixed28"
           ],
           "status": "researched_partial",
-          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+          "limit_zh": "带年代的编号/分配快照；携号转网后分配记录不等于当前运营商；表外返回 unknown，不证明无效。"
         },
         "passport": {
-          "rule_ids": [],
-          "status": "unsupported_insufficient_primary_spec",
-          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+          "rule_ids": [
+            "MO.mainland_travel_permit"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "通行证/回乡证本体规则；换证次数等后缀是独立组件；不做发证核验。"
         },
         "bank": {
-          "rule_ids": [],
-          "status": "unsupported_insufficient_primary_spec",
-          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+          "rule_ids": [
+            "MO.bnu.eapplication_savings",
+            "MO.icbc.ebanking_main",
+            "MO.boc.standard17",
+            "MO.boc.selfservice15",
+            "MO.boc.old12",
+            "MO.boc.loan15"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "银行规则均为产品/渠道/代际限定 profile，不是国家级通用账号长度；目录成员资格与开户归属均为 unknown。"
         }
       },
       "notes_zh": "薪俸税可能使用居民身份证号，但 BIR 校验来源未审阅；商业税号 OECD 明确无检查位。",
-      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+      "domestic_bank_account_policy_zh": "澳门：BNU10；ICBC网银主账号19（日期未知）；中银标准17/贷款15/旧12/自助渠道15；禁止全局去前导零；FPS ID未取得可信规范。"
     },
     {
       "jurisdiction": "IN",

@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "UZ",
   "name_zh": "乌兹别克斯坦",
   "scope_group": "additional_asia",

@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "LK",
   "name_zh": "斯里兰卡",
   "scope_group": "additional_asia",

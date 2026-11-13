@@ -117,6 +117,7 @@ local SUITES = {
   "suite_policies",
   "suite_edge_cases",
   "suite_api",
+  "suite_banking",
 }
 
 local t_start = os.clock()

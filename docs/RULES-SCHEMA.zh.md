@@ -35,10 +35,17 @@
 | 值 | 含义 | 验证器行为 |
 |---|---|---|
 | `syntax_supported` | 有现行官方结构证据；仅语法 | 正常评估 |
+| `official_scoped_syntax` | 官方但**产品/渠道/发行人限定** | 评估并附 scope 提醒；`issuer_scope` 必填含义 |
+| `processor_scoped_profile` | 支付处理商接入剖面 | 默认不启用校验码；需 `processor_profiles` |
+| `dated_bank_generation_profile` / `dated_channel_profile` | 银行代际或渠道输入 | 仅在对应代际/渠道显式选用时有意义 |
+| `standard_announcement_envelope` | 标准公告长度外壳 | 非发卡行/产品目录 |
+| `syntax_plus_required_allocation_lookup` | 语法 + 离线分配表 | 表外 → registry/semantic `unknown`，不证明无效 |
 | `candidate_profile` | 候选剖面，不是权威硬拒绝依据 | 评估并附 `rule_status:candidate_profile_*` 提醒 |
 | `historical_syntax` | 历史格式 | 评估；非 `historical_import` 模式附提醒 |
 | `dated_numbering_profile` | 带年代的电话编号快照 | 评估并附提醒 |
 | `country_code_envelope_only` | 仅 `+区号` + ≤15 位 | 评估并附“不是电话验证器”提醒 |
+
+可选字段：`issuer_scope`、`rule_role`（`full_identifier` / `component` / `routing` / `processor_profile`）、`validation_scope`、`source_dates`、`effective_from`。组件与路由规则计入规则总数，但**不宣传为新增完整 PII 类型**。
 
 ## `rules/algorithms.json`
 

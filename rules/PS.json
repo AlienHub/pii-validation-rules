@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "PS",
   "name_zh": "巴勒斯坦",
   "scope_group": "middle_east",

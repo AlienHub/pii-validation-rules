@@ -11,9 +11,9 @@ LUAS    ?= $(shell found=""; for l in lua5.4 lua5.3 lua5.1 luajit; do command -v
              if [ -z "$$found" ]; then command -v lua >/dev/null 2>&1 && found="lua"; fi; echo $$found)
 REPORTS  = reports
 
-.PHONY: test lint pcre2 lua differential coverage fixtures reports clean-reports
+.PHONY: test lint pcre2 banking lua differential coverage fixtures reports clean-reports
 
-test: lint pcre2 lua differential coverage
+test: lint pcre2 banking lua differential coverage
 	@echo "all checks passed"
 
 lint:
@@ -22,6 +22,10 @@ lint:
 pcre2:
 	$(PY) tests/pcre2/run_pcre2_tests.py --report $(REPORTS)/pcre2-regex-report.json
 	$(PY) tests/pcre2/run_pcre2test_cli.py --report $(REPORTS)/pcre2test-cli-report.json
+
+banking:
+	$(PY) tests/pcre2/run_banking_format_tests.py --report $(REPORTS)/banking-format-report.json
+	$(PY) tests/pcre2/run_banking_algorithm_tests.py --report $(REPORTS)/banking-algorithm-report.json
 
 lua:
 	@test -n "$(LUAS)" || (echo "no Lua interpreter found (install lua5.4, lua5.1 or luajit)"; exit 1)

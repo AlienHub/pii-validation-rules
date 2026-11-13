@@ -16,10 +16,50 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATUS = {"syntax_supported", "historical_syntax", "candidate_profile", "country_code_envelope_only", "dated_numbering_profile"}
-PII_TYPES = {"national_id", "resident_id", "tax_id", "tax_id_entity", "passport", "phone", "iban", "payment_card", "passport_mrz_field"}
+STATUS = {
+    "syntax_supported",
+    "historical_syntax",
+    "candidate_profile",
+    "country_code_envelope_only",
+    "dated_numbering_profile",
+    "official_scoped_syntax",
+    "processor_scoped_profile",
+    "dated_bank_generation_profile",
+    "dated_channel_profile",
+    "standard_announcement_envelope",
+    "syntax_plus_required_allocation_lookup",
+}
+PII_TYPES = {
+    "national_id",
+    "resident_id",
+    "tax_id",
+    "tax_id_entity",
+    "passport",
+    "phone",
+    "iban",
+    "payment_card",
+    "passport_mrz_field",
+    "domestic_bank_account",
+    "virtual_bank_account",
+    "loan_account",
+    "account_channel_input",
+    "routing_code",
+    "payment_alias",
+    "payment_alias_component",
+    "foreign_resident_id",
+    "mainland_residence_permit",
+    "mainland_travel_permit",
+    "exit_entry_permit",
+    "identity_component",
+}
 CHECKSUM_STATUS = {"algorithm_available", "none_per_source", "not_established", "not_applicable"}
-POLICIES = {"enabled", "opt_in_secondary", "opt_in_secondary_m_series_experimental", "explicit_legacy_regime"}
+POLICIES = {
+    "enabled",
+    "opt_in_secondary",
+    "opt_in_secondary_m_series_experimental",
+    "explicit_legacy_regime",
+    "opt_in_processor_profile",
+}
 COVERAGE_STATUS = {"researched_partial", "unsupported_insufficient_primary_spec", "not_implemented_not_fully_researched", "out_of_requested_named_scope_backlog"}
 
 problems = []

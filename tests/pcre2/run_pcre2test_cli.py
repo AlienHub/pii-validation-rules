@@ -50,13 +50,24 @@ def main():
 
     blocks = []
     expected = []  # list of (rule_id, input, expected)
+    skipped_empty_positives = 0
     for r in rules:
         subjects = [(e["input"], e["expected_syntax"]) for e in r["examples"]] + \
                    [(e["input"], e["expected_syntax"]) for e in r["negative_syntax_examples"]]
         lines = ["/" + r["regex_pcre2"] + "/"]
         for s, exp in subjects:
-            lines.append(esc(s) if s != "" else "\\x{00}")  # pcre2test cannot express an empty subject; see below
+            if s == "" and exp:
+                # pcre2test cannot express an empty subject. Empty-string positives
+                # (e.g. optional PayNow suffix component) are covered by ctypes /
+                # Python fullmatch runners instead.
+                skipped_empty_positives += 1
+                continue
+            lines.append(esc(s) if s != "" else "\\x{00}")  # empty negatives → NUL must also fail
             expected.append((r["id"], s, exp))
+        if len(lines) == 1:
+            # pattern with no remaining subjects: still compile once with a NUL probe
+            lines.append("\\x{00}")
+            expected.append((r["id"], "", False))
         blocks.append("\n".join(lines))
     src = "\n\n".join(blocks) + "\n"
     with tempfile.NamedTemporaryFile("w", suffix=".pcre2test", delete=False, encoding="utf-8") as fh:
@@ -90,13 +101,15 @@ def main():
         "subjects": len(expected),
         "mismatches": mism,
         "runtime_seconds": round(elapsed, 3),
-        "note": "empty-string subjects are submitted as a single NUL byte (pcre2test has no empty-subject syntax); both must fail",
+        "skipped_empty_positives": skipped_empty_positives,
+        "note": "empty negatives submitted as NUL (must fail); empty positives skipped (no pcre2test empty-subject syntax)",
     })
     os.makedirs(os.path.dirname(a.report), exist_ok=True)
     with open(a.report, "w", encoding="utf-8") as fh:
         json.dump(report, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
-    print("pcre2test %s: %d subjects, %d mismatches, %.3fs" % (version, len(expected), len(mism), elapsed))
+    print("pcre2test %s: %d subjects, %d mismatches, %d empty-positives skipped, %.3fs"
+          % (version, len(expected), len(mism), skipped_empty_positives, elapsed))
     for m in mism[:10]:
         print("MISMATCH", m)
     return 1 if mism else 0

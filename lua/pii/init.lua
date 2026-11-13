@@ -7,7 +7,8 @@
 --   local pii = require("pii")
 --   pii.load("rules")                      -- optional; default rules dir is "rules"
 --   local r = pii.validate("CN.resident_id", "11010519491231002X")
---   r.syntax, r.checksum, r.semantic, r.issuer_verification, r.summary, r.warnings
+--   r.syntax, r.checksum, r.semantic, r.registry, r.ownership,
+--   r.issuer_verification, r.summary, r.warnings
 --
 -- Layer vocabulary: "pass" | "fail" | "unknown" | "not_applicable" | "not_evaluated".
 -- "unknown" is neither pass nor fail: the repository has no sufficiently evidenced
@@ -19,15 +20,17 @@ local checksums = require("pii.checksums")
 local policies = require("pii.policies")
 local normalize = require("pii.normalize")
 local semantic = require("pii.semantic")
+local directories = require("pii.directories")
 local json = require("pii.json")
 
 local M = {}
 
-M.version = "0.1.0"
+M.version = "0.2.0"
 M.syntax = syntax
 M.checksums = checksums
 M.policies = policies
 M.semantic = semantic
+M.directories = directories
 M.json = json
 M.normalize_module = normalize
 
@@ -79,6 +82,12 @@ local STATUS_WARNINGS = {
   candidate_profile = "rule_status:candidate_profile_not_authoritative_do_not_hard_reject",
   country_code_envelope_only = "rule_status:country_code_envelope_only_not_a_phone_number_validator",
   dated_numbering_profile = "rule_status:dated_numbering_profile_snapshot_not_current_allocation",
+  official_scoped_syntax = "rule_status:official_scoped_syntax_product_or_channel_limited",
+  processor_scoped_profile = "rule_status:processor_scoped_profile_not_global_card_brand_rule",
+  dated_bank_generation_profile = "rule_status:dated_bank_generation_profile_select_generation_explicitly",
+  dated_channel_profile = "rule_status:dated_channel_profile_do_not_globalize",
+  standard_announcement_envelope = "rule_status:standard_announcement_envelope_not_issuer_directory",
+  syntax_plus_required_allocation_lookup = "rule_status:allocation_lookup_required_unlisted_is_unknown",
 }
 
 -- validate(rule_id, value, options) -> result table (see docs/API.zh.md)
@@ -97,10 +106,19 @@ function M.validate(rule_id, value, options)
     pii_type = rule.pii_type,
     rule_status = rule.status,
     rule_version = rule.file_version,
+    rule_version_label = rule.rule_version_label,
     library_version = M.version,
+    issuer_scope = rule.issuer_scope,
+    rule_role = rule.rule_role or "full_identifier",
+    validation_scope = rule.validation_scope,
+    evidence_source_ids = rule.source_ids,
     syntax = "fail",
     checksum = "not_evaluated",
     semantic = "not_evaluated",
+    registry = "unknown",
+    registry_note = "directory membership not asserted unless a loaded offline directory returns a row",
+    ownership = "unknown",
+    ownership_note = "account existence, alias registration and name match are never performed",
     issuer_verification = "unknown",
     issuer_verification_note = "never performed by this library",
     checksum_status = rule.checksum and rule.checksum.status or "not_established",
@@ -115,6 +133,12 @@ function M.validate(rule_id, value, options)
   if STATUS_WARNINGS[rule.status] then warnings[#warnings + 1] = STATUS_WARNINGS[rule.status] end
   if rule.status == "historical_syntax" and not o.historical_import then
     warnings[#warnings + 1] = "rule_status:historical_syntax_only_meaningful_in_historical_import_mode"
+  end
+  if rule.rule_role == "component" then
+    warnings[#warnings + 1] = "rule_role:component_not_a_standalone_full_pii_type"
+  end
+  if rule.rule_role == "routing" then
+    warnings[#warnings + 1] = "rule_role:routing_code_not_a_customer_account"
   end
 
   -- 1. type / size guards
@@ -190,7 +214,34 @@ function M.validate(rule_id, value, options)
     for _, w in ipairs(sw) do warnings[#warnings + 1] = w end
   end
 
-  -- 6. summary (never "valid": only "nothing failed" at the layers that could run)
+  -- 6. registry (offline directory membership only; never online)
+  -- Promote semantic directory hits to registry=pass; absence stays unknown.
+  if res.semantic_details then
+    local d = res.semantic_details
+    if d.uob_prefix_branch_directory == "pass"
+      or d.hk_mobile_allocation == "pass"
+      or d.mo_mobile_allocation == "pass" then
+      res.registry = "pass"
+      res.registry_note = "matched_offline_directory_row_not_live_membership"
+    elseif d.psp_directory_membership == "unknown"
+      or d.uob_prefix_branch_directory == "unknown"
+      or d.hk_mobile_allocation == "unknown"
+      or d.mo_mobile_allocation == "unknown" then
+      res.registry = "unknown"
+    end
+  end
+  if rule.pii_type == "routing_code" and rule.status == "candidate_profile" then
+    res.registry = "unknown"
+    warnings[#warnings + 1] = "registry:candidate_routing_directory_unverified"
+  end
+
+  -- 7. ownership: always unknown (existence / alias registration / name match)
+  res.ownership = "unknown"
+
+  -- 8. summary (never "valid": only "nothing failed" at the layers that could run).
+  -- ownership is always unknown and does not by itself force pass_with_unknowns
+  -- (API compatibility with pre-0.2 summaries). registry unknown likewise does
+  -- not downgrade a clean syntax/checksum/semantic pass.
   if res.checksum == "fail" or res.semantic == "fail" then
     res.summary = "fail"
   elseif (res.checksum == "pass" or res.checksum == "not_applicable")

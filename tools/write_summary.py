@@ -70,9 +70,21 @@ def main():
         L.append("| %s | %d | %d | %d | %d | %d |" % (d["lua_runtime"], s["inputs_compared"], s["agree_match"], s["agree_nomatch"], s["disagreements"], s["missing"]))
     L.append("")
 
+    bf = load("banking-format-report.json")
+    ba = load("banking-algorithm-report.json")
+    if bf or ba:
+        L.append("## 5. 银行深度调研夹具（458 格式 + 62 数学）\n")
+        if bf:
+            L.append("- 格式：%d 用例，编译规则 %d，失败 %d，耗时 %.3fs（仅 syntax；不把正例当 checksum 通过）" % (
+                bf["fixture_count"], bf["unique_rules_compiled"], bf["failure_count"], bf["elapsed_seconds"]))
+        if ba:
+            L.append("- 数学（独立 Python reference_impl）：%d 用例，失败 %d，耗时 %.3fs" % (
+                ba["fixture_count"], ba["failure_count"], ba["elapsed_seconds"]))
+        L.append("")
+
     cov = load("coverage-summary.json")
     if cov:
-        L.append("## 5. 覆盖计数（reports/coverage-summary.json）\n")
+        L.append("## 6. 覆盖计数（reports/coverage-summary.json）\n")
         L.append("- 正则规则：%d（%s）" % (cov["regex_rules_total"], ", ".join("%s %d" % kv for kv in cov["regex_rules_by_status"].items())))
         L.append("- 校验算法：%d（默认策略 %s）" % (cov["checksum_algorithms_total"], ", ".join("%s %d" % kv for kv in cov["checksum_algorithms_by_default_policy"].items())))
         L.append("- 辖区：指定 %d，清单 %d（%s）" % (cov["jurisdictions_named"], cov["jurisdictions_inventory_total"], ", ".join("%s %d" % kv for kv in cov["jurisdictions_by_scope_group"].items())))
@@ -80,7 +92,7 @@ def main():
         L.append("")
     L.append("## 说明\n")
     L.append("- 这些测试证明：正则在 PCRE2 下的全串形状判定、Lua 校验算法与独立 Python 参考实现对同一书面规格的算术一致性、策略门控与分层结果模型按文档行为。")
-    L.append("- 这些测试不证明：任何号码已发放、仍有效或归属某人；二级/重建来源的算法是官方算法；未收录的类型不存在格式。")
+    L.append("- 这些测试不证明：任何号码已发放、仍有效或归属某人；二级/重建来源的算法是官方算法；未收录的类型不存在格式；目录命中不等于当前运营商或开户存在。")
     out = os.path.join(R, "SUMMARY.md")
     open(out, "w", encoding="utf-8").write("\n".join(L) + "\n")
     print("wrote", out)

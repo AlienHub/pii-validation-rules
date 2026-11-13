@@ -6,7 +6,8 @@
     "enabled": "默认运行（官方或标准算法）。",
     "opt_in_secondary": "仅当 options.secondary_checksums=true 或 options.algorithms[id]=true 时运行；否则 checksum=unknown。",
     "opt_in_secondary_m_series_experimental": "S/T/F/G 同 opt_in_secondary；M 系列另需 options.sg_m_series_experimental=true。",
-    "explicit_legacy_regime": "仅当 options.kr_rrn_regime == 'legacy_pre_2020_10' 时运行；current → not_applicable，unknown → unknown。"
+    "explicit_legacy_regime": "仅当 options.kr_rrn_regime == 'legacy_pre_2020_10' 时运行；current → not_applicable，unknown → unknown。",
+    "opt_in_processor_profile": "仅当 options.processor_profiles.<name>=true（规则 checksum.processor 字段）或 options.algorithms[id]=true 时运行；处理商接入 profile 不得变为全球卡组织默认拒绝条件。"
   },
   "algorithms": [
     {
@@ -237,7 +238,7 @@
         "总和 mod 10 == 0 则通过。字段长度/前缀限制另行执行。"
       ],
       "parameters": {},
-      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。截短后仍可能数学通过；全0可通过；不推断借记/信用/预付或发卡国。Worldpay等处理商长度/前缀规则是独立的 processor_scoped_profile。"
     },
     {
       "id": "iban_mod97",

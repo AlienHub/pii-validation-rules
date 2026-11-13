@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "SG",
   "name_zh": "新加坡",
   "scope_group": "core",
@@ -794,6 +794,1080 @@
         }
       ],
       "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "SG.dbs.account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{10})\\z",
+      "python_fullmatch_body": "[0-9]{10}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=DBS 10-digit accounts；bank7171; branch=first3; full10 retained；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.dbs"
+      ],
+      "source_urls": [
+        "https://www.dbs.com.sg/personal/support/bank-general-bank-branch-names-codes.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9999999999",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0123456789\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0123456789",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0123456789\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0123456789x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６٧８٩",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "DBS 10-digit accounts",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.dbs": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.posb.account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{9})\\z",
+      "python_fullmatch_body": "[0-9]{9}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=POSB 9-digit accounts；bank7171; branch081 constant; full9 retained；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.dbs"
+      ],
+      "source_urls": [
+        "https://www.dbs.com.sg/personal/support/bank-general-bank-branch-names-codes.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "999999999",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "012345678\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 012345678",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "012345678\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "012345678x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６٧８",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "POSB 9-digit accounts",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.dbs": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.hsbc.account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{12})\\z",
+      "python_fullmatch_body": "[0-9]{12}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=HSBC SG current/savings full account；full account includes branch3+account9; HSBC personal9548 vs corporate7232 in2026UOB guide；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.abs"
+      ],
+      "source_urls": [
+        "https://www.abs.org.sg/docs/library/account_3_banks.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "012345678901",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "999999999999",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "012345678901\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 012345678901",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "012345678901\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "012345678901x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６٧８٩０١",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "HSBC SG current/savings full account",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.abs": "2015-03-23"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.sbi.account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{14})\\z",
+      "python_fullmatch_body": "[0-9]{14}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=SBI SG current full account；full account includes branch3+account11；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.abs"
+      ],
+      "source_urls": [
+        "https://www.abs.org.sg/docs/library/account_3_banks.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "01234567890123",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "99999999999999",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "01234567890123\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 01234567890123",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "01234567890123\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "01234567890123x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６٧８٩０١２٣",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "SBI SG current full account",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.abs": "2015-03-23"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.uob.account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{10})\\z",
+      "python_fullmatch_body": "[0-9]{10}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=UOB ordinary account (not VAN)；bank7375; first3 maps through Appendix A, not necessarily branch; example910->030；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [
+        "uob_prefix_branch_directory_lookup"
+      ],
+      "normalization": [],
+      "source_ids": [
+        "sg.uob"
+      ],
+      "source_urls": [
+        "https://www.uob.com.sg/assets/pdfs/global/achcode.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9999999999",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0123456789\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0123456789",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0123456789\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0123456789x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６٧８٩",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "UOB ordinary account (not VAN)",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.standard_chartered.account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{10})\\z",
+      "python_fullmatch_body": "[0-9]{10}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Standard Chartered SG ordinary account in ACH guide；bank9496 in2026 guide; branch=0+first2; do not revive old7144 automatically；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.uob"
+      ],
+      "source_urls": [
+        "https://www.uob.com.sg/assets/pdfs/global/achcode.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9999999999",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0123456789\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0123456789",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0123456789\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0123456789x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６٧８٩",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Standard Chartered SG ordinary account in ACH guide",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.ocbc.full_account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:(?:[0-9]{10}|[0-9]{12}))\\z",
+      "python_fullmatch_body": "(?:[0-9]{10}|[0-9]{12})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=OCBC savings/current after23Mar2015；bank7339; full account includes branch3; oldIBG field splits account7/9; FAST/GIRO full10/12；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax；effective_from=2015-03-23",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.abs",
+        "sg.uob"
+      ],
+      "source_urls": [
+        "https://www.abs.org.sg/docs/library/account_3_banks.pdf",
+        "https://www.uob.com.sg/assets/pdfs/global/achcode.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "001234567890",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0012345678\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0012345678",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0012345678\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0012345678x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "00000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "OCBC savings/current after23Mar2015",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.abs": "2015-03-23",
+        "sg.uob": "2026-10-08"
+      },
+      "effective_from": "2015-03-23",
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.uob.van",
+      "pii_type": "virtual_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:(?:[0-9]{7}|[0-9]{9}|[0-9]{11,14}|[0-9]{17,18}))\\z",
+      "python_fullmatch_body": "(?:[0-9]{7}|[0-9]{9}|[0-9]{11,14}|[0-9]{17,18})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=UOB Virtual Account Number only；bank7375; branch001 default; not ordinary 10-digit UOB account；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.uob"
+      ],
+      "source_urls": [
+        "https://www.uob.com.sg/assets/pdfs/global/achcode.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "1234567",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "123456789012",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "1234567\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 1234567",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "1234567\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "1234567x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "١２٣４٥６٧",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "00000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "0000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "000000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "0000000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "0000000000000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "UOB Virtual Account Number only",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.ach.bank_code",
+      "pii_type": "routing_code",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{4})\\z",
+      "python_fullmatch_body": "[0-9]{4}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=ACH Bank Code syntax；directory relation, country context and date required; not PII alone；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.uob"
+      ],
+      "source_urls": [
+        "https://www.uob.com.sg/assets/pdfs/global/achcode.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "7171",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "7375",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "7171\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 7171",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "7171\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "7171x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "٧١٧١",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "ACH Bank Code syntax",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "SG.ach.branch_code",
+      "pii_type": "routing_code",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{3})\\z",
+      "python_fullmatch_body": "[0-9]{3}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=ACH branch syntax；pair with bank code; channel-specific; not a secret/checksum/PII alone；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.uob"
+      ],
+      "source_urls": [
+        "https://www.uob.com.sg/assets/pdfs/global/achcode.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "001",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "081",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "001\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 001",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "001\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "001x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "ACH branch syntax",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.uob": "2026-10-08"
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "SG.paynow.corporate_suffix",
+      "pii_type": "payment_alias_component",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:(?:|[A-Z0-9]{3}))\\z",
+      "python_fullmatch_body": "(?:|[A-Z0-9]{3})",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=PayNow corporate optional suffix, separate from validated UEN root；concatenate only after independent UEN root parse; #GRAB VPA not suffix；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax；空串正例仅表示“未填写可选后缀组件”，不是空 PayNow ID 合法；必须先独立校验 UEN 根号。VPA 中 #GRAB 类参与者标识不是本后缀。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.paynow.suffix"
+      ],
+      "source_urls": [
+        "https://www.uob.com.sg/business/transact/payments/paynow-corporate.page"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "ABC",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "0Z9",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "ABC\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " ABC",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "ABC\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "ABCx",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "ＡＢＣ",
+          "expected_syntax": false,
+          "reason": "non_ASCII_letters"
+        },
+        {
+          "input": "AB",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "ABCD",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "abc",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "PayNow corporate optional suffix, separate from validated UEN root",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.paynow.suffix": null
+      },
+      "rule_role": "component"
+    },
+    {
+      "id": "SG.phone.radio_network",
+      "pii_type": "phone",
+      "status": "dated_numbering_profile",
+      "regex_pcre2": "\\A(?:\\+65(?:8[0-9]{7}|9[0-8][0-9]{6}))\\z",
+      "python_fullmatch_body": "\\+65(?:8[0-9]{7}|9[0-8][0-9]{6})",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=IMDA2026series8and9 radio network；exclude99reserved; no current operator or individual mobile ownership inferred；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_numbering_series_profile",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.phone"
+      ],
+      "source_urls": [
+        "https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/numbering/national-numbering-plan-and-allocation-process/imda-national-numbering-plan.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+6580123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "+6598123456",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "+6580123456\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " +6580123456",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "+6580123456\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "+6580123456x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "+６٥８０١２٣４٥６",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "+6599123456",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "+6561234567",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "IMDA2026series8and9 radio network",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.phone": "2026-02"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.phone.pstn_ipt",
+      "pii_type": "phone",
+      "status": "dated_numbering_profile",
+      "regex_pcre2": "\\A(?:\\+656[0-9]{7})\\z",
+      "python_fullmatch_body": "\\+656[0-9]{7}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=IMDA2026series6 PSTN/IPT；series grammar only, some subblocks reserved; no allocated subscriber assertion；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_numbering_series_profile",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.phone"
+      ],
+      "source_urls": [
+        "https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/numbering/national-numbering-plan-and-allocation-process/imda-national-numbering-plan.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+6561234567",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "+6569876543",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "+6561234567\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " +6561234567",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "+6561234567\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "+6561234567x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "+６٥６١２٣４٥６٧",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "IMDA2026series6 PSTN/IPT",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.phone": "2026-02"
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "SG.phone.ipt_ucdo",
+      "pii_type": "phone",
+      "status": "dated_numbering_profile",
+      "regex_pcre2": "\\A(?:\\+653[0-9]{7})\\z",
+      "python_fullmatch_body": "\\+653[0-9]{7}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "issuer_scope=IMDA2026series3 IPT/UCDO；not all numbers callable voice;UCDOdataonly; suballocation separate；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=dated_numbering_series_profile",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "sg.phone"
+      ],
+      "source_urls": [
+        "https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/numbering/national-numbering-plan-and-allocation-process/imda-national-numbering-plan.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+6531234567",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "+6539876543",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "+6531234567\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " +6531234567",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "+6531234567\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "+6531234567x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "+６٥٣١２٣４٥６٧",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "IMDA2026series3 IPT/UCDO",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "sg.phone": "2026-02"
+      },
+      "rule_role": "full_identifier"
     }
   ]
 }

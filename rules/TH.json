@@ -1,6 +1,6 @@
 {
   "schema_version": "pii-rules-1",
-  "version": "2026.11.13",
+  "version": "2026.11.13.banking",
   "jurisdiction": "TH",
   "name_zh": "泰国",
   "scope_group": "core",
@@ -308,6 +308,304 @@
         }
       ],
       "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "TH.bbl.personal_deposit",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{10})\\z",
+      "python_fullmatch_body": "[0-9]{10}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Bangkok Bank personal savings/current in SMS Account Alert；unknown account check digit; do not apply Luhn；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.bbl"
+      ],
+      "source_urls": [
+        "https://www.bangkokbank.com/en/fragments/accordions/personal/digital-banking/sms-services/sms-account-alert-1"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0123456789",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9876543210",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0123456789\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0123456789",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0123456789\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0123456789x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "０١２٣４٥６٧８٩",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        },
+        {
+          "input": "000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        },
+        {
+          "input": "00000000000",
+          "expected_syntax": false,
+          "reason": "field_boundary"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Bangkok Bank personal savings/current in SMS Account Alert",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "th.bbl": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "TH.bbl.atm_be1st",
+      "pii_type": "payment_card",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{16})\\z",
+      "python_fullmatch_body": "[0-9]{16}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=Bangkok Bank ATM or Be1st card in SMS Account Alert；only length documented for this service; no BIN or Luhn obligation established；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.bbl"
+      ],
+      "source_urls": [
+        "https://www.bangkokbank.com/en/fragments/accordions/personal/digital-banking/sms-services/sms-account-alert-1"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0000123456789012",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9876543210987654",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0000123456789012\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0000123456789012",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0000123456789012\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0000123456789012x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００００١２٣４٥６٧８٩０١２",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "Bangkok Bank ATM or Be1st card in SMS Account Alert",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "th.bbl": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "TH.kbank.cdm_account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{10})\\z",
+      "python_fullmatch_body": "[0-9]{10}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=KBank K-CDM deposit account-number field；scoped CDM input; not virtual account or every deposit product；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.kbank"
+      ],
+      "source_urls": [
+        "https://www.kasikornbank.com/en/personal/services/payment/pages/transfer-k-cdm.aspx"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "9876543210",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0012345678\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0012345678",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0012345678\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0012345678x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "KBank K-CDM deposit account-number field",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "th.kbank": null
+      },
+      "rule_role": "full_identifier"
+    },
+    {
+      "id": "TH.scb.company_add_account",
+      "pii_type": "domestic_bank_account",
+      "status": "official_scoped_syntax",
+      "regex_pcre2": "\\A(?:(?:[0-9]{10}|[0-9]{13}))\\z",
+      "python_fullmatch_body": "(?:[0-9]{10}|[0-9]{13})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "issuer_scope=SCB company-admin Add Bank Account manual；10/13 product mapping not published in source; do not claim personal-only or all-Thai length；validation_scope=syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation；研究状态原文=official_scoped_syntax",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "th.scb"
+      ],
+      "source_urls": [
+        "https://www.scb.co.th/getmedia/3d158e54-9ecf-469e-ba7b-a7ce99149b67/add-new-account.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0012345678",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        },
+        {
+          "input": "0012345678901",
+          "expected_syntax": true,
+          "provenance": "synthetic_format_fixture_not_checksum_claim"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "0012345678\n",
+          "expected_syntax": false,
+          "reason": "strict_end"
+        },
+        {
+          "input": " 0012345678",
+          "expected_syntax": false,
+          "reason": "leading_space"
+        },
+        {
+          "input": "0012345678\u0000",
+          "expected_syntax": false,
+          "reason": "NUL"
+        },
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "0012345678x",
+          "expected_syntax": false,
+          "reason": "extra_character"
+        },
+        {
+          "input": "００١２٣４٥６٧８",
+          "expected_syntax": false,
+          "reason": "non_ASCII_digits"
+        }
+      ],
+      "sample_notice_zh": "样本为合成格式串或官方说明性号码，不代表已发卡/开户/发证；格式正例不承诺校验码通过。",
+      "issuer_scope": "SCB company-admin Add Bank Account manual",
+      "rule_version_label": "2026-11-13.research1",
+      "validation_scope": "syntax only unless semantic/checksum layer explicitly run; no issuance/ownership validation",
+      "source_dates": {
+        "th.scb": null
+      },
+      "rule_role": "full_identifier"
     }
   ]
 }
