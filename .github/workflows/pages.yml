@@ -1,9 +1,13 @@
 name: pages
 
+# Deploy only when the owner has enabled GitHub Pages (Settings → Pages →
+# GitHub Actions) and then runs this workflow manually — or after merge to main.
+# Auto-deploy on every feature-branch push was removed: it 404s until Pages is
+# enabled and paints a failing "deploy" check on the PR.
 on:
-  push:
-    branches: ["cursor/pii-validation-rules-impl-9e79", "main"]
   workflow_dispatch:
+  push:
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -20,7 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build PII Atlas static site
-        run: python3 tools/build_website.py
+        run: |
+          python3 tools/build_website.py
+          python3 tools/check_website.py
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

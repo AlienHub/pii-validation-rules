@@ -18,9 +18,11 @@
 2. **启用 GitHub Pages（GitHub Actions 来源）**  
    Settings → Pages → Build and deployment → Source: **GitHub Actions**.
 
-3. （可选）打开 Actions 中 `pages` workflow，对当前分支 Run workflow，或 push 一次触发。
+3. 打开 Actions → **pages** → **Run workflow**（选 `main` 或已合并的默认分支；当前 PR 分支上的自动 deploy 已关闭，避免 Pages 未启用时出现 404 红叉）。  
+   若希望从本 PR 分支直接发布：Pages 启用后，可临时把 `.github/workflows/pages.yml` 的 `on.push.branches` 加回功能分支，或先 merge 再依赖 `main` 推送。
 
-4. 验证：浏览器打开 Pages URL，确认标题为 **PII Atlas**，可加载 `catalog.json`，无登录墙。
+4. 验证：浏览器打开 Pages URL，确认标题为 **PII Atlas**，可加载 `catalog.json`，无登录墙。  
+   先前失败日志原文：`Failed to create deployment (status: 404) … Ensure GitHub Pages has been enabled` — **构建已成功**，仅 deploy 因 Pages 未开启而失败；validator `ci` 工作流为成功。
 
 ## 本代理不会做的事
 
