@@ -18,11 +18,10 @@
 2. **启用 GitHub Pages（GitHub Actions 来源）**  
    Settings → Pages → Build and deployment → Source: **GitHub Actions**.
 
-3. 打开 Actions → **pages** → **Run workflow**（选 `main` 或已合并的默认分支；当前 PR 分支上的自动 deploy 已关闭，避免 Pages 未启用时出现 404 红叉）。  
-   若希望从本 PR 分支直接发布：Pages 启用后，可临时把 `.github/workflows/pages.yml` 的 `on.push.branches` 加回功能分支，或先 merge 再依赖 `main` 推送。
+3. Pages 已启用后，向 `cursor/pii-validation-rules-impl-9e79`（或 `main`）推送会自动跑 `pages` build+deploy。也可在 Actions → **pages** → **Run workflow**（需所选 ref 上已有该 workflow 文件）。
 
-4. 验证：浏览器打开 Pages URL，确认标题为 **PII Atlas**，可加载 `catalog.json`，无登录墙。  
-   先前失败日志原文：`Failed to create deployment (status: 404) … Ensure GitHub Pages has been enabled` — **构建已成功**，仅 deploy 因 Pages 未开启而失败；validator `ci` 工作流为成功。
+4. 站点 URL：`https://alienhub.github.io/pii-validation-rules/`  
+   验证：标题 **PII Atlas**，可加载 `catalog.json`，相对资源路径在 project base path 下可用。
 
 ## 本代理不会做的事
 

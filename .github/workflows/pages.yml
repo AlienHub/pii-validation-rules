@@ -1,13 +1,15 @@
 name: pages
 
-# Deploy only when the owner has enabled GitHub Pages (Settings → Pages →
-# GitHub Actions) and then runs this workflow manually — or after merge to main.
-# Auto-deploy on every feature-branch push was removed: it 404s until Pages is
-# enabled and paints a failing "deploy" check on the PR.
+# Deploy PII Atlas to GitHub Pages.
+# - main: after merge
+# - cursor/pii-validation-rules-impl-9e79: sanctioned pre-merge publish (PR #1 not merged)
+# - workflow_dispatch: manual redeploy once this file exists on the selected ref
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]
+    branches:
+      - main
+      - cursor/pii-validation-rules-impl-9e79
 
 permissions:
   contents: read
