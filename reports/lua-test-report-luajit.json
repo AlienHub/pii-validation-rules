@@ -1,7 +1,7 @@
 {
  "command": "lua tests/lua/run.lua --report <path> --syntax-verdicts <path>",
  "failures": {},
- "run_at_utc": "2026-11-13T04:17:23Z",
+ "run_at_utc": "2026-11-13T04:24:09Z",
  "runtime": "LuaJIT 2.1.1703358377",
  "stage": "implementation_lua_runtime_tests",
  "suites": [
@@ -262,7 +262,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 2,
+     "ms": 1,
      "name": "ir_national_mod11: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -298,7 +298,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 2,
+     "ms": 1,
      "name": "jp_mynumber: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -346,7 +346,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "luhn: Lua generator reproduces Python check characters",
      "status": "pass"
     },
@@ -376,7 +376,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "th_mod11: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -388,7 +388,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 3,
+     "ms": 2,
      "name": "th_mod11: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -406,13 +406,13 @@
     },
     {
      "assertions": 19800,
-     "ms": 14,
+     "ms": 15,
      "name": "tr_tckn: every other value at the check position is rejected",
      "status": "pass"
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "tr_vkn: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -472,7 +472,7 @@
     }
    ],
    "failed": 0,
-   "ms": 94,
+   "ms": 91,
    "name": "reference_vectors",
    "passed": 52
   },
@@ -997,7 +997,7 @@
     },
     {
      "assertions": 1163,
-     "ms": 1,
+     "ms": 2,
      "name": "ISO 7064 / Luhn / Verhoeff schemes detect every single-character substitution",
      "status": "pass"
     },
@@ -1039,7 +1039,7 @@
     },
     {
      "assertions": 7,
-     "ms": 2,
+     "ms": 1,
      "name": "ICAO: composite check digit over TD3 sample slices",
      "status": "pass"
     },
@@ -1090,13 +1090,13 @@
     },
     {
      "assertions": 1,
-     "ms": 17,
+     "ms": 15,
      "name": "differential corpus verdicts recorded for PCRE2 comparison",
      "status": "pass"
     }
    ],
    "failed": 0,
-   "ms": 27,
+   "ms": 25,
    "name": "syntax_subset",
    "passed": 6
   },
@@ -1147,7 +1147,7 @@
     }
    ],
    "failed": 0,
-   "ms": 9,
+   "ms": 8,
    "name": "normalize",
    "passed": 7
   },
@@ -1267,7 +1267,7 @@
     }
    ],
    "failed": 0,
-   "ms": 8,
+   "ms": 6,
    "name": "policies",
    "passed": 8
   },
@@ -1843,7 +1843,7 @@
     },
     {
      "assertions": 2159,
-     "ms": 7,
+     "ms": 5,
      "name": "every rule: positive examples pass syntax; negative examples fail",
      "status": "pass"
     },
@@ -1873,7 +1873,7 @@
     },
     {
      "assertions": 1548,
-     "ms": 2,
+     "ms": 3,
      "name": "non-string and oversize inputs for every rule",
      "status": "pass"
     },
@@ -1885,7 +1885,7 @@
     }
    ],
    "failed": 0,
-   "ms": 20,
+   "ms": 19,
    "name": "api",
    "passed": 10
   }
@@ -1893,7 +1893,7 @@
  "summary": {
   "assertions": 89032,
   "cases": 299,
-  "cpu_seconds": 0.184,
+  "cpu_seconds": 0.17499999999999999,
   "failed": 0,
   "passed": 299,
   "suites": 10

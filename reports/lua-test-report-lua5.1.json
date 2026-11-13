@@ -1,7 +1,7 @@
 {
  "command": "lua tests/lua/run.lua --report <path> --syntax-verdicts <path>",
  "failures": {},
- "run_at_utc": "2026-11-13T04:17:22Z",
+ "run_at_utc": "2026-11-13T04:24:08Z",
  "runtime": "Lua 5.1",
  "stage": "implementation_lua_runtime_tests",
  "suites": [
@@ -226,7 +226,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 142,
+     "ms": 141,
      "name": "iban_mod97: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -256,7 +256,7 @@
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "ir_national_mod11: Lua generator reproduces Python check characters",
      "status": "pass"
     },
@@ -280,7 +280,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 8,
+     "ms": 7,
      "name": "jp_corporate_number: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -292,7 +292,7 @@
     },
     {
      "assertions": 200,
-     "ms": 0,
+     "ms": 1,
      "name": "jp_mynumber: Lua generator reproduces Python check characters",
      "status": "pass"
     },
@@ -328,7 +328,7 @@
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "kz_iin: Lua generator reproduces Python check characters",
      "status": "pass"
     },
@@ -382,13 +382,13 @@
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "th_mod11: Lua generator reproduces Python check characters",
      "status": "pass"
     },
     {
      "assertions": 1800,
-     "ms": 8,
+     "ms": 7,
      "name": "th_mod11: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -406,7 +406,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 39,
+     "ms": 38,
      "name": "tr_tckn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -472,7 +472,7 @@
     }
    ],
    "failed": 0,
-   "ms": 324,
+   "ms": 318,
    "name": "reference_vectors",
    "passed": 52
   },
@@ -1090,13 +1090,13 @@
     },
     {
      "assertions": 1,
-     "ms": 27,
+     "ms": 26,
      "name": "differential corpus verdicts recorded for PCRE2 comparison",
      "status": "pass"
     }
    ],
    "failed": 0,
-   "ms": 43,
+   "ms": 42,
    "name": "syntax_subset",
    "passed": 6
   },
@@ -1147,7 +1147,7 @@
     }
    ],
    "failed": 0,
-   "ms": 16,
+   "ms": 15,
    "name": "normalize",
    "passed": 7
   },
@@ -1210,7 +1210,7 @@
     }
    ],
    "failed": 0,
-   "ms": 14,
+   "ms": 13,
    "name": "semantic",
    "passed": 9
   },
@@ -1267,7 +1267,7 @@
     }
    ],
    "failed": 0,
-   "ms": 13,
+   "ms": 12,
    "name": "policies",
    "passed": 8
   },
@@ -1843,7 +1843,7 @@
     },
     {
      "assertions": 2159,
-     "ms": 9,
+     "ms": 8,
      "name": "every rule: positive examples pass syntax; negative examples fail",
      "status": "pass"
     },
@@ -1885,7 +1885,7 @@
     }
    ],
    "failed": 0,
-   "ms": 32,
+   "ms": 30,
    "name": "api",
    "passed": 10
   }
@@ -1893,7 +1893,7 @@
  "summary": {
   "assertions": 89032,
   "cases": 299,
-  "cpu_seconds": 0.46999999999999997,
+  "cpu_seconds": 0.45800000000000002,
   "failed": 0,
   "passed": 299,
   "suites": 10

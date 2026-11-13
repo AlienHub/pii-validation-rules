@@ -1,7 +1,7 @@
 {
  "stage": "implementation_pcre2_native_regex_tests",
  "command": "python3 tests/pcre2/run_pcre2_tests.py",
- "run_at_utc": "2026-11-13T04:17:22Z",
+ "run_at_utc": "2026-11-13T04:24:08Z",
  "engine_versions": {
   "PCRE2": "10.42 2022-12-11",
   "PCRE2_library": "libpcre2-8.so.0",
@@ -17,7 +17,7 @@
   "corpus_inputs_evaluated": 7363,
   "engine_disagreements_pcre2_vs_pcre2utf_vs_python": 0,
   "anchor_policy_violations": [],
-  "runtime_seconds": 0.062
+  "runtime_seconds": 0.05
  },
  "failures": [],
  "engine_disagreements": [],

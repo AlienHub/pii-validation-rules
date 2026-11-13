@@ -1,7 +1,7 @@
 {
  "command": "lua tests/lua/run.lua --report <path> --syntax-verdicts <path>",
  "failures": {},
- "run_at_utc": "2026-11-13T04:17:22Z",
+ "run_at_utc": "2026-11-13T04:24:08Z",
  "runtime": "Lua 5.4",
  "stage": "implementation_lua_runtime_tests",
  "suites": [
@@ -28,7 +28,7 @@
     },
     {
      "assertions": 2,
-     "ms": 1,
+     "ms": 0,
      "name": "decode_file loads a rules file",
      "status": "pass"
     }
@@ -85,7 +85,7 @@
     },
     {
      "assertions": 39,
-     "ms": 1,
+     "ms": 0,
      "name": "iban_mod97 fixture cases (positive + check mutation)",
      "status": "pass"
     },
@@ -151,7 +151,7 @@
     }
    ],
    "failed": 0,
-   "ms": 4,
+   "ms": 2,
    "name": "checksum_fixtures",
    "passed": 18
   },
@@ -160,19 +160,19 @@
    "cases": [
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "cn_resident_id_mod11_2: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "cn_resident_id_mod11_2: Lua generator reproduces Python check characters",
      "status": "pass"
     },
     {
      "assertions": 2000,
-     "ms": 14,
+     "ms": 5,
      "name": "cn_resident_id_mod11_2: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -184,49 +184,49 @@
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "cn_uscc_mod31: Lua generator reproduces Python check characters",
      "status": "pass"
     },
     {
      "assertions": 6000,
-     "ms": 19,
+     "ms": 8,
      "name": "cn_uscc_mod31: every other value at the check position is rejected",
      "status": "pass"
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "hkid_mod11: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "hkid_mod11: Lua generator reproduces Python check characters",
      "status": "pass"
     },
     {
      "assertions": 2000,
-     "ms": 9,
+     "ms": 4,
      "name": "hkid_mod11: every other value at the check position is rejected",
      "status": "pass"
     },
     {
      "assertions": 200,
-     "ms": 2,
+     "ms": 1,
      "name": "iban_mod97: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
     {
      "assertions": 200,
-     "ms": 2,
+     "ms": 1,
      "name": "iban_mod97: Lua generator reproduces Python check characters",
      "status": "pass"
     },
     {
      "assertions": 19800,
-     "ms": 107,
+     "ms": 110,
      "name": "iban_mod97: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -286,7 +286,7 @@
     },
     {
      "assertions": 200,
-     "ms": 1,
+     "ms": 0,
      "name": "jp_mynumber: verify accepts all 200 Python-generated vectors",
      "status": "pass"
     },
@@ -298,7 +298,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 4,
+     "ms": 5,
      "name": "jp_mynumber: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -334,7 +334,7 @@
     },
     {
      "assertions": 1804,
-     "ms": 4,
+     "ms": 5,
      "name": "kz_iin: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -406,7 +406,7 @@
     },
     {
      "assertions": 19800,
-     "ms": 27,
+     "ms": 28,
      "name": "tr_tckn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -424,7 +424,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 4,
+     "ms": 5,
      "name": "tr_vkn: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -460,7 +460,7 @@
     },
     {
      "assertions": 1800,
-     "ms": 3,
+     "ms": 4,
      "name": "verhoeff: every other value at the check position is rejected",
      "status": "pass"
     },
@@ -472,7 +472,7 @@
     }
    ],
    "failed": 0,
-   "ms": 287,
+   "ms": 239,
    "name": "reference_vectors",
    "passed": 52
   },
@@ -1147,7 +1147,7 @@
     }
    ],
    "failed": 0,
-   "ms": 15,
+   "ms": 14,
    "name": "normalize",
    "passed": 7
   },
@@ -1816,7 +1816,7 @@
     }
    ],
    "failed": 0,
-   "ms": 13,
+   "ms": 14,
    "name": "edge_cases",
    "passed": 90
   },
@@ -1893,7 +1893,7 @@
  "summary": {
   "assertions": 89032,
   "cases": 299,
-  "cpu_seconds": 0.41099999999999998,
+  "cpu_seconds": 0.35999999999999999,
   "failed": 0,
   "passed": 299,
   "suites": 10

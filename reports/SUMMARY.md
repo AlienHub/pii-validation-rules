@@ -1,25 +1,25 @@
 # 测试报告汇总（由 tools/write_summary.py 生成）
 
-生成时间（UTC）：2026-11-13T04:17:23Z
+生成时间（UTC）：2026-11-13T04:24:13Z
 
 所有数字来自同目录下的机器可读 JSON 报告；每次 `make reports` 都会重新执行全部测试并覆盖本文件。
 
 ## 1. 原生 PCRE2 全串正则测试（tests/pcre2/run_pcre2_tests.py）
 
 - 引擎：PCRE2 10.42 2022-12-11（libpcre2-8.so.0，ctypes 直接调用 pcre2_compile_8/pcre2_match_8，分别以 options=0 与 PCRE2_UTF 编译）；Python 3.12.3 `re.fullmatch` 仅作兼容性对照
-- 规则编译：129；带预期用例：1176，通过 1176，失败 0；差分语料输入：7363；三引擎分歧：0；锚定策略违规：0；耗时 0.062s
+- 规则编译：129；带预期用例：1176，通过 1176，失败 0；差分语料输入：7363；三引擎分歧：0；锚定策略违规：0；耗时 0.050s
 
 ## 2. pcre2test 命令行二次核对（tests/pcre2/run_pcre2test_cli.py）
 
-- PCRE2 version 10.42 2022-12-11：1176 个主题串，0 处不一致，耗时 0.010s
+- PCRE2 version 10.42 2022-12-11：1176 个主题串，0 处不一致，耗时 0.009s
 
 ## 3. Lua 运行时测试（tests/lua/run.lua）
 
 | 运行时 | 用例 | 通过 | 失败 | 断言 | CPU 秒 |
 |---|---|---|---|---|---|
-| Lua 5.1 | 299 | 299 | 0 | 89032 | 0.470 |
-| Lua 5.4 | 299 | 299 | 0 | 89032 | 0.411 |
-| LuaJIT 2.1.1703358377 | 299 | 299 | 0 | 89032 | 0.184 |
+| Lua 5.1 | 299 | 299 | 0 | 89032 | 0.458 |
+| Lua 5.4 | 299 | 299 | 0 | 89032 | 0.360 |
+| LuaJIT 2.1.1703358377 | 299 | 299 | 0 | 89032 | 0.175 |
 
 按套件（Lua 5.1）：
 
@@ -27,14 +27,14 @@
 |---|---|---|---|---|
 | json | 4 | 0 | 17 | 1 |
 | checksum_fixtures | 18 | 0 | 159 | 2 |
-| reference_vectors | 52 | 0 | 81217 | 324 |
+| reference_vectors | 52 | 0 | 81217 | 318 |
 | checksum_properties | 95 | 0 | 1822 | 7 |
-| syntax_subset | 6 | 0 | 1333 | 43 |
-| normalize | 7 | 0 | 32 | 16 |
-| semantic | 9 | 0 | 53 | 14 |
-| policies | 8 | 0 | 178 | 13 |
+| syntax_subset | 6 | 0 | 1333 | 42 |
+| normalize | 7 | 0 | 32 | 15 |
+| semantic | 9 | 0 | 53 | 13 |
+| policies | 8 | 0 | 178 | 12 |
 | edge_cases | 90 | 0 | 286 | 16 |
-| api | 10 | 0 | 3935 | 32 |
+| api | 10 | 0 | 3935 | 30 |
 
 ## 4. Lua 子集匹配器 vs 原生 PCRE2 差分（tools/compare_syntax_verdicts.py）
 
