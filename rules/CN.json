@@ -1,0 +1,342 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13",
+  "jurisdiction": "CN",
+  "name_zh": "中国大陆",
+  "scope_group": "core",
+  "calling_code": "86",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "CN.resident_id",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{17}[0-9X])\\z",
+      "python_fullmatch_body": "[0-9]{17}[0-9X]",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "cn_resident_id_mod11_2",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "GB 11643-1999 公民身份号码：6 位地址码 + 8 位出生日期 + 3 位顺序码 + 1 位校验码（ISO 7064 MOD 11-2，X 表示 10）。第二个正例为标准附录示例，不保证未发放。出生日期合法性、历史行政区划码、发证状态属于语义层/发证核验层，正则与校验码都不能证明。不要把出生年硬编码为 19/20 开头（标准附录含 1880 年示例）。15 位旧号、外国人永久居留身份证、港澳台居住证不在本规则内。",
+      "semantic_checks": [
+        "gregorian_birth_date_yyyymmdd_pos7_14",
+        "not_after_reference_date",
+        "region_code_not_verified"
+      ],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase_last_char",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.id.standard",
+        "cn.id.catalogue"
+      ],
+      "source_urls": [
+        "https://zjw.beijing.gov.cn/Portals/0/zhuanti/fazhan/%E8%BA%AB%E4%BB%BD%E8%AF%81GB11643-1999.pdf",
+        "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=080D6FBF2BB468F9007657F26D60013E"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "110105199001010010",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        },
+        {
+          "input": "11010519491231002X",
+          "expected_syntax": true,
+          "provenance": "official_GB11643_illustrative_example_not_reserved",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!110105199001010010",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "110105199001010010\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n110105199001010010",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "110105199001010010!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "11010519900101001",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "1101051990010100100",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "11０105199001010010",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "CN.uscc",
+      "pii_type": "tax_id_entity",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9ABCDEFGHJKLMNPQRTUWXY]{18})\\z",
+      "python_fullmatch_body": "[0-9ABCDEFGHJKLMNPQRTUWXY]{18}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "cn_uscc_mod31",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "GB 32100-2015 统一社会信用代码：18 位，字符集排除 I/O/Z/S/V；第 1 位登记管理部门、第 2 位机构类别、第 3-8 位行政区划、第 9-17 位主体标识码（组织机构代码）、第 18 位校验码（MOD 31）。部门/类别组合、行政区划分配表与内嵌组织机构代码的 GB 11714 校验位未在本规则内。并非所有 18 位税号都是 USCC。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.uscc",
+        "oecd.CN"
+      ],
+      "source_urls": [
+        "https://www.cods.org.cn/cods/2020-10/29/12575hi/2026052817531155415.pdf",
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/china-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "91110101ABCDEFGH1E",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!91110101ABCDEFGH1E",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "91110101ABCDEFGH1E\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n91110101ABCDEFGH1E",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "91110101ABCDEFGH1E!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "91110101ABCDEFGH1",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "91110101ABCDEFGH1E0",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "9111０101ABCDEFGH1E",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "CN.ordinary_passport",
+      "pii_type": "passport",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:(?:[GE][0-9]{8}|E[A-HJ-NP-Z][0-9]{7}))\\z",
+      "python_fullmatch_body": "(?:[GE][0-9]{8}|E[A-HJ-NP-Z][0-9]{7})",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "仅普通护照：G+8 位数字、E+8 位数字、E+第二字母（排除 I/O）+7 位数字。外交/公务护照、更早历史系列不涵盖。未发现对印刷护照号公开的校验码；MRZ 检查位是另一字段。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "cn.passport"
+      ],
+      "source_urls": [
+        "https://gaj.gz.gov.cn/zwfw/ywtd/crjimmigration/crjzx/content/post_9496059.html"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "G00000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "E00000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "EA0000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!G00000001",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "G00000001\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nG00000001",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "G00000001!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "G0000000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "G000000010",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "G０0000001",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "CN.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+86[0-9]{1,13})\\z",
+      "python_fullmatch_body": "\\+86[0-9]{1,13}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+861",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+861111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+861",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+861\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+861",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+861!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+86",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+86１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

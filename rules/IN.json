@@ -1,0 +1,242 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13",
+  "jurisdiction": "IN",
+  "name_zh": "印度",
+  "scope_group": "additional_asia",
+  "calling_code": "91",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "IN.aadhaar",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[2-9][0-9]{11})\\z",
+      "python_fullmatch_body": "[2-9][0-9]{11}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "verhoeff",
+        "evidence": "official_algorithm_name_secondary_tables",
+        "policy": "enabled"
+      },
+      "notes_zh": "Aadhaar 12 位，Verhoeff 校验（UIDAI 开发者文档支持算法名称；表格来自标准算术）。首位 2-9 限制在索引中有线索，正式发布前应取得 UIDAI 手册原文。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "in.aadhaar",
+        "in.aadhaar.structure",
+        "verhoeff.reference"
+      ],
+      "source_urls": [
+        "https://www.uidai.gov.in/pu/916-developer-section/data-and-downloads-section.html",
+        "https://backend.uidai.gov.in/get/files/media/document/2026-06/UIDAI_Handbook_for_Ecosystem_Partners_English.pdf",
+        "https://raw.githubusercontent.com/arthurdejong/python-stdnum/master/stdnum/verhoeff.py"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "234567890124",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!234567890124",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "234567890124\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n234567890124",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "234567890124!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "23456789012",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "2345678901240",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "23456789０124",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "IN.pan",
+      "pii_type": "tax_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[A-Z]{3}[ABCFGHJLPT][A-Z][0-9]{4}[A-Z])\\z",
+      "python_fullmatch_body": "[A-Z]{3}[ABCFGHJLPT][A-Z][0-9]{4}[A-Z]",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "PAN：3 字母 + 持有人类别字母 + 姓名首字母 + 4 位数字 + 字母检查字符。检查字符公式未公开，不得伪装成 Luhn。",
+      "semantic_checks": [
+        "serial_0000_excluded"
+      ],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "oecd.IN",
+        "in.pan"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/india-tin.pdf",
+        "https://www.incometaxindia.gov.in/w/how-pan-is-formed-and-how-it-gets-its-unique-identity-"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "ZZZPZ0001A",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!ZZZPZ0001A",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "ZZZPZ0001A\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nZZZPZ0001A",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "ZZZPZ0001A!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "ZZZPZ0001",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "ZZZPZ0001A0",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "ZZZPZ０001A",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "IN.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+91[0-9]{1,13})\\z",
+      "python_fullmatch_body": "\\+91[0-9]{1,13}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+911",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+911111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+911",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+911\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+911",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+911!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+91",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+9１1",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

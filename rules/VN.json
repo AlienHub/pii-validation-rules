@@ -1,0 +1,157 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13",
+  "jurisdiction": "VN",
+  "name_zh": "越南",
+  "scope_group": "additional_asia",
+  "calling_code": "84",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "VN.personal_id",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{12})\\z",
+      "python_fullmatch_body": "[0-9]{12}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "越南 12 位个人识别号（公民身份证号）。2025-07-01 起在规定条件下替代个人税号，不代表所有法人或外国人税号改为 12 位。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "vn.id",
+        "vn.taxchange"
+      ],
+      "source_urls": [
+        "https://xaydungchinhsach.chinhphu.vn/cach-nho-12-so-can-cuoc-cong-dan-gan-chip-cuc-de-119220914161814354.htm",
+        "https://xaydungchinhsach.chinhphu.vn/quy-dinh-moi-tu-1-7-2025-su-dung-so-dinh-danh-ca-nhan-thay-cho-ma-so-thue-119241228125210708.htm"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "001090000001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!001090000001",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "001090000001\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n001090000001",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "001090000001!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "00109000000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "0010900000010",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "０01090000001",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "VN.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+84[0-9]{1,13})\\z",
+      "python_fullmatch_body": "\\+84[0-9]{1,13}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+841",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+841111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+841",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+841\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+841",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+841!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+84",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+84１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

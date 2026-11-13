@@ -1,0 +1,245 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13",
+  "jurisdiction": "JP",
+  "name_zh": "日本",
+  "scope_group": "additional_asia",
+  "calling_code": "81",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "JP.my_number",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{12})\\z",
+      "python_fullmatch_body": "[0-9]{12}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "jp_mynumber",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "个人番号 12 位，末位检查位。公式来自总务省令第 5 条（Pn、Qn 定义，余数 ≤1 时为 0），官方。绝不可套用到 13 位法人番号。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "jp.checksum",
+        "oecd.JP"
+      ],
+      "source_urls": [
+        "https://laws.e-gov.go.jp/law/426M60000008085",
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/japan-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "123456789018",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!123456789018",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "123456789018\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n123456789018",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "123456789018!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "12345678901",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "1234567890180",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "123456789０18",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "JP.corporate_number",
+      "pii_type": "tax_id_entity",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{13})\\z",
+      "python_fullmatch_body": "[0-9]{13}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "jp_corporate_number",
+        "evidence": "official",
+        "policy": "enabled"
+      },
+      "notes_zh": "法人番号 13 位：1 位检查位在首位 + 12 位基础番号。公式来自《法人番号の指定等に関する省令》第 2 条（Pn 自右起第 n 位，Qn 奇数位 1、偶数位 2）与国税厅 checkdigit.pdf（含示例 8700110005901）。与个人番号算法不同。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "oecd.JP",
+        "jp.corporate.ordinance",
+        "jp.corporate.nta_checkdigit"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/japan-tin.pdf",
+        "https://laws.e-gov.go.jp/law/426M60000040070",
+        "https://www.houjin-bangou.nta.go.jp/documents/checkdigit.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "8700110005901",
+          "expected_syntax": true,
+          "provenance": "official_NTA_illustrative_example",
+          "expected_checksum_arithmetic": true
+        },
+        {
+          "input": "9234567890123",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!1234567890123",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "1234567890123\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n1234567890123",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "1234567890123!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "123456789012",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "12345678901230",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "123456789０123",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "JP.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+81[0-9]{1,13})\\z",
+      "python_fullmatch_body": "\\+81[0-9]{1,13}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+811",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+811111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+811",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+811\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+811",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+811!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+81",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+8１1",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13",
+  "jurisdiction": "ID",
+  "name_zh": "印度尼西亚",
+  "scope_group": "core",
+  "calling_code": "62",
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "ID.nik",
+      "pii_type": "national_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{16})\\z",
+      "python_fullmatch_body": "[0-9]{16}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "NIK 16 位：6 位地区码 + DDMMYY（女性日 +40）+ 4 位序列。本次未获证实的公开校验码，末位不是校验位。YY 无法唯一确定世纪。",
+      "semantic_checks": [
+        "ddmmyy_birth_date_pos7_12_female_day_plus_40",
+        "century_ambiguous",
+        "region_code_not_verified"
+      ],
+      "normalization": [],
+      "source_ids": [
+        "id.nik"
+      ],
+      "source_urls": [
+        "https://dukcapil.klaten.go.id/arti-16-digit-nomor-induk-kependudukan-nik"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "3273010101900001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "3273014101900002",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!3273010101900001",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "3273010101900001\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n3273010101900001",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "3273010101900001!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "327301010190000",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "32730101019000010",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "3273０10101900001",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "ID.npwp16",
+      "pii_type": "tax_id",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{16})\\z",
+      "python_fullmatch_body": "[0-9]{16}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "Coretax 时期 16 位 NPWP：居民个人使用匹配的 NIK；非居民与实体使用 16 位，历史主体通常 0 + 旧 15 位。不要把旧 15 位 NPWP 算法扩展到 NIK。OECD 旧文中的 2023-12-31 截止日已被税局 2024 年公告修订。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "id.npwp.current",
+        "id.coretax",
+        "oecd.ID"
+      ],
+      "source_urls": [
+        "https://www.pajak.go.id/id/pengumuman/petunjuk-penggunaan-nomor-pokok-wajib-pajak-dan-nomor-identitas-tempat-kegiatan-usaha",
+        "https://www.pajak.go.id/id/artikel/coretax-djp-era-npwp-16-digit",
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/indonesia-tin.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "0123456789012345",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "3273010101900001",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!0123456789012345",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "0123456789012345\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n0123456789012345",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "0123456789012345!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "012345678901234",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "01234567890123450",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "０123456789012345",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "ID.npwp15_legacy",
+      "pii_type": "tax_id",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{15})\\z",
+      "python_fullmatch_body": "[0-9]{15}",
+      "checksum": {
+        "status": "not_established"
+      },
+      "notes_zh": "历史 15 位 NPWP，仅用于历史数据导入模式，不断言现行独立 15 位号码仍被接受。NITKU（经营场所标识）不是同一字段。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "oecd.ID",
+        "id.npwp.current"
+      ],
+      "source_urls": [
+        "https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/indonesia-tin.pdf",
+        "https://www.pajak.go.id/id/pengumuman/petunjuk-penggunaan-nomor-pokok-wajib-pajak-dan-nomor-identitas-tempat-kegiatan-usaha"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "123456789012345",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!123456789012345",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "123456789012345\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n123456789012345",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "123456789012345!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "12345678901234",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "1234567890123450",
+          "expected_syntax": false,
+          "reason": "too_long"
+        },
+        {
+          "input": "123456789０12345",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "ID.phone_country_envelope",
+      "pii_type": "phone",
+      "status": "country_code_envelope_only",
+      "regex_pcre2": "\\A(?:\\+62[0-9]{1,13})\\z",
+      "python_fullmatch_body": "\\+62[0-9]{1,13}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "仅国家区号 + E.164 最多 15 位数字的外壳，不是国家电话号码验证器：NSN 长度、号段分配、移动/固话/服务类型均未验证。不得显示为“有效手机号”。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "itu.nnp",
+        "itu.e164"
+      ],
+      "source_urls": [
+        "https://www.itu.int/oth/t0202/en",
+        "https://www.itu.int/rec/T-REC-E.164"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "+621",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "+621111111111111",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!+621",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "+621\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n+621",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "+621!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "+62",
+          "expected_syntax": false,
+          "reason": "too_short_or_missing_field"
+        },
+        {
+          "input": "+62１",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

@@ -1,0 +1,2055 @@
+{
+  "schema_version": "pii-coverage-1",
+  "version": "2026.11.13",
+  "named_jurisdictions": 39,
+  "inventory_total": 53,
+  "scope_definition_zh": "39 个指定技术辖区 + 13 个其余亚洲/跨洲条目 + 埃及地理边界条目。地理选择不是政治表态。不覆盖全部属地。",
+  "status_vocabulary_zh": {
+    "researched_partial": "已研究并至少有一条规则，但不完整；逐条看规则状态。",
+    "unsupported_insufficient_primary_spec": "未取得足够的一手规范，明确不支持；不证明格式不存在。",
+    "not_implemented_not_fully_researched": "仅列入清单的待办，未研究、未实现。",
+    "out_of_requested_named_scope_backlog": "超出指定范围的地理边界待办。"
+  },
+  "jurisdictions": [
+    {
+      "jurisdiction": "CN",
+      "name_zh": "中国大陆",
+      "scope_group": "core",
+      "calling_code": "86",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "CN.resident_id"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "CN.uscc"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "CN.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [
+            "CN.ordinary_passport"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "旧 15 位号、外国人证件、港澳台居住证等代际/变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "TH",
+      "name_zh": "泰国",
+      "scope_group": "core",
+      "calling_code": "66",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "TH.citizen_id"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "TH.tin_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "TH.phone_country_envelope",
+            "TH.phone_mobile_profile"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "ID",
+      "name_zh": "印度尼西亚",
+      "scope_group": "core",
+      "calling_code": "62",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "ID.nik"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "ID.npwp16",
+            "ID.npwp15_legacy"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "ID.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "MY",
+      "name_zh": "马来西亚",
+      "scope_group": "core",
+      "calling_code": "60",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "MY.nric"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "MY.tin_individual",
+            "MY.tin_individual_legacy",
+            "MY.tin_entity"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "MY.phone_country_envelope",
+            "MY.phone_011_profile"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "SG",
+      "name_zh": "新加坡",
+      "scope_group": "core",
+      "calling_code": "65",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "SG.nric",
+            "SG.fin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "SG.iras_asgd",
+            "SG.uen_rob",
+            "SG.uen_roc",
+            "SG.uen_others",
+            "SG.foreign_company_tax_ref",
+            "SG.itr"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "SG.phone_country_envelope",
+            "SG.phone_nsn_profile"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "TR",
+      "name_zh": "土耳其",
+      "scope_group": "core",
+      "calling_code": "90",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "TR.tckn",
+            "TR.ykn"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "TR.vkn"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "TR.phone_country_envelope",
+            "TR.phone_nsn_profile"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "TR.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "SA",
+      "name_zh": "沙特阿拉伯",
+      "scope_group": "middle_east",
+      "calling_code": "966",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "SA.national_id",
+            "SA.iqama"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "SA.tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "SA.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "SA.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "AE",
+      "name_zh": "阿联酋",
+      "scope_group": "middle_east",
+      "calling_code": "971",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "AE.emirates_id"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "AE.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "AE.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "OECD 2021 年称无 CRS TIN 且 VAT 号不是 TIN；不得由此推断 2026 年没有公司税 TRN/VAT 号，需另行研究 FTA。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "QA",
+      "name_zh": "卡塔尔",
+      "scope_group": "middle_east",
+      "calling_code": "974",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [
+            "QA.gta_tin",
+            "QA.qfc_tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "QA.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "QA.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "QID 11 位/世纪/国籍说法无发证机关原文支持，保持 unsupported。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "KW",
+      "name_zh": "科威特",
+      "scope_group": "middle_east",
+      "calling_code": "965",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "KW.civil_id"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "KW.entity_tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "KW.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "KW.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "BH",
+      "name_zh": "巴林",
+      "scope_group": "middle_east",
+      "calling_code": "973",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "BH.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "BH.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "旧 OECD 材料“CRS 无 TIN”不等于没有 VAT/TRN。CPR 9 位说法为二级来源；校验未建立。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "OM",
+      "name_zh": "阿曼",
+      "scope_group": "middle_east",
+      "calling_code": "968",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [
+            "OM.tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "OM.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "OM.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "民事/居留 ID 8 位与 9 位说法未经发证机关核实。税号最多 7 位，不是民事 ID。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "IL",
+      "name_zh": "以色列",
+      "scope_group": "middle_east",
+      "calling_code": "972",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "IL.id_tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "IL.entity_tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "IL.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "IL.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "IR",
+      "name_zh": "伊朗",
+      "scope_group": "middle_east",
+      "calling_code": "98",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "IR.national_code"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "IR.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "IR26 Sheba 不在 SWIFT 103 注册表；央行来源待取。国民号算法仅二级来源。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "IQ",
+      "name_zh": "伊拉克",
+      "scope_group": "middle_east",
+      "calling_code": "964",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "IQ.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "IQ.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "国民卡 12 位说法仅二级来源；旧民事身份卡不同；TIN 未建立。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "JO",
+      "name_zh": "约旦",
+      "scope_group": "middle_east",
+      "calling_code": "962",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "JO.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "JO.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "国民号 10 位说法仅二级来源；无官方编码/算法。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "LB",
+      "name_zh": "黎巴嫩",
+      "scope_group": "middle_east",
+      "calling_code": "961",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "LB.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "LB.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "OECD 只说数字序列及 VAT 后缀 601/603/604，无确切总长；不编造严格正则。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "SY",
+      "name_zh": "叙利亚",
+      "scope_group": "middle_east",
+      "calling_code": "963",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "SY.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "国民号 11 位说法未验证；无官方格式/校验。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "YE",
+      "name_zh": "也门",
+      "scope_group": "middle_east",
+      "calling_code": "967",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "YE.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "YE.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "国民 ID/护照/TIN 未建立；2024 年 7 月新 IBAN 有文档。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "PS",
+      "name_zh": "巴勒斯坦",
+      "scope_group": "middle_east",
+      "calling_code": "970",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "PS.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "PS.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "9 位 ID/Luhn 说法常见但未取得发证机关规范；不得从以色列推断。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "JP",
+      "name_zh": "日本",
+      "scope_group": "additional_asia",
+      "calling_code": "81",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "JP.my_number"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "JP.corporate_number"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "JP.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "KR",
+      "name_zh": "韩国",
+      "scope_group": "additional_asia",
+      "calling_code": "82",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "KR.rrn"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "KR.business_registration",
+            "KR.corporation_registration"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "KR.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "TW",
+      "name_zh": "台湾",
+      "scope_group": "additional_asia",
+      "calling_code": "886",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "TW.citizen_id",
+            "TW.new_ui",
+            "TW.old_ui"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "TW.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "HK",
+      "name_zh": "香港",
+      "scope_group": "additional_asia",
+      "calling_code": "852",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "HK.hkid"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "HK.business_registration"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "HK.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "MO",
+      "name_zh": "澳门",
+      "scope_group": "additional_asia",
+      "calling_code": "853",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [
+            "MO.individual_commercial_tin",
+            "MO.entity_tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "MO.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "薪俸税可能使用居民身份证号，但 BIR 校验来源未审阅；商业税号 OECD 明确无检查位。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "IN",
+      "name_zh": "印度",
+      "scope_group": "additional_asia",
+      "calling_code": "91",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "IN.aadhaar"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "IN.pan"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "IN.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "PK",
+      "name_zh": "巴基斯坦",
+      "scope_group": "additional_asia",
+      "calling_code": "92",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "PK.cnic"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "PK.entity_ntn"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "PK.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "PK.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "BD",
+      "name_zh": "孟加拉国",
+      "scope_group": "additional_asia",
+      "calling_code": "880",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [
+            "BD.etin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "BD.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "NID 10/13/17 位说法需选举委员会原始格式；TIN 不是 NID。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "LK",
+      "name_zh": "斯里兰卡",
+      "scope_group": "additional_asia",
+      "calling_code": "94",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "LK.nic_old",
+            "LK.nic_new"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "LK.tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "LK.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "NP",
+      "name_zh": "尼泊尔",
+      "scope_group": "additional_asia",
+      "calling_code": "977",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [
+            "NP.pan"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "NP.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "公民证多种编码与 10 位 NIN 未经发证机关核实；PAN 仅候选。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "VN",
+      "name_zh": "越南",
+      "scope_group": "additional_asia",
+      "calling_code": "84",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "VN.personal_id"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "VN.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "PH",
+      "name_zh": "菲律宾",
+      "scope_group": "additional_asia",
+      "calling_code": "63",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "PH.psn",
+            "PH.pcn"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "PH.tin_base"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "PH.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "KH",
+      "name_zh": "柬埔寨",
+      "scope_group": "additional_asia",
+      "calling_code": "855",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "KH.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "国民 ID 9/10 位代际与 TIN P/T 前缀变体未解决；不做硬拒正则。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "LA",
+      "name_zh": "老挝",
+      "scope_group": "additional_asia",
+      "calling_code": "856",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [
+            "LA.tin_2007"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "LA.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "仅 2007 年 TIN 结构；现行法律与监控位算法未知；国民 ID/护照未知。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "MM",
+      "name_zh": "缅甸",
+      "scope_group": "additional_asia",
+      "calling_code": "95",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "MM.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "NRC/CSC 含邦/省、乡镇、身份类别与缅文/转写变体；乡镇表、类别与 ASCII 编码未验证。不发布玩具 ASCII 正则。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "BN",
+      "name_zh": "文莱",
+      "scope_group": "additional_asia",
+      "calling_code": "673",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "BN.nric"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "BN.entity_equivalent"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "BN.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "MN",
+      "name_zh": "蒙古",
+      "scope_group": "additional_asia",
+      "calling_code": "976",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "tax": {
+          "rule_ids": [
+            "MN.civil_tin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "MN.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "MN.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "西里尔字母 2 字母 + 8 位登记号与 12 位民事税号不同；Unicode 模式不在当前 ASCII 剖面内。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "KZ",
+      "name_zh": "哈萨克斯坦",
+      "scope_group": "additional_asia",
+      "calling_code": "7",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "KZ.iin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [
+            "KZ.bin"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "phone": {
+          "rule_ids": [
+            "KZ.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [
+            "KZ.iban"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        }
+      },
+      "notes_zh": "历史/外国人/非本地证件变体不完整；逐条规则读 notes_zh。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "UZ",
+      "name_zh": "乌兹别克斯坦",
+      "scope_group": "additional_asia",
+      "calling_code": "998",
+      "coverage": {
+        "national_resident_id": {
+          "rule_ids": [
+            "UZ.pinfl"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "不做发证存在性/归属核验。"
+        },
+        "tax": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "phone": {
+          "rule_ids": [
+            "UZ.phone_country_envelope"
+          ],
+          "status": "researched_partial",
+          "limit_zh": "除非另列带年代的编号剖面规则，否则仅国家区号外壳。"
+        },
+        "passport": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        },
+        "bank": {
+          "rule_ids": [],
+          "status": "unsupported_insufficient_primary_spec",
+          "limit_zh": "本次研究未取得官方统一格式；不证明该格式不存在。"
+        }
+      },
+      "notes_zh": "PINFL 14 位形状已知；生成/校验、税务实体码与护照未解决。",
+      "domestic_bank_account_policy_zh": "国内银行账号：除非有官方统一方案证据，否则不支持（银行各异）；IBAN 单独处理；支付卡 PAN 不是银行账号。"
+    },
+    {
+      "jurisdiction": "AF",
+      "name_zh": "阿富汗",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "93",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "AM",
+      "name_zh": "亚美尼亚",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "374",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "AZ",
+      "name_zh": "阿塞拜疆",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "994",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "BT",
+      "name_zh": "不丹",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "975",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "CY",
+      "name_zh": "塞浦路斯",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "357",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "GE",
+      "name_zh": "格鲁吉亚",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "995",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "KG",
+      "name_zh": "吉尔吉斯斯坦",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "996",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "MV",
+      "name_zh": "马尔代夫",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "960",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "TL",
+      "name_zh": "东帝汶",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "670",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "TJ",
+      "name_zh": "塔吉克斯坦",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "992",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "TM",
+      "name_zh": "土库曼斯坦",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "993",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "KP",
+      "name_zh": "朝鲜",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "850",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "RU",
+      "name_zh": "俄罗斯，跨洲补充",
+      "scope_group": "remaining_asia_inventory_only",
+      "calling_code": "7",
+      "coverage": {
+        "national_resident_id": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "not_implemented_not_fully_researched",
+          "rule_ids": []
+        }
+      },
+      "source_ids": [
+        "itu.nnp"
+      ],
+      "notes_zh": "明确待办，不是对亚洲全覆盖的声明。AZ/CY/GE/TL 在 SWIFT 注册表有 IBAN 条目但不在本范围实现。KZ 与 RU 共用 +7。"
+    },
+    {
+      "jurisdiction": "EG",
+      "name_zh": "埃及，西奈半岛跨洲补充",
+      "scope_group": "geographic_edge_inventory_only",
+      "calling_code": "20",
+      "coverage": {
+        "national_resident_id": {
+          "status": "out_of_requested_named_scope_backlog",
+          "rule_ids": []
+        },
+        "tax": {
+          "status": "out_of_requested_named_scope_backlog",
+          "rule_ids": []
+        },
+        "phone": {
+          "status": "out_of_requested_named_scope_backlog",
+          "rule_ids": []
+        },
+        "passport": {
+          "status": "out_of_requested_named_scope_backlog",
+          "rule_ids": []
+        },
+        "bank": {
+          "status": "out_of_requested_named_scope_backlog",
+          "rule_ids": []
+        }
+      },
+      "notes_zh": "UN M49 将埃及列为北非；因地理上亚洲/中东范围界定不一而显式列出，属范围外待办。"
+    }
+  ]
+}

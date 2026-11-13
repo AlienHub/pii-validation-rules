@@ -1,0 +1,215 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13",
+  "jurisdiction": "GLOBAL",
+  "name_zh": "全球/国际统一类型",
+  "scope_group": "international",
+  "calling_code": null,
+  "regex_engine": "PCRE2",
+  "anchor_policy": "\\A(?:body)\\z",
+  "validation_scope_zh": "仅格式/校验码一致性，绝不是发证真实性。",
+  "rules": [
+    {
+      "id": "GLOBAL.payment_pan_current",
+      "pii_type": "payment_card",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[0-9]{10,19})\\z",
+      "python_fullmatch_body": "[0-9]{10,19}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "luhn",
+        "evidence": "standard_algorithm",
+        "policy": "enabled"
+      },
+      "notes_zh": "ISO/IEC 7812 现行：8 位 IIN，PAN 10-19 位。Luhn 仅是算术一致性，不是品牌识别、有效期、CVV、余额、授权或银行账号验证。测试仅使用处理商公开测试 PAN。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "iso.pan",
+        "stripe.tests"
+      ],
+      "source_urls": [
+        "https://www.iso.org/news/2016/11/Ref2146.html",
+        "https://docs.stripe.com/testing"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "4242424242424242",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!4242424242424242",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "4242424242424242\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n4242424242424242",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "4242424242424242!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "4２42424242424242",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "GLOBAL.payment_pan_legacy",
+      "pii_type": "payment_card",
+      "status": "historical_syntax",
+      "regex_pcre2": "\\A(?:[0-9]{8,19})\\z",
+      "python_fullmatch_body": "[0-9]{8,19}",
+      "checksum": {
+        "status": "algorithm_available",
+        "algorithm": "luhn",
+        "evidence": "standard_algorithm",
+        "policy": "enabled"
+      },
+      "notes_zh": "兼容历史 6 位 IIN 时期 PAN 8-19 位。仅历史/兼容模式。",
+      "semantic_checks": [],
+      "normalization": [],
+      "source_ids": [
+        "iso.pan",
+        "stripe.tests"
+      ],
+      "source_urls": [
+        "https://www.iso.org/news/2016/11/Ref2146.html",
+        "https://docs.stripe.com/testing"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "4242424242424242",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture",
+          "expected_checksum_arithmetic": true
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!4242424242424242",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "4242424242424242\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\n4242424242424242",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "4242424242424242!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "4２42424242424242",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    },
+    {
+      "id": "GLOBAL.icao_mrz_field",
+      "pii_type": "passport_mrz_field",
+      "status": "syntax_supported",
+      "regex_pcre2": "\\A(?:[A-Z0-9<]{1,44})\\z",
+      "python_fullmatch_body": "[A-Z0-9<]{1,44}",
+      "checksum": {
+        "status": "not_applicable"
+      },
+      "notes_zh": "ICAO Doc 9303 MRZ 字段字符集 A-Z/0-9/<，最长 44。检查位是另一字段，使用 icao9303 模块按文档布局切片计算；本规则不是完整 MRZ 解析器，也不是国内护照号格式。",
+      "semantic_checks": [],
+      "normalization": [
+        {
+          "transform": "ascii_uppercase",
+          "requires_option": "ascii_uppercase"
+        }
+      ],
+      "source_ids": [
+        "icao.mrz"
+      ],
+      "source_urls": [
+        "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p3_cons_en.pdf"
+      ],
+      "accessed_on": "2026-11-13",
+      "examples": [
+        {
+          "input": "L898902C3",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        },
+        {
+          "input": "ABC123<<<",
+          "expected_syntax": true,
+          "provenance": "synthetic_research_fixture"
+        }
+      ],
+      "negative_syntax_examples": [
+        {
+          "input": "",
+          "expected_syntax": false,
+          "reason": "empty"
+        },
+        {
+          "input": "!L898902C3",
+          "expected_syntax": false,
+          "reason": "invalid_character"
+        },
+        {
+          "input": "L898902C3\n",
+          "expected_syntax": false,
+          "reason": "trailing_newline"
+        },
+        {
+          "input": "\nL898902C3",
+          "expected_syntax": false,
+          "reason": "leading_newline"
+        },
+        {
+          "input": "L898902C3!",
+          "expected_syntax": false,
+          "reason": "invalid_suffix"
+        },
+        {
+          "input": "L8989０2C3",
+          "expected_syntax": false,
+          "reason": "non_ascii_digit"
+        }
+      ],
+      "sample_notice_zh": "仅合成或官方说明性样本，可能与已发放号码偶然相同；不保证保留，绝不可用于身份、鉴权或支付操作。"
+    }
+  ]
+}

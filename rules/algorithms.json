@@ -1,0 +1,760 @@
+{
+  "schema_version": "pii-rules-1",
+  "version": "2026.11.13",
+  "global_policy_zh": "二级/重建来源的校验算法不得宣传为官方，未经显式启用不得用于强制拒绝。任何校验函数都不核验身份。",
+  "policy_vocabulary": {
+    "enabled": "默认运行（官方或标准算法）。",
+    "opt_in_secondary": "仅当 options.secondary_checksums=true 或 options.algorithms[id]=true 时运行；否则 checksum=unknown。",
+    "opt_in_secondary_m_series_experimental": "S/T/F/G 同 opt_in_secondary；M 系列另需 options.sg_m_series_experimental=true。",
+    "explicit_legacy_regime": "仅当 options.kr_rrn_regime == 'legacy_pre_2020_10' 时运行；current → not_applicable，unknown → unknown。"
+  },
+  "algorithms": [
+    {
+      "id": "cn_resident_id_mod11_2",
+      "lua_module": "pii.checksums.east_asia",
+      "evidence": "official",
+      "default_policy": "enabled",
+      "source_ids": [
+        "cn.id.standard",
+        "cn.id.catalogue"
+      ],
+      "steps_zh": [
+        "要求 17 位 ASCII 数字 + 1 位 0-9/X。",
+        "前 17 位自左向右乘权重 7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2 求和 S。",
+        "expected = \"10X98765432\"[S mod 11]（0 起始下标）。",
+        "比较第 18 位。出生日期与历史区划另行语义校验。"
+      ],
+      "parameters": {
+        "weights": [
+          7,
+          9,
+          10,
+          5,
+          8,
+          4,
+          2,
+          1,
+          6,
+          3,
+          7,
+          9,
+          10,
+          5,
+          8,
+          4,
+          2
+        ],
+        "check_characters": "10X98765432",
+        "iso_system": "ISO7064:1983 MOD11-2"
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "cn_uscc_mod31",
+      "lua_module": "pii.checksums.east_asia",
+      "evidence": "official",
+      "default_policy": "enabled",
+      "source_ids": [
+        "cn.uscc"
+      ],
+      "steps_zh": [
+        "要求 18 位字符，全部属于 0123456789ABCDEFGHJKLMNPQRTUWXY，字符值为 0 起始下标。",
+        "S = Σ value(c_i) × w_i，i=1..17，权重 1,3,9,27,19,26,16,17,20,29,25,13,8,24,10,30,28。",
+        "校验下标 = (31 − S mod 31) mod 31；比较 alphabet[下标]。",
+        "部门/类别、行政区划需要分配表，不在算法内。"
+      ],
+      "parameters": {
+        "alphabet": "0123456789ABCDEFGHJKLMNPQRTUWXY",
+        "weights": [
+          1,
+          3,
+          9,
+          27,
+          19,
+          26,
+          16,
+          17,
+          20,
+          29,
+          25,
+          13,
+          8,
+          24,
+          10,
+          30,
+          28
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "th_mod11",
+      "lua_module": "pii.checksums.southeast_asia",
+      "evidence": "official_structure_secondary_formula",
+      "default_policy": "opt_in_secondary",
+      "source_ids": [
+        "th.checksum",
+        "th.structure",
+        "oecd.TH"
+      ],
+      "steps_zh": [
+        "要求 13 位数字。",
+        "S = Σ 前 12 位 × 权重 13 递减到 2。",
+        "expected = (11 − S mod 11) mod 10。",
+        "DOPA 类别与 RD/DBD 前缀是独立语义规则。"
+      ],
+      "parameters": {
+        "weights": [
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "jp_mynumber",
+      "lua_module": "pii.checksums.east_asia",
+      "evidence": "official",
+      "default_policy": "enabled",
+      "source_ids": [
+        "jp.checksum",
+        "oecd.JP"
+      ],
+      "steps_zh": [
+        "要求 12 位数字。",
+        "P_n 为除检查位外 11 位中自右起第 n 位；Q_n = n+1（n≤6），n−5（7≤n≤11）。等价左到右权重 6,5,4,3,2,7,6,5,4,3,2。",
+        "r = Σ P_n Q_n mod 11；r ≤ 1 时检查位 0，否则 11 − r。",
+        "比较第 12 位。绝不适用于 13 位法人番号。"
+      ],
+      "parameters": {
+        "weights_left_to_right": [
+          6,
+          5,
+          4,
+          3,
+          2,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "jp_corporate_number",
+      "lua_module": "pii.checksums.east_asia",
+      "evidence": "official",
+      "default_policy": "enabled",
+      "source_ids": [
+        "jp.corporate.ordinance",
+        "jp.corporate.nta_checkdigit",
+        "oecd.JP"
+      ],
+      "steps_zh": [
+        "要求 13 位数字；第 1 位为检查位，后 12 位为基础番号。",
+        "P_n 为基础番号自右起第 n 位；Q_n = 1（n 奇数）、2（n 偶数）。",
+        "检查位 = 9 − (Σ P_n Q_n mod 9)。",
+        "与个人番号算法不同，不可互换。"
+      ],
+      "parameters": {
+        "weights_from_right": "odd positions 1, even positions 2",
+        "modulus": 9,
+        "check_position": "first character"
+      },
+      "notes_zh": "本会话新增：省令第 2 条定义 Pn/Qn，国税厅 PDF 给出公式与示例 8700110005901。校验码只证明算术一致性。"
+    },
+    {
+      "id": "kz_iin",
+      "lua_module": "pii.checksums.west_central_asia",
+      "evidence": "official",
+      "default_policy": "enabled",
+      "source_ids": [
+        "kz.checksum",
+        "oecd.KZ"
+      ],
+      "steps_zh": [
+        "要求 12 位数字。",
+        "r = Σ 前 11 位 × 权重 1..11 mod 11。",
+        "若 r = 10，改用权重 3,4,5,6,7,8,9,10,11,1,2 重算。",
+        "若第二轮仍为 10，则不存在合法十进制检查位，校验失败；否则比较 r 与第 12 位。",
+        "不强制解析出生日期或性别。"
+      ],
+      "parameters": {
+        "weights1": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "weights2": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          1,
+          2
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "luhn",
+      "lua_module": "pii.checksums.luhn",
+      "evidence": "standard_algorithm",
+      "default_policy": "enabled",
+      "source_ids": [
+        "iso.pan",
+        "stripe.tests"
+      ],
+      "steps_zh": [
+        "要求 ASCII 数字串，保留前导 0。",
+        "自最右位（含检查位，权重 1）起按 1,2,1,2 交替加权；乘 2 后大于 9 的减 9。",
+        "总和 mod 10 == 0 则通过。字段长度/前缀限制另行执行。"
+      ],
+      "parameters": {},
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "iban_mod97",
+      "lua_module": "pii.checksums.iban",
+      "evidence": "official",
+      "default_policy": "enabled",
+      "source_ids": [
+        "swift.103",
+        "swift.copy"
+      ],
+      "steps_zh": [
+        "要求受支持国家的精确长度与 BBAN 结构。",
+        "前 4 位移到末尾；A..Z 换成 10..35。",
+        "逐字符流式计算 remainder = (remainder×10 + digit) mod 97，绝不整串 tonumber。",
+        "余数为 1 且检查位在 02..98 之间才通过（00、01、99 即使算术同余也拒绝）。",
+        "合成样本：国家 + 00 + BBAN 计算，检查位 = 98 − 余数。BBAN 银行/分行存在性另行核验。"
+      ],
+      "parameters": {
+        "modulus": 97,
+        "iso_system": "ISO7064 MOD97-10"
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "icao9303_check_digit",
+      "lua_module": "pii.checksums.icao9303",
+      "evidence": "official",
+      "default_policy": "enabled",
+      "source_ids": [
+        "icao.mrz"
+      ],
+      "steps_zh": [
+        "要求字段字符为 ASCII A-Z/0-9/<，不接受小写。",
+        "值：0-9 → 0-9，A-Z → 10-35，< → 0。",
+        "权重 7,3,1 自字段第 1 位循环；Σ mod 10 为检查位。",
+        "复合检查位按文档布局拼接指定切片，权重从拼接后的第 1 位重新开始。本函数不是国内护照号验证。"
+      ],
+      "parameters": {
+        "weights": [
+          7,
+          3,
+          1
+        ],
+        "filler_value": 0
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "verhoeff",
+      "lua_module": "pii.checksums.verhoeff",
+      "evidence": "official_algorithm_name_secondary_tables",
+      "default_policy": "enabled",
+      "source_ids": [
+        "in.aadhaar",
+        "verhoeff.reference"
+      ],
+      "steps_zh": [
+        "要求 ASCII 数字。",
+        "c = 0；自最右位起位置 i = 0,1,2…；每位 c = D[c][P[i mod 8][d]]（0 起始下标）。",
+        "c == 0 通过。生成检查位：对 body 按 i+1 位置计算后取 inv[c]，并用完整号码校验器复核。",
+        "Lua 表 1 起始，每个下标显式 +1 转换。"
+      ],
+      "parameters": {
+        "D": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          [
+            1,
+            2,
+            3,
+            4,
+            0,
+            6,
+            7,
+            8,
+            9,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            0,
+            1,
+            7,
+            8,
+            9,
+            5,
+            6
+          ],
+          [
+            3,
+            4,
+            0,
+            1,
+            2,
+            8,
+            9,
+            5,
+            6,
+            7
+          ],
+          [
+            4,
+            0,
+            1,
+            2,
+            3,
+            9,
+            5,
+            6,
+            7,
+            8
+          ],
+          [
+            5,
+            9,
+            8,
+            7,
+            6,
+            0,
+            4,
+            3,
+            2,
+            1
+          ],
+          [
+            6,
+            5,
+            9,
+            8,
+            7,
+            1,
+            0,
+            4,
+            3,
+            2
+          ],
+          [
+            7,
+            6,
+            5,
+            9,
+            8,
+            2,
+            1,
+            0,
+            4,
+            3
+          ],
+          [
+            8,
+            7,
+            6,
+            5,
+            9,
+            3,
+            2,
+            1,
+            0,
+            4
+          ],
+          [
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "P": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          [
+            1,
+            5,
+            7,
+            6,
+            2,
+            8,
+            3,
+            0,
+            9,
+            4
+          ],
+          [
+            5,
+            8,
+            0,
+            3,
+            7,
+            9,
+            6,
+            1,
+            4,
+            2
+          ],
+          [
+            8,
+            9,
+            1,
+            6,
+            0,
+            4,
+            3,
+            5,
+            2,
+            7
+          ],
+          [
+            9,
+            4,
+            5,
+            3,
+            1,
+            2,
+            6,
+            8,
+            7,
+            0
+          ],
+          [
+            4,
+            2,
+            8,
+            6,
+            5,
+            7,
+            3,
+            9,
+            0,
+            1
+          ],
+          [
+            2,
+            7,
+            9,
+            3,
+            8,
+            0,
+            6,
+            4,
+            1,
+            5
+          ],
+          [
+            7,
+            0,
+            4,
+            6,
+            9,
+            1,
+            3,
+            2,
+            5,
+            8
+          ]
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "tr_tckn",
+      "lua_module": "pii.checksums.west_central_asia",
+      "evidence": "reconstructed",
+      "default_policy": "opt_in_secondary",
+      "source_ids": [
+        "tr.id",
+        "tr.checksum"
+      ],
+      "steps_zh": [
+        "要求 11 位数字且首位非 0。",
+        "O = d1+d3+d5+d7+d9，E = d2+d4+d6+d8。",
+        "d10 == ((7×O − E) mod 10 + 10) mod 10（非负归一化）。",
+        "d11 == Σ d1..d10 mod 10。",
+        "仅公民 TCKN；YKN 需单独规范。"
+      ],
+      "parameters": {},
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "tr_vkn",
+      "lua_module": "pii.checksums.west_central_asia",
+      "evidence": "reconstructed",
+      "default_policy": "opt_in_secondary",
+      "source_ids": [
+        "oecd.TR",
+        "tr.vkn.checksum"
+      ],
+      "steps_zh": [
+        "要求 10 位数字。",
+        "对 i = 1..9：a = (d_i + 10 − i) mod 10。",
+        "a = 0 时贡献 0；否则 b = (a × 2^(10−i)) mod 9，b = 0 时贡献 9，否则贡献 b。",
+        "检查位 = (10 − Σ贡献 mod 10) mod 10。不是 TCKN 算法。"
+      ],
+      "parameters": {},
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "sg_nric_fin_reconstructed",
+      "lua_module": "pii.checksums.southeast_asia",
+      "evidence": "reconstructed_disputed_M",
+      "default_policy": "opt_in_secondary_m_series_experimental",
+      "source_ids": [
+        "sg.m",
+        "sg.checksum"
+      ],
+      "steps_zh": [
+        "要求前缀 S/T/F/G/M + 7 位数字 + 字母。",
+        "S = Σ 7 位数字 × 2,7,6,5,4,3,2 + 偏移（S/F 0，T/G 4，M 3）。",
+        "r = S mod 11；expected = 对照表[prefix][r]（0 起始）。S/T：JZIHGFEDCBA；F/G：XWUTRQPNMLK；M：XWUTRQPNJLK（有争议）。",
+        "默认不运行（非 ICA 官方）；M 仅在 sg_m_series_experimental 下运行。不得据此拒绝 ICA 官方格式示例 M1234567B。"
+      ],
+      "parameters": {
+        "weights": [
+          2,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2
+        ],
+        "offsets": {
+          "S": 0,
+          "T": 4,
+          "F": 0,
+          "G": 4,
+          "M": 3
+        },
+        "maps": {
+          "S": "JZIHGFEDCBA",
+          "T": "JZIHGFEDCBA",
+          "F": "XWUTRQPNMLK",
+          "G": "XWUTRQPNMLK",
+          "M": "XWUTRQPNJLK"
+        }
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "tw_citizen_new_ui",
+      "lua_module": "pii.checksums.east_asia",
+      "evidence": "official_structure_secondary_algorithm",
+      "default_policy": "opt_in_secondary",
+      "source_ids": [
+        "tw.format",
+        "tw.checksum",
+        "tw.id.checksum"
+      ],
+      "steps_zh": [
+        "要求 1 字母 + 9 位数字，第二字符按规则为 1/2（国民）或 8/9（新式 UI）。",
+        "首字母按对照表展开为两位数字（A=10 … Z=33，I=34，O=35，W=32，X=30，Y=31）。",
+        "展开后 11 位（含检查位）乘 1,9,8,7,6,5,4,3,2,1,1 求和。",
+        "Σ mod 10 == 0 通过。旧式 2 字母 UI 不适用。"
+      ],
+      "parameters": {
+        "letter_values": {
+          "A": 10,
+          "B": 11,
+          "C": 12,
+          "D": 13,
+          "E": 14,
+          "F": 15,
+          "G": 16,
+          "H": 17,
+          "I": 34,
+          "J": 18,
+          "K": 19,
+          "L": 20,
+          "M": 21,
+          "N": 22,
+          "O": 35,
+          "P": 23,
+          "Q": 24,
+          "R": 25,
+          "S": 26,
+          "T": 27,
+          "U": 28,
+          "V": 29,
+          "W": 32,
+          "X": 30,
+          "Y": 31,
+          "Z": 33
+        },
+        "weights": [
+          1,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1,
+          1
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "hkid_mod11",
+      "lua_module": "pii.checksums.east_asia",
+      "evidence": "official_structure_secondary_algorithm",
+      "default_policy": "opt_in_secondary",
+      "source_ids": [
+        "hk.format",
+        "hk.checksum"
+      ],
+      "steps_zh": [
+        "要求 1-2 字母 + 6 位数字 + 检查字符 0-9/A。",
+        "字母 A=10 … Z=35；单字母前缀前补值 36（代表空格，不是 0）。",
+        "8 个主体值乘 9,8,7,6,5,4,3,2 求和。",
+        "v = (11 − Σ mod 11) mod 11；v = 10 → A，否则十进制数字。",
+        "括号仅展示，只移除末尾匹配的一对。"
+      ],
+      "parameters": {
+        "weights": [
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "ir_national_mod11",
+      "lua_module": "pii.checksums.west_central_asia",
+      "evidence": "reconstructed",
+      "default_policy": "opt_in_secondary",
+      "source_ids": [
+        "ir.checksum"
+      ],
+      "steps_zh": [
+        "要求 10 位数字。",
+        "全部相同数字按独立的反占位策略拒绝，不是校验定理。",
+        "r = Σ 前 9 位 × 10,9,8,7,6,5,4,3,2 mod 11。",
+        "expected = r（r < 2）否则 11 − r；比较第 10 位。保留前导 0，不隐式左补。"
+      ],
+      "parameters": {
+        "weights": [
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    },
+    {
+      "id": "kr_rrn_legacy",
+      "lua_module": "pii.checksums.east_asia",
+      "evidence": "legacy_secondary_algorithm",
+      "default_policy": "explicit_legacy_regime",
+      "source_ids": [
+        "kr.regime",
+        "kr.legacy"
+      ],
+      "steps_zh": [
+        "仅当调用方显式选择 legacy_pre_2020_10 时运行。",
+        "S = Σ 前 12 位 × 2,3,4,5,6,7,8,9,2,3,4,5。",
+        "check = (11 − S mod 11) mod 10；比较第 13 位。",
+        "现行/未知年代返回 not_applicable/unknown，绝不因此返回 false。不适用于外国人登录番号。"
+      ],
+      "parameters": {
+        "weights": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "notes_zh": "校验码只证明算术一致性，不证明号码已分配、发放、归属或仍有效。"
+    }
+  ]
+}
